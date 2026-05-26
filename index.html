@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초록 숲 속 탐험 일지 🌿</title>
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="동물과 곤충을 사랑하는 딸아이를 위한 따뜻한 수채화 동화풍의 관찰일지 블로그">
+    <meta name="keywords" content="방아깨비 뚜기, 자벌레 호랑이, 관찰일지, 초등학생 관찰기록, 동화풍 블로그, 곤충 관찰">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Canvas for magical floating watercolor petals or fireflies -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- SVG Filter for Watercolor Paper Texture -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="paper-texture" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDiffuseLighting in="noise" lighting-color="#fffefb" surfaceScale="1.5" result="light">
+                    <feDistantLight azimuth="50" elevation="60" />
+                </feDiffuseLighting>
+                <feBlend mode="multiply" in="SourceGraphic" in2="light" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container" style="filter: url(#paper-texture);">
+        
+        <!-- Header Section -->
+        <header>
+            <div class="header-night-overlay"></div>
+            <div class="header-content">
+                <div class="header-title-area">
+                    <div class="header-subtitle">초록 들판과 밤하늘의 기록들</div>
+                    <h1 class="header-title">초록 들판의 탐험 일기장 🌿</h1>
+                    <p class="header-desc">
+                        동물과 곤충을 무척 사랑하는 11살 루시의 비밀 관찰 기록장이에요.<br>
+                        우리 마당과 들판에서 만난 작고 소중한 생명체들과 나눈 따뜻한 이야기를 들려줄게요.
+                    </p>
+                </div>
+                
+                <div class="header-interactive">
+                    <!-- Audio Control Toggle -->
+                    <button class="audio-control" id="audio-toggle" title="배경음악 켜기/끄기">
+                        <svg viewBox="0 0 24 24" id="audio-icon-on" style="display:none;">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                        <svg viewBox="0 0 24 24" id="audio-icon-off">
+                            <path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.03c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4zm4.27 6.27L19 7.53V3l-5 5v2.27l2.27 2.27z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Interactive Supermoon Moon Switcher (Aesthetic & Theme changer) -->
+                    <button class="supermoon-btn" id="theme-toggle" title="낮과 밤 전환하기">
+                        <span class="moon-face" id="moon-face">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard">
+            
+            <!-- Left Column: Memorial Sidebar -->
+            <section class="memorial-sidebar">
+                <h2 class="memorial-title">
+                    <span>🌟</span> 호랑이의 숲 <span>🌟</span>
+                </h2>
+                <p class="memorial-desc">
+                    호랑나비 애벌레를 닮았던<br>
+                    초록색 귀염둥이 자벌레 '호랑이'를<br>
+                    기억해 주는 보금자리예요.
+                </p>
+                
+                <!-- Tomb interactive area -->
+                <div class="tomb-area" id="tomb-trigger" title="호랑이에게 따뜻한 마음 전하기">
+                    <div class="firefly"></div>
+                    <div class="firefly"></div>
+                    <div class="firefly"></div>
+                    <div class="firefly"></div>
+                    <div class="tomb-img-container">
+                        <img src="assets/images/tomb_horangi.png" alt="호랑이의 숲 돌무덤" class="tomb-illustration">
+                    </div>
+                </div>
+
+                <p class="memorial-desc" style="font-size: 0.85rem; font-style: italic;">
+                    돌무덤을 클릭해 호랑이에게<br>
+                    이쁜 들꽃을 올려주세요.
+                </p>
+
+                <div class="memorial-stats">
+                    <span>🌸 올려진 들꽃 :</span>
+                    <strong id="flower-counter">0</strong><span>송이</span>
+                </div>
+            </section>
+
+            <!-- Right Column: Observation Grid -->
+            <section class="observation-grid-section">
+                <h2 class="grid-title">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    루시의 초록 친구들 관찰일지
+                </h2>
+                
+                <div class="observation-grid">
+                    
+                    <!-- Card 1: Ttougi (Active) -->
+                    <article class="card active" id="card-ttougi" title="뚜기 관찰일지 보기">
+                        <span class="card-tag">관찰 중 🌿</span>
+                        <div class="card-img-frame">
+                            <img src="assets/images/grasshopper_ttougi.png" alt="방아깨비 뚜기" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">뚜기 🟢</h3>
+                            <p class="card-meta">종류: 방아깨비</p>
+                            <p class="card-meta" style="color: var(--accent-color);">활기찬 6화 분량의 일기</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Snails (Locked) -->
+                    <article class="card locked" title="아직 비밀이에요!">
+                        <span class="card-tag">휴식 중 💤</span>
+                        <div class="lock-icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="assets/images/grasshopper_ttougi.png" alt="달이" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">달이와 팽이들 🐌</h3>
+                            <p class="card-meta">달팽이 14가족 이야기</p>
+                            <p class="card-meta">곧 공개될게요!</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: Ant (Locked) -->
+                    <article class="card locked" title="아직 비밀이에요!">
+                        <span class="card-tag">휴식 중 💤</span>
+                        <div class="lock-icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="assets/images/grasshopper_ttougi.png" alt="대장 개미" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">대장 개미 🐜</h3>
+                            <p class="card-meta">방을 넓히는 씩씩한 개미</p>
+                            <p class="card-meta">곧 공개될게요!</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 4: Caterpillar (Locked) -->
+                    <article class="card locked" title="아직 비밀이에요!">
+                        <span class="card-tag">휴식 중 💤</span>
+                        <div class="lock-icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="assets/images/caterpillar_horangi.png" alt="꼬물이" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">초록 꼬물이 🐛</h3>
+                            <p class="card-meta">신선한 나뭇잎 먹방러</p>
+                            <p class="card-meta">곧 공개될게요!</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 5: Herbs (Locked) -->
+                    <article class="card locked" title="아직 비밀이에요!">
+                        <span class="card-tag">발아 대기 🌱</span>
+                        <div class="lock-icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="assets/images/grasshopper_ttougi.png" alt="허브" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">새싹 삼총사 🌱</h3>
+                            <p class="card-meta">루꼴라, 레몬밤, 딜의 씨앗</p>
+                            <p class="card-meta">곧 공개될게요!</p>
+                        </div>
+                    </article>
+
+                    <!-- Card 6: Corn (Locked) -->
+                    <article class="card locked" title="아직 비밀이에요!">
+                        <span class="card-tag">발아 대기 🌽</span>
+                        <div class="lock-icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                        </div>
+                        <div class="card-img-frame">
+                            <img src="assets/images/grasshopper_ttougi.png" alt="초당옥수수" class="card-img">
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-name">키다리 초당이 🌽</h3>
+                            <p class="card-meta">달콤한 옥수수가 되기까지</p>
+                            <p class="card-meta">곧 공개될게요!</p>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-desc">🍀 매일 조금씩 성장하는 우리의 초록 친구들 🍀</div>
+            <p>&copy; 2026 루시의 초록 일기장. All Rights Reserved. Made with 💚 by Dad.</p>
+        </footer>
+    </div>
+
+    <!-- Memorial Popup Modal (Horangi) -->
+    <div class="modal-overlay" id="memorial-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="memorial-modal-header">
+                <div class="memorial-avatar-frame">
+                    <img src="assets/images/caterpillar_horangi.png" alt="자벌레 호랑이" class="memorial-avatar">
+                </div>
+                <h3 class="memorial-modal-title">초록빛 친구, 호랑이를 기억하며 🌟</h3>
+                <div class="memorial-modal-subtitle">초록 자벌레 (2026.05 관찰)</div>
+            </div>
+            
+            <div class="memorial-letter">
+                호랑나비 애벌레 형아를 닮아 녹색 가로줄 무늬를 하고선 나뭇가지마냥 꼿꼿하게 서서 우리를 웃겨주던 귀여운 자벌레 호랑이에게 🌿<br><br>
+                매일 신선한 나뭇잎을 꼬물꼬물 갉아 먹던 모습이 눈에 선해. 비록 번데기가 되어 날개를 펴지는 못하고 일찍 밤하늘 소풍을 떠났지만, 하늘나라에선 그 예쁜 초록 옷을 입고 마음껏 기어 다니며 행복하게 놀고 있을 거야. <br><br>
+                호랑아, 우리 곁에 와서 아름다운 초록빛 기쁨을 주어서 정말 고마웠어. 영원히 잊지 않고 늘 기억할게! 💫
+            </div>
+
+            <div class="flower-selector-title">🌻 호랑이에게 이쁜 들꽃 선물하기 🌻</div>
+            
+            <div class="flower-options">
+                <div class="flower-option" data-flower="dandelion">
+                    <span class="flower-emoji">🌼</span>
+                    <span class="flower-name">노랑 민들레</span>
+                    <span class="flower-desc">"고마운 마음"</span>
+                </div>
+                <div class="flower-option" data-flower="gyp">
+                    <span class="flower-emoji">💮</span>
+                    <span class="flower-name">하얀 안개꽃</span>
+                    <span class="flower-desc">"사랑하는 마음"</span>
+                </div>
+                <div class="flower-option" data-flower="cosmos">
+                    <span class="flower-emoji">🌸</span>
+                    <span class="flower-name">분홍 코스모스</span>
+                    <span class="flower-desc">"영원한 기억"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

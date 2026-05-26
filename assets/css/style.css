@@ -1,0 +1,1358 @@
+/* assets/css/style.css */
+
+/* 1. Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gowun+Batang:wght@400;700&display=swap');
+
+/* 2. CSS Design Tokens & Variables */
+:root {
+    /* Day Theme (Warm Cream & Green) */
+    --bg-color: #fcf8f2;
+    --paper-tint: rgba(253, 251, 247, 0.95);
+    --text-primary: #3b2f2f;
+    --text-secondary: #6e5e54;
+    --accent-color: #7fa87f; /* Warm Soft Green */
+    --accent-hover: #618761;
+    --accent-bg: rgba(127, 168, 127, 0.15);
+    --border-color: #8c7a6b;
+    --card-shadow: 0 10px 25px rgba(140, 122, 107, 0.15);
+    --accent-purple: #c5a3ff;
+    --accent-purple-hover: #b085ff;
+    --lock-bg: rgba(140, 122, 107, 0.08);
+    --modal-overlay: rgba(59, 47, 47, 0.4);
+    --supermoon-color: #fff176;
+    --supermoon-glow: 0 0 30px #fdd835, 0 0 60px rgba(253, 216, 53, 0.4);
+    
+    --font-handwriting: 'Gamja Flower', cursive;
+    --font-serif: 'Gowun Batang', serif;
+}
+
+[data-theme="night"] {
+    /* Night Theme (Dreamy Indigo & Gold) */
+    --bg-color: #1e1b29;
+    --paper-tint: rgba(28, 25, 38, 0.92);
+    --text-primary: #f5f2eb;
+    --text-secondary: #ccc3b8;
+    --accent-color: #a3c4f3; /* Dreamy Soft Blue */
+    --accent-hover: #8fb6eb;
+    --accent-bg: rgba(163, 196, 243, 0.15);
+    --border-color: #5d5670;
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    --accent-purple: #d6bfff;
+    --accent-purple-hover: #c4a1ff;
+    --lock-bg: rgba(93, 86, 112, 0.2);
+    --modal-overlay: rgba(15, 12, 20, 0.7);
+    --supermoon-color: #fff9c4;
+    --supermoon-glow: 0 0 40px #fff59d, 0 0 80px rgba(255, 245, 157, 0.6);
+}
+
+/* 3. Base & Layout Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.8s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Watercolor texture overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--paper-tint) 60%, transparent 100%),
+        radial-gradient(circle at 10% 20%, rgba(247, 220, 196, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(200, 220, 240, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(220, 240, 210, 0.1) 0%, transparent 50%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Canvas overlay for particle effect */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1840px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem;
+}
+
+/* 4. Common Elements */
+/* Hand-drawn irregular border button */
+.btn-handdrawn {
+    font-family: var(--font-handwriting);
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    background: transparent;
+    border: 2px solid var(--border-color);
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-handdrawn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-bg);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.btn-handdrawn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.btn-handdrawn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn-handdrawn:active {
+    transform: scale(0.97);
+}
+
+/* 5. Header Section */
+header {
+    margin-bottom: 3rem;
+    position: relative;
+    border-radius: 30px 30px 255px 30px/30px 255px 30px 225px;
+    border: 2px solid var(--border-color);
+    padding: 2.5rem 2rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0));
+}
+
+.header-night-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #161224 0%, #1e1b29 100%);
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 0;
+}
+
+[data-theme="night"] .header-night-overlay {
+    opacity: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.header-title-area {
+    max-width: 600px;
+}
+
+.header-subtitle {
+    font-family: var(--font-handwriting);
+    font-size: 1.6rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.header-title {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    margin-bottom: 0.8rem;
+}
+
+.header-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+.header-interactive {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Audio Controls & Theme Switcher */
+.audio-control, .theme-control {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--border-color);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    position: relative;
+}
+
+.audio-control:hover, .theme-control:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--accent-color);
+}
+
+.audio-control svg, .theme-control svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+}
+
+/* Supermoon interactive button */
+.supermoon-btn {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--supermoon-color);
+    box-shadow: var(--supermoon-glow);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease, background-color 0.8s ease;
+    animation: moonPulse 4s infinite ease-in-out;
+}
+
+.supermoon-btn::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%);
+}
+
+.supermoon-btn:hover {
+    transform: scale(1.15) rotate(15deg);
+}
+
+.supermoon-btn .moon-face {
+    font-size: 1.8rem;
+    position: relative;
+    top: -2px;
+    transition: transform 0.6s ease;
+}
+
+.supermoon-btn:hover .moon-face {
+    transform: scale(1.1);
+}
+
+@keyframes moonPulse {
+    0%, 100% { box-shadow: var(--supermoon-glow); }
+    50% { box-shadow: 0 0 45px #fdd835, 0 0 90px rgba(253, 216, 53, 0.6); }
+}
+
+[data-theme="night"] .supermoon-btn {
+    animation: moonPulseNight 4s infinite ease-in-out;
+}
+
+@keyframes moonPulseNight {
+    0%, 100% { box-shadow: var(--supermoon-glow); }
+    50% { box-shadow: 0 0 55px #fff59d, 0 0 100px rgba(255, 245, 157, 0.8); }
+}
+
+
+/* 6. Main Dashboard Layout */
+.dashboard {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* 7. Memorial Column (Left side) */
+.memorial-sidebar {
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid var(--border-color);
+    border-radius: 20px 255px 25px 225px/25px 25px 255px 25px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+[data-theme="night"] .memorial-sidebar {
+    background: rgba(40, 35, 55, 0.4);
+}
+
+.memorial-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 20%, rgba(163, 196, 243, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.memorial-title {
+    font-family: var(--font-handwriting);
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.memorial-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    word-break: keep-all;
+}
+
+/* Horangi Tomb Art Area */
+.tomb-area {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    cursor: pointer;
+}
+
+.tomb-img-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50% 60% 40% / 50% 40% 60% 50%;
+    border: 2px solid var(--border-color);
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgba(140, 122, 107, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.5s ease, border-color 0.5s ease;
+}
+
+[data-theme="night"] .tomb-img-container {
+    background: #252233;
+}
+
+.tomb-area:hover .tomb-img-container {
+    transform: translateY(-5px) scale(1.02) rotate(-1deg);
+    border-color: var(--accent-color);
+}
+
+.tomb-illustration {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* Fireflies rising from tomb */
+.firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #c5e1a5;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #c5e1a5, 0 0 20px rgba(197, 225, 165, 0.5);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.tomb-area:hover .firefly {
+    animation: riseFirefly 3s infinite ease-out;
+}
+
+.tomb-area .firefly:nth-child(2) { left: 30%; animation-delay: 0.2s; }
+.tomb-area .firefly:nth-child(3) { left: 50%; animation-delay: 0.8s; }
+.tomb-area .firefly:nth-child(4) { left: 70%; animation-delay: 1.4s; }
+.tomb-area .firefly:nth-child(5) { left: 40%; animation-delay: 2s; }
+
+@keyframes riseFirefly {
+    0% {
+        transform: translateY(120px) scale(0.5);
+        opacity: 0;
+    }
+    30% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50px) translateX(var(--drift, 20px)) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.memorial-stats {
+    background: var(--accent-bg);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    font-family: var(--font-handwriting);
+    color: var(--text-primary);
+    border: 1px dashed var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.memorial-stats strong {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+}
+
+
+/* 8. Grid of Observation Cards (Right side) */
+.observation-grid-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grid-title {
+    font-family: var(--font-handwriting);
+    font-size: 2.2rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 2px dashed var(--border-color);
+    padding-bottom: 0.8rem;
+}
+
+.grid-title svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--accent-color);
+}
+
+.observation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Card Styling */
+.card {
+    background: rgba(255, 255, 255, 0.45);
+    border: 2px solid var(--border-color);
+    border-radius: 15px 225px 15px 255px/225px 15px 255px 15px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    height: 400px;
+    justify-content: space-between;
+    animation: gentleFloat 5s infinite ease-in-out;
+}
+
+[data-theme="night"] .card {
+    background: rgba(40, 35, 55, 0.45);
+}
+
+.card:nth-child(2n) {
+    animation-delay: 1.2s;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.card:nth-child(3n) {
+    animation-delay: 2.5s;
+    border-radius: 20px 25px 255px 25px/25px 255px 25px 225px;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.03) rotate(-1.5deg);
+    border-color: var(--accent-color);
+    box-shadow: 0 15px 30px rgba(127, 168, 127, 0.25);
+    animation-play-state: paused;
+}
+
+[data-theme="night"] .card:hover {
+    box-shadow: 0 15px 30px rgba(163, 196, 243, 0.25);
+}
+
+/* Active Card Special */
+.card.active {
+    background: rgba(253, 251, 247, 0.9);
+    border-color: var(--accent-color);
+    border-width: 3px;
+}
+
+[data-theme="night"] .card.active {
+    background: rgba(45, 40, 60, 0.9);
+}
+
+.card.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 90% 10%, rgba(127, 168, 127, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.card-tag {
+    font-family: var(--font-handwriting);
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: var(--accent-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.card.locked .card-tag {
+    background-color: var(--text-secondary);
+}
+
+.card-img-frame {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 2px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+    margin: 0.8rem 0;
+    padding: 8px;
+    transition: transform 0.5s ease;
+}
+
+[data-theme="night"] .card-img-frame {
+    background: #252233;
+}
+
+.card:hover .card-img-frame {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.card.locked .card-img {
+    filter: grayscale(1) opacity(0.25);
+}
+
+.card-info {
+    text-align: center;
+    width: 100%;
+}
+
+.card-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.card-meta {
+    font-family: var(--font-handwriting);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Locked Card overlay elements */
+.card.locked {
+    background: var(--lock-bg);
+    cursor: not-allowed;
+    border-color: rgba(140, 122, 107, 0.4);
+}
+
+.card.locked:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+    border-color: rgba(140, 122, 107, 0.5);
+    animation: gentleShake 0.4s ease;
+}
+
+@keyframes gentleShake {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-2deg) scale(0.99); }
+    75% { transform: rotate(2deg) scale(1.01); }
+}
+
+.lock-icon-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    opacity: 0.85;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 2;
+    border: 2px solid var(--border-color);
+}
+
+[data-theme="night"] .lock-icon-container {
+    background: rgba(40, 35, 55, 0.9);
+}
+
+.card.locked:hover .lock-icon-container {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+}
+
+.lock-icon-container svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--text-primary);
+}
+
+
+/* 9. Memorial Modal / Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background-color: var(--bg-color);
+    max-width: 550px;
+    width: 90%;
+    border: 3px solid var(--border-color);
+    border-radius: 20px 255px 25px 225px/25px 25px 255px 25px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.modal-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--paper-tint) 70%, transparent 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--text-secondary);
+}
+
+.modal-close:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.memorial-modal-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.memorial-avatar-frame {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    border: 2px dashed var(--accent-color);
+    padding: 5px;
+    background: #fff;
+}
+
+[data-theme="night"] .memorial-avatar-frame {
+    background: #252233;
+}
+
+.memorial-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.memorial-modal-title {
+    font-family: var(--font-handwriting);
+    font-size: 2.2rem;
+    color: var(--text-primary);
+}
+
+.memorial-modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.memorial-letter {
+    font-family: var(--font-serif);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+    word-break: keep-all;
+    position: relative;
+}
+
+[data-theme="night"] .memorial-letter {
+    background: rgba(40, 35, 55, 0.6);
+}
+
+.memorial-letter::after {
+    content: "🌸";
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    font-size: 2rem;
+}
+
+.flower-selector-title {
+    font-family: var(--font-handwriting);
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.flower-options {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.flower-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.4);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.8rem;
+    cursor: pointer;
+    flex: 1;
+    transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+[data-theme="night"] .flower-option {
+    background: rgba(40,35,55,0.4);
+}
+
+.flower-option:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    background: var(--accent-bg);
+}
+
+.flower-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+    animation: gentleWiggle 3s infinite ease-in-out;
+}
+
+.flower-option:nth-child(2) .flower-emoji { animation-delay: 0.8s; }
+.flower-option:nth-child(3) .flower-emoji { animation-delay: 1.6s; }
+
+@keyframes gentleWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.flower-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.flower-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Placed flowers accumulation visualization inside modal/tomb */
+.tomb-flower-layer {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    right: 20px;
+    height: 40px;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.placed-flower-svg {
+    width: 20px;
+    height: 20px;
+    animation: dropFlower 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes dropFlower {
+    0% { transform: translateY(-50px) scale(0) rotate(0deg); opacity: 0; }
+    100% { transform: translateY(0) scale(1) rotate(var(--rot, 0deg)); opacity: 0.95; }
+}
+
+
+/* 10. DETAIL PAGE SPECIFIC STYLES */
+.detail-main {
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+}
+
+/* Leaf/Flower Episode Tabs */
+.episode-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.tab-btn {
+    font-family: var(--font-handwriting);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.5);
+    border: 2px solid var(--border-color);
+    padding: 0.5rem 1.4rem;
+    cursor: pointer;
+    border-radius: 50% 50% 60% 40% / 40% 50% 50% 60%; /* Symmetrical organic leaf shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    position: relative;
+}
+
+[data-theme="night"] .tab-btn {
+    background: rgba(40,35,55,0.5);
+}
+
+.tab-btn:nth-child(2n) {
+    border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+}
+
+.tab-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    border-color: var(--accent-color);
+    background: var(--accent-bg);
+}
+
+.tab-btn.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 15px rgba(127, 168, 127, 0.3);
+}
+
+/* 6th tab is special (purple color) */
+.tab-btn.special-tab {
+    border-color: var(--accent-purple);
+    background: rgba(197, 163, 255, 0.15);
+}
+
+.tab-btn.special-tab.active {
+    background: var(--accent-purple);
+    border-color: var(--accent-purple);
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(197, 163, 255, 0.4);
+}
+
+.tab-icon {
+    font-size: 1.2rem;
+}
+
+/* Diary Container & Paper Layout */
+.diary-book {
+    background: rgba(253, 251, 247, 0.95);
+    border: 3px solid var(--border-color);
+    border-radius: 15px 225px 15px 255px/225px 15px 255px 15px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--card-shadow);
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="night"] .diary-book {
+    background: rgba(30, 27, 41, 0.95);
+}
+
+/* Book binding effect in the center */
+.diary-book::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 48%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(140, 122, 107, 0.15), transparent);
+    pointer-events: none;
+}
+
+.diary-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .diary-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .diary-book {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Left Page: Photos & Media */
+.diary-media {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Polaroid Frame */
+.polaroid-frame {
+    background: #ffffff;
+    padding: 1.2rem 1.2rem 2.5rem;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transform: rotate(var(--rot, -2deg));
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[data-theme="night"] .polaroid-frame {
+    background: #252233;
+}
+
+.polaroid-frame:hover {
+    transform: scale(1.03) rotate(0deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.polaroid-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #f8f8f8;
+    position: relative;
+}
+
+[data-theme="night"] .polaroid-img-wrapper {
+    background: #1b1926;
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.polaroid-frame:hover .polaroid-img {
+    transform: scale(1.05);
+}
+
+.polaroid-caption {
+    font-family: var(--font-handwriting);
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* Media Box (Video / Audio Fallback) */
+.media-container {
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+}
+
+[data-theme="night"] .media-container {
+    background: rgba(40, 35, 55, 0.4);
+}
+
+.media-title {
+    font-family: var(--font-handwriting);
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--text-primary);
+}
+
+.media-title svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-color);
+}
+
+.custom-player {
+    width: 100%;
+    height: 160px;
+    background: #ffffff;
+    border: 2px solid var(--border-color);
+    border-radius: 15px 225px 15px 255px/225px 15px 255px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+[data-theme="night"] .custom-player {
+    background: #252233;
+}
+
+.custom-player:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.player-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(127, 168, 127, 0.05);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.play-btn-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(127, 168, 127, 0.4);
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-player:hover .play-btn-circle {
+    transform: scale(1.1);
+    background: var(--accent-hover);
+}
+
+.play-btn-circle svg {
+    width: 22px;
+    height: 22px;
+    fill: #ffffff;
+    position: relative;
+    left: 2px;
+}
+
+.player-duration {
+    font-family: var(--font-handwriting);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 0.8rem;
+    z-index: 2;
+}
+
+/* Video Popout Modal */
+.video-frame-container {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16/9;
+    border: 3px solid var(--border-color);
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.video-frame-container iframe, .video-frame-container video {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+/* Right Page: Text Diary */
+.diary-text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 1rem;
+}
+
+.diary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px dashed var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.diary-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.diary-meta {
+    font-family: var(--font-handwriting);
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+}
+
+.diary-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Lined Paper effect for text */
+.diary-body {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    line-height: 2.8rem; /* Line spacing to match background lines */
+    position: relative;
+    background-image: linear-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 100% 2.8rem; /* Match line-height exactly */
+    padding-top: 0.5rem;
+    min-height: 380px;
+    word-break: keep-all;
+    text-align: justify;
+}
+
+.diary-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.diary-signature {
+    font-family: var(--font-handwriting);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    transform: rotate(-3deg);
+}
+
+/* Navigation Bookmarks */
+.bookmark-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.bookmark-link {
+    font-family: var(--font-handwriting);
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+[data-theme="night"] .bookmark-link {
+    background: rgba(40, 35, 55, 0.4);
+}
+
+.bookmark-link:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px) rotate(1deg);
+}
+
+/* Leaf shape bookmarks on top */
+.bookmark-link::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 20px;
+    height: 10px;
+    border-radius: 50% 50% 0 0;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    z-index: -1;
+}
+
+.bookmark-link.back-home {
+    border-radius: 15px 5px 15px 5px;
+}
+
+.bookmark-link.prev-tab {
+    border-radius: 15px 15px 5px 15px;
+}
+
+.bookmark-link.next-tab {
+    border-radius: 15px 15px 15px 5px;
+}
+
+/* Floating Confetti / Flower Petals */
+.petal-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 2rem 0;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.footer-desc {
+    font-family: var(--font-handwriting);
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: var(--accent-color);
+}
