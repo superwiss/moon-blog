@@ -9,6 +9,7 @@ class SoundSynth {
         this.bgmInterval = null;
         this.isPlayingAmbient = false;
         this.nodes = [];
+        this.bgmAudio = null;
     }
 
     init() {
@@ -93,81 +94,53 @@ class SoundSynth {
         osc.stop(now + 0.5);
     }
 
-    // Generative Soft Watercolor Ambient Pad (Generates continuous music)
+    // Play cheerful royalty-free MP3 BGM (Funny Adventures!)
     startAmbient() {
-        this.init();
         if (this.isPlayingAmbient) return;
         this.isPlayingAmbient = true;
-
-        const synthDrone = (freq, volume, startTime) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            const lfo = this.ctx.createOscillator();
-            const lfoGain = this.ctx.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, startTime);
-            
-            // Soft LFO modulation for warm watercolor swelling
-            lfo.frequency.setValueAtTime(0.08 + Math.random() * 0.05, startTime);
-            lfoGain.gain.setValueAtTime(volume * 0.4, startTime);
-            
-            gain.gain.setValueAtTime(0, startTime);
-            gain.gain.linearRampToValueAtTime(volume, startTime + 2.0); // Gentle fade in
-
-            lfo.connect(lfoGain);
-            lfoGain.connect(gain.gain); // Modulate volume
-
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(startTime);
-            lfo.start(startTime);
-
-            this.nodes.push(osc, gain, lfo, lfoGain);
-        };
-
-        // Synthesize an ambient pad triad: F major 9 chords (very warm and fairy-tale-like)
-        const now = this.ctx.currentTime;
-        synthDrone(174.61, 0.08, now); // F3
-        synthDrone(220.00, 0.06, now + 0.5); // A3
-        synthDrone(261.63, 0.05, now + 1.0); // C4
-        synthDrone(349.23, 0.04, now + 1.5); // F4
-        synthDrone(440.00, 0.03, now + 2.0); // A4
-
-        // Random sweet wind chimes every few seconds
-        const freqs = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50]; // Pentatonic
-        this.bgmInterval = setInterval(() => {
-            if (this.isPlayingAmbient && Math.random() > 0.3) {
-                const randomFreq = freqs[Math.floor(Math.random() * freqs.length)];
-                const randomTime = this.ctx.currentTime + Math.random() * 2;
-                this.synthBell(randomFreq, randomTime);
-            }
-        }, 4000);
+        
+        if (!this.bgmAudio) {
+            this.bgmAudio = new Audio("https://www.chosic.com/wp-content/uploads/2021/10/Funny-Adventures.mp3");
+            this.bgmAudio.loop = true;
+            this.bgmAudio.volume = 0;
+        }
+        
+        this.bgmAudio.play().then(() => {
+            let vol = 0;
+            const interval = setInterval(() => {
+                if (!this.isPlayingAmbient || !this.bgmAudio) {
+                    clearInterval(interval);
+                    return;
+                }
+                vol += 0.04;
+                if (vol >= 0.3) {
+                    vol = 0.3;
+                    clearInterval(interval);
+                }
+                this.bgmAudio.volume = vol;
+            }, 100);
+        }).catch(e => {
+            console.log("Main BGM autoplay prevented.", e);
+        });
     }
 
     stopAmbient() {
         this.isPlayingAmbient = false;
-        clearInterval(this.bgmInterval);
-        
-        // Fade out all nodes gently to prevent clicking
-        const now = this.ctx ? this.ctx.currentTime : 0;
-        this.nodes.forEach(node => {
-            if (node.gain && typeof node.gain.setValueAtTime === 'function') {
-                try {
-                    node.gain.cancelScheduledValues(now);
-                    node.gain.setValueAtTime(node.gain.value, now);
-                    node.gain.exponentialRampToValueAtTime(0.0001, now + 1.5);
-                } catch(e) {}
-            }
-        });
-        
-        setTimeout(() => {
-            this.nodes.forEach(node => {
-                try { node.stop(); } catch(e) {}
-            });
-            this.nodes = [];
-        }, 1600);
+        if (this.bgmAudio) {
+            let vol = this.bgmAudio.volume;
+            const interval = setInterval(() => {
+                vol -= 0.05;
+                if (vol <= 0 || !this.bgmAudio) {
+                    clearInterval(interval);
+                    if (this.bgmAudio) {
+                        this.bgmAudio.pause();
+                        this.bgmAudio.currentTime = 0;
+                    }
+                    return;
+                }
+                this.bgmAudio.volume = vol;
+            }, 80);
+        }
     }
 }
 

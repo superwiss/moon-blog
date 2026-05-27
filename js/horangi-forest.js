@@ -9,6 +9,7 @@ class SoundSynth {
         this.bgmInterval = null;
         this.isPlayingBGM = false;
         this.nodes = [];
+        this.bgmAudio = null;
     }
 
     init() {
@@ -163,77 +164,53 @@ class SoundSynth {
         osc.stop(startTime + duration + 0.1);
     }
 
-    // Ambient generative Orgel / Wind BGM
+    // Play cheerful royalty-free MP3 BGM (Ukulele Trip!)
     startAmbientBGM() {
-        this.init();
         if (this.isPlayingBGM) return;
         this.isPlayingBGM = true;
-
-        const droneFreqs = [146.83, 220.00, 293.66]; // D3, A3, D4
-        droneFreqs.forEach((freq, idx) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            const lfo = this.ctx.createOscillator();
-            const lfoGain = this.ctx.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-            
-            lfo.type = 'sine';
-            lfo.frequency.setValueAtTime(0.04 + idx * 0.02, this.ctx.currentTime);
-            lfoGain.gain.setValueAtTime(0.025, this.ctx.currentTime);
-
-            gain.gain.setValueAtTime(0, this.ctx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.04, this.ctx.currentTime + 3.0);
-
-            lfo.connect(lfoGain);
-            lfoGain.connect(gain.gain);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(this.ctx.currentTime);
-            lfo.start(this.ctx.currentTime);
-            
-            this.nodes.push(osc, gain, lfo, lfoGain);
-        });
-
-        // Play gentle random melody bells representing magic forest breezes
-        const melody = [587.33, 659.25, 739.99, 880.00, 987.77, 1174.66, 1318.51]; // D pentatonic
-        this.bgmInterval = setInterval(() => {
-            if (this.isPlayingBGM && Math.random() > 0.35) {
-                const randomFreq = melody[Math.floor(Math.random() * melody.length)];
-                const randomDelay = Math.random() * 2;
-                this.synthTone(randomFreq, 0.04, 2.0, this.ctx.currentTime + randomDelay, 'sine');
-                
-                // Add soft major-third overtone for rich harmony
-                if (Math.random() > 0.6) {
-                    this.synthTone(randomFreq * 1.25, 0.02, 1.5, this.ctx.currentTime + randomDelay + 0.1, 'sine');
+        
+        if (!this.bgmAudio) {
+            this.bgmAudio = new Audio("https://www.chosic.com/wp-content/uploads/2020/06/ukulele-trip.mp3");
+            this.bgmAudio.loop = true;
+            this.bgmAudio.volume = 0;
+        }
+        
+        this.bgmAudio.play().then(() => {
+            let vol = 0;
+            const interval = setInterval(() => {
+                if (!this.isPlayingBGM || !this.bgmAudio) {
+                    clearInterval(interval);
+                    return;
                 }
-            }
-        }, 3500);
+                vol += 0.04;
+                if (vol >= 0.35) {
+                    vol = 0.35;
+                    clearInterval(interval);
+                }
+                this.bgmAudio.volume = vol;
+            }, 100);
+        }).catch(e => {
+            console.log("BGM autoplay prevented.", e);
+        });
     }
 
     stopAmbientBGM() {
         this.isPlayingBGM = false;
-        clearInterval(this.bgmInterval);
-        
-        const now = this.ctx ? this.ctx.currentTime : 0;
-        this.nodes.forEach(node => {
-            if (node.gain && typeof node.gain.setValueAtTime === 'function') {
-                try {
-                    node.gain.cancelScheduledValues(now);
-                    node.gain.setValueAtTime(node.gain.value, now);
-                    node.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
-                } catch(e) {}
-            }
-        });
-        
-        setTimeout(() => {
-            this.nodes.forEach(node => {
-                try { node.stop(); } catch(e) {}
-            });
-            this.nodes = [];
-        }, 2200);
+        if (this.bgmAudio) {
+            let vol = this.bgmAudio.volume;
+            const interval = setInterval(() => {
+                vol -= 0.05;
+                if (vol <= 0 || !this.bgmAudio) {
+                    clearInterval(interval);
+                    if (this.bgmAudio) {
+                        this.bgmAudio.pause();
+                        this.bgmAudio.currentTime = 0;
+                    }
+                    return;
+                }
+                this.bgmAudio.volume = vol;
+            }, 80);
+        }
     }
 }
 
