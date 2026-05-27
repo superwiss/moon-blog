@@ -12,6 +12,9 @@
     <!-- Canvas for particle background -->
     <canvas id="particle-canvas"></canvas>
 
+    <!-- Fixed viewport-sized overlay to apply watercolor paper texture efficiently -->
+    <div class="paper-overlay"></div>
+
     <!-- SVG Filter for Watercolor Paper Texture -->
     <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
         <defs>
@@ -25,7 +28,7 @@
         </defs>
     </svg>
 
-    <div class="container" style="filter: url(#paper-texture);">
+    <div class="container">
         
         <!-- Small Header for Detail Page -->
         <header style="padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 15px 15px 150px 15px/15px 150px 15px 150px;">

@@ -14,6 +14,9 @@
     <!-- Canvas for magical floating watercolor petals or fireflies -->
     <canvas id="particle-canvas"></canvas>
 
+    <!-- Fixed viewport-sized overlay to apply watercolor paper texture efficiently -->
+    <div class="paper-overlay"></div>
+
     <!-- SVG Filter for Watercolor Paper Texture -->
     <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
         <defs>
@@ -27,7 +30,7 @@
         </defs>
     </svg>
 
-    <div class="container" style="filter: url(#paper-texture);">
+    <div class="container">
         
         <!-- Header Section -->
         <header>

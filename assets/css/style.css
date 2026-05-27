@@ -98,6 +98,21 @@ body::before {
     padding: 2rem 2.5rem;
 }
 
+/* Fixed viewport-sized overlay to apply watercolor paper texture efficiently */
+.paper-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fffefb; /* Solid base cream color representing SourceGraphic */
+    z-index: 9999;             /* Sits on top of all content layers to blend down */
+    pointer-events: none;      /* Ensures clicks and scroll gestures pass through */
+    filter: url(#paper-texture); /* Applies the high-fidelity SVG paper filter */
+    mix-blend-mode: multiply;  /* Multiplies the paper grain onto colors below */
+    opacity: 0.85;             /* Soft watercolor texture opacity */
+}
+
 /* 4. Common Elements */
 /* Hand-drawn irregular border button */
 .btn-handdrawn {
@@ -1600,7 +1615,8 @@ footer {
     }
     
     .card {
-        height: 340px;
+        height: auto;
+        min-height: 340px; /* Changed to min-height to prevent text clipping on small viewports */
     }
     
     .bookmark-nav {
