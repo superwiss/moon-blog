@@ -134,7 +134,7 @@ class SoundSynth {
         this.isPlayingAmbient = true;
         
         if (!this.bgmAudio) {
-            this.bgmAudio = new Audio("https://www.chosic.com/wp-content/uploads/2021/04/Warm-Summer-Acoustic-Guitar-Sunny-Vlog-Music.mp3");
+            this.bgmAudio = new Audio("./assets/audio/warm-summer.mp3");
             this.bgmAudio.loop = true;
             this.bgmAudio.volume = 0;
         }

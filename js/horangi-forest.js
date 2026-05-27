@@ -170,7 +170,7 @@ class SoundSynth {
         this.isPlayingBGM = true;
         
         if (!this.bgmAudio) {
-            this.bgmAudio = new Audio("https://www.chosic.com/wp-content/uploads/2020/06/ukulele-trip.mp3");
+            this.bgmAudio = new Audio("./assets/audio/ukulele-trip.mp3");
             this.bgmAudio.loop = true;
             this.bgmAudio.volume = 0;
         }

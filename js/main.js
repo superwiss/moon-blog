@@ -100,7 +100,7 @@ class SoundSynth {
         this.isPlayingAmbient = true;
         
         if (!this.bgmAudio) {
-            this.bgmAudio = new Audio("https://www.chosic.com/wp-content/uploads/2021/10/Funny-Adventures.mp3");
+            this.bgmAudio = new Audio("./assets/audio/funny-adventures.mp3");
             this.bgmAudio.loop = true;
             this.bgmAudio.volume = 0;
         }
