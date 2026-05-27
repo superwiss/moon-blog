@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호랑이의 숲 - 영혼 수호 요정 다마고치 🌟</title>
+    <meta name="description" content="세상을 떠난 귀여운 자벌레 호랑이의 영혼을 돌보는 따뜻한 다마고치 정원">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Tamagotchi game specific layout styles */
+        .game-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Watercolor Tamagotchi Device Wrapper */
+        .tamagotchi-device {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(253, 251, 247, 0.95);
+            border: 4px solid var(--border-color);
+            border-radius: 40px 40px 100px 100px/40px 40px 180px 180px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow), 0 20px 40px rgba(140, 122, 107, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        [data-theme="night"] .tamagotchi-device {
+            background: rgba(32, 28, 44, 0.95);
+            border-color: var(--border-color);
+        }
+
+        .tamagotchi-device::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 15%, rgba(127, 168, 127, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Screen housing */
+        .tamagotchi-screen-frame {
+            width: 100%;
+            height: 280px;
+            border: 3px solid var(--border-color);
+            border-radius: 20px;
+            background: radial-gradient(circle, #fcf8f2 0%, #e3dac9 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.06);
+        }
+
+        [data-theme="night"] .tamagotchi-screen-frame {
+            background: radial-gradient(circle, #252233 0%, #171424 100%);
+        }
+
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: transparent;
+        }
+
+        /* Status UI inside Tamagotchi overlay */
+        .status-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            font-family: var(--font-handwriting);
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            z-index: 10;
+        }
+
+        .spirit-stage-badge {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            backdrop-filter: blur(2px);
+        }
+
+        .spirit-level {
+            font-weight: bold;
+            color: var(--accent-hover);
+        }
+
+        /* Gauges Section */
+        .gauges-panel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            padding: 1rem;
+            border: 1px dashed var(--border-color);
+        }
+
+        [data-theme="night"] .gauges-panel {
+            background: rgba(40, 35, 55, 0.4);
+        }
+
+        .gauge-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .gauge-label {
+            font-family: var(--font-handwriting);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            width: 80px;
+        }
+
+        .gauge-bar-outer {
+            flex-grow: 1;
+            height: 14px;
+            background: #e0dcd3;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        [data-theme="night"] .gauge-bar-outer {
+            background: #3c374c;
+        }
+
+        .gauge-bar-inner {
+            height: 100%;
+            width: 50%;
+            border-radius: 8px;
+            transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            background: var(--accent-color);
+        }
+
+        .gauge-val {
+            font-family: var(--font-handwriting);
+            font-size: 1.1rem;
+            width: 35px;
+            text-align: right;
+        }
+
+        /* Console buttons */
+        .console-controls {
+            display: flex;
+            gap: 1.2rem;
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .console-btn {
+            flex: 1;
+            font-family: var(--font-handwriting);
+            font-size: 1.25rem;
+            padding: 0.6rem 0.2rem;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            background: #fffefb;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            box-shadow: 0 4px 8px rgba(140, 122, 107, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="night"] .console-btn {
+            background: #252233;
+            color: var(--text-primary);
+        }
+
+        .console-btn:hover {
+            transform: translateY(-3px) rotate(1deg);
+            border-color: var(--accent-color);
+            box-shadow: 0 6px 12px rgba(127, 168, 127, 0.15);
+        }
+
+        .console-btn:active {
+            transform: translateY(1px);
+        }
+
+        .console-btn.active {
+            background: var(--accent-bg);
+            border-color: var(--accent-color);
+        }
+
+        .console-btn-icon {
+            font-size: 1.6rem;
+        }
+
+        /* Popover Item Selections */
+        .popover-menu {
+            position: absolute;
+            bottom: 110px;
+            background: #fffef8;
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 0.8rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 0.8rem;
+            z-index: 100;
+            transform: translateY(10px) scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25), opacity 0.3s ease;
+        }
+
+        [data-theme="night"] .popover-menu {
+            background: #201c2c;
+        }
+
+        .popover-menu.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popover-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+            font-family: var(--font-handwriting);
+            font-size: 1.05rem;
+            gap: 2px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .popover-item:hover {
+            background: var(--accent-bg);
+            transform: scale(1.05);
+        }
+
+        .popover-item-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Floating dark sadness dust */
+        .sadness-dust {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle, rgba(60,50,55,0.85) 0%, rgba(30,20,25,0) 70%);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 50;
+            animation: wobblyFloating 3s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        @keyframes wobblyFloating {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(4px, -6px) scale(1.08); }
+        }
+
+        /* Heart / Star Pop Particles on Click */
+        .pop-particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.5rem;
+            z-index: 60;
+            animation: burstParticle 0.8s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+
+        @keyframes burstParticle {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(1.2); opacity: 0; }
+        }
+
+        /* Magic Brush Sweep Cursor effect when Sweeping is active */
+        .sweeping-active {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='fill:black'><text y='20' font-size='18'>🧹</text></svg>"), auto !important;
+        }
+
+        /* Dialogue Box */
+        .dialogue-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 0.8rem 1.2rem;
+            font-family: var(--font-handwriting);
+            font-size: 1.2rem;
+            text-align: center;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        [data-theme="night"] .dialogue-box {
+            background: rgba(40, 35, 55, 0.6);
+        }
+
+        /* Celebrate Evolution Modal Card */
+        #evolve-modal {
+            z-index: 1000;
+        }
+        .evolve-card {
+            max-width: 420px;
+            padding: 2rem;
+            text-align: center;
+            border-color: var(--accent-purple);
+        }
+        .evolve-gif-stub {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px double var(--accent-purple);
+            background: #fff;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: heartPulse 1.5s infinite ease-in-out;
+        }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for floating fireflies/stars background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Watercolor paper overlay texture -->
+    <div class="paper-overlay"></div>
+
+    <!-- SVG paper texture filter definition -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="paper-texture" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDiffuseLighting in="noise" lighting-color="#fffefb" surfaceScale="1.5" result="light">
+                    <feDistantLight azimuth="50" elevation="60" />
+                </feDiffuseLighting>
+                <feBlend mode="multiply" in="SourceGraphic" in2="light" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container" style="padding-bottom: 4rem;">
+        
+        <!-- Header Section -->
+        <header style="padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 15px 15px 150px 15px/15px 150px 15px 150px;">
+            <div class="header-night-overlay"></div>
+            <div class="header-content">
+                <div class="header-title-area">
+                    <div class="header-subtitle">호랑이의 영혼과 함께 나누는 교감 정원</div>
+                    <h1 class="header-title" style="font-size: 2.2rem; margin-bottom: 0;">✨ 호랑이의 숲 영혼 수호 ✨</h1>
+                </div>
+                
+                <div class="header-interactive">
+                    <!-- Audio Controls -->
+                    <button class="audio-control" id="audio-toggle" title="배경음악 켜기/끄기">
+                        <svg viewBox="0 0 24 24" id="audio-icon-on" style="display:none;">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                        <svg viewBox="0 0 24 24" id="audio-icon-off">
+                            <path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.03c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4zm4.27 6.27L19 7.53V3l-5 5v2.27l2.27 2.27z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Theme toggle -->
+                    <button class="supermoon-btn" id="theme-toggle" style="width:60px; height:60px;" title="낮과 밤 전환하기">
+                        <span class="moon-face" id="moon-face" style="font-size:1.4rem;">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            
+            <!-- Dialogue speech bubbles -->
+            <div class="dialogue-box" id="speech-bubble">
+                안녕 루시! 나를 보러 숲속에 와줘서 기뻐! 💚
+            </div>
+
+            <!-- Watercolor Tamagotchi Console -->
+            <div class="tamagotchi-device" id="device-wrapper">
+                
+                <!-- 1. Screen housing containing drawing canvas -->
+                <div class="tamagotchi-screen-frame" id="screen-container">
+                    
+                    <div class="status-overlay">
+                        <!-- Left Status: Evolution Badge -->
+                        <div class="spirit-stage-badge">
+                            <span id="spirit-emoji">🥚</span>
+                            <span id="spirit-stage-text">아기 영혼</span>
+                        </div>
+                        
+                        <!-- Right Status: Level -->
+                        <div class="spirit-stage-badge">
+                            <span>Lv.</span>
+                            <span class="spirit-level" id="spirit-level-val">1</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Interactive Drawing Canvas -->
+                    <canvas id="game-canvas"></canvas>
+                </div>
+
+                <!-- 2. Status Bars (Gauges) -->
+                <section class="gauges-panel">
+                    <!-- Hunger -->
+                    <div class="gauge-row">
+                        <div class="gauge-label">🥬 포만감</div>
+                        <div class="gauge-bar-outer">
+                            <div class="gauge-bar-inner" id="gauge-hunger" style="background:#a5d6a7;"></div>
+                        </div>
+                        <div class="gauge-val" id="hunger-val">50%</div>
+                    </div>
+
+                    <!-- Happiness -->
+                    <div class="gauge-row">
+                        <div class="gauge-label">🎈 기쁨</div>
+                        <div class="gauge-bar-outer">
+                            <div class="gauge-bar-inner" id="gauge-happy" style="background:#ffb74d;"></div>
+                        </div>
+                        <div class="gauge-val" id="happy-val">50%</div>
+                    </div>
+
+                    <!-- Cleanliness -->
+                    <div class="gauge-row">
+                        <div class="gauge-label">🧹 정화</div>
+                        <div class="gauge-bar-outer">
+                            <div class="gauge-bar-inner" id="gauge-clean" style="background:#81c784;"></div>
+                        </div>
+                        <div class="gauge-val" id="clean-val">50%</div>
+                    </div>
+
+                    <!-- Spirit Experience XP -->
+                    <div class="gauge-row" style="margin-top:4px;">
+                        <div class="gauge-label" style="color:var(--accent-purple-hover);">⭐ 영혼성장</div>
+                        <div class="gauge-bar-outer" style="height:10px; border-color:var(--accent-purple-hover);">
+                            <div class="gauge-bar-inner" id="gauge-xp" style="background:var(--accent-purple-hover); width:0%;"></div>
+                        </div>
+                        <div class="gauge-val" id="xp-val">0/100</div>
+                    </div>
+                </section>
+
+                <!-- 3. Dynamic Console Action Buttons -->
+                <nav class="console-controls">
+                    <!-- Feed -->
+                    <button class="console-btn" id="btn-feed" title="맛있는 마법 먹이 주기">
+                        <span class="console-btn-icon">🥬</span>
+                        <span>먹이 주기</span>
+                    </button>
+
+                    <!-- Play -->
+                    <button class="console-btn" id="btn-play" title="호랑이 놀아주기">
+                        <span class="console-btn-icon">🎈</span>
+                        <span>놀아주기</span>
+                    </button>
+
+                    <!-- Clean Sweep -->
+                    <button class="console-btn" id="btn-clean" title="슬픔의 어둠 먼지 청소하기">
+                        <span class="console-btn-icon">🧹</span>
+                        <span>먼지 정화</span>
+                    </button>
+                </nav>
+
+                <!-- Floating Popover Menus for selections (Food / Play) -->
+                <!-- Food Popover -->
+                <div class="popover-menu" id="popover-feed">
+                    <div class="popover-item" data-food="lettuce">
+                        <span class="popover-item-icon">🥬</span>
+                        <span>이슬 상추</span>
+                    </div>
+                    <div class="popover-item" data-food="star">
+                        <span class="popover-item-icon">🍃</span>
+                        <span>은하 잎사귀</span>
+                    </div>
+                    <div class="popover-item" data-food="berry">
+                        <span class="popover-item-icon">🍓</span>
+                        <span>달빛 열매</span>
+                    </div>
+                </div>
+
+                <!-- Play Popover -->
+                <div class="popover-menu" id="popover-play">
+                    <div class="popover-item" data-play="feather">
+                        <span class="popover-item-icon">🪶</span>
+                        <span>깃털 간지럼</span>
+                    </div>
+                    <div class="popover-item" data-play="bell">
+                        <span class="popover-item-icon">🔔</span>
+                        <span>방울 오르골</span>
+                    </div>
+                    <div class="popover-item" data-play="dance">
+                        <span class="popover-item-icon">💫</span>
+                        <span>은하수 댄스</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Page Bookmarks / Navigation back to home -->
+            <nav class="bookmark-nav" style="margin-top: 1rem;">
+                <a href="index.html" class="bookmark-link back-home" title="메인 화면으로 돌아가기">
+                    <span>🍂</span> 마당으로 돌아가기
+                </a>
+            </nav>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-desc">🍀 호랑이의 숲속에서 따뜻하게 빛나는 영원한 소풍 🍀</div>
+            <p>&copy; 2026 루시의 초록 일기장. All Rights Reserved. Made with 💚 by Dad.</p>
+        </footer>
+    </div>
+
+    <!-- Evolve Celebration Popup Modal -->
+    <div class="modal-overlay" id="evolve-modal">
+        <div class="modal-card evolve-card">
+            <button class="modal-close" id="evolve-close-btn">&times;</button>
+            <div style="font-family: var(--font-handwriting);">
+                <h3 style="font-size: 2.5rem; color:var(--accent-purple-hover); margin-bottom: 0.5rem;">🌟 영혼 진화 대성공! 🌟</h3>
+                <p style="font-size:1.25rem; color:var(--text-secondary);" id="evolve-modal-subtitle">은하수 빛 속에서 호랑이가 우화했어요!</p>
+                
+                <!-- Pulsing evolve graphic symbol -->
+                <div class="evolve-gif-stub" id="evolve-stub-emoji">🐛</div>
+                
+                <p style="font-size:1.3rem; margin:1.5rem 0 1rem; line-height:1.6; word-break:keep-all;" id="evolve-modal-desc">
+                    루시가 정성을 다해 슬픔을 정화하고 사랑을 준 덕분에, 호랑이의 영혼이 훨씬 더 단단하고 눈부신 빛의 요정으로 진화했어요! ✨
+                </p>
+                
+                <!-- Special butterfly bonus alert -->
+                <div id="butterfly-gift-alert" style="display:none; background:var(--accent-bg); padding:10px 15px; border-radius:12px; border:1px dashed var(--accent-purple-hover); font-size:1.15rem; margin-top:1.2rem;">
+                    🎁 <strong>대특전 잠금해제!</strong> 호랑이가 찬란한 은하 나비로 성불하여, 메인 마당의 <strong>[새싹 삼총사 🌱]</strong> 카드 잠금이 해제되었습니다!
+                </div>
+
+                <button class="btn-handdrawn" id="evolve-ok-btn" style="margin-top: 1.5rem; padding: 0.5rem 2rem;">
+                    고마워 호랑아! 💚
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/horangi-forest.js"></script>
+</body>
+</html>
