@@ -462,6 +462,7 @@ animate();
 // 5. Grid Navigation & Wiggle for Locked Cards
 // ==========================================
 const ttougiCard = document.getElementById('card-ttougi');
+const snailCard = document.getElementById('card-snail');
 const lockedCards = document.querySelectorAll('.card.locked');
 
 ttougiCard.addEventListener('click', () => {
@@ -473,6 +474,18 @@ ttougiCard.addEventListener('click', () => {
         window.location.href = 'detail.html';
     }, 450);
 });
+
+if (snailCard) {
+    snailCard.addEventListener('click', () => {
+        synth.playChime();
+        // Add page transition effect
+        document.body.style.opacity = 0;
+        document.body.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            window.location.href = 'snail-detail.html';
+        }, 450);
+    });
+}
 
 lockedCards.forEach(card => {
     card.addEventListener('click', (e) => {

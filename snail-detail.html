@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달이와 팽이들 관찰일지 - 초록 들판의 탐험가 🌿</title>
+    <meta name="description" content="달이와 15마리 팽이 남매들의 우당탕탕 10일간의 소중한 식성 일지 (총 16마리 대가족)">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Canvas for particle background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Fixed viewport-sized overlay to apply watercolor paper texture efficiently -->
+    <div class="paper-overlay"></div>
+
+    <!-- SVG Filter for Watercolor Paper Texture -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="paper-texture" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDiffuseLighting in="noise" lighting-color="#fffefb" surfaceScale="1.5" result="light">
+                    <feDistantLight azimuth="50" elevation="60" />
+                </feDiffuseLighting>
+                <feBlend mode="multiply" in="SourceGraphic" in2="light" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="container">
+        
+        <!-- Small Header for Snail Detail Page -->
+        <header style="padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 15px 15px 150px 15px/15px 150px 15px 150px;">
+            <div class="header-night-overlay"></div>
+            <div class="header-content">
+                <div class="header-title-area">
+                    <div class="header-subtitle">16마리 대가족의 폭풍 꼬물꼬물 먹방 일기</div>
+                    <h1 class="header-title" style="font-size: 2.2rem; margin-bottom: 0;">💚 달이와 팽이들 관찰일지 💚</h1>
+                </div>
+                
+                <div class="header-interactive">
+                    <!-- Audio Control Toggle -->
+                    <button class="audio-control" id="audio-toggle" title="배경음악 켜기/끄기">
+                        <svg viewBox="0 0 24 24" id="audio-icon-on" style="display:none;">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                        <svg viewBox="0 0 24 24" id="audio-icon-off">
+                            <path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.03c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4zm4.27 6.27L19 7.53V3l-5 5v2.27l2.27 2.27z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Moon Theme toggle -->
+                    <button class="supermoon-btn" id="theme-toggle" style="width:60px; height:60px;" title="낮과 밤 전환하기">
+                        <span class="moon-face" id="moon-face" style="font-size:1.4rem;">☀️</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="detail-main">
+            
+            <!-- Episode Selector Tabs (Leaf/flower-shaped horizontally swipeable on mobile) -->
+            <nav class="episode-tabs" id="tabs-container">
+                <button class="tab-btn active" data-ep="1"><span class="tab-icon">🐌</span> 1일차</button>
+                <button class="tab-btn" data-ep="2"><span class="tab-icon">🥗</span> 2일차</button>
+                <button class="tab-btn" data-ep="3"><span class="tab-icon">💩</span> 3일차</button>
+                <button class="tab-btn" data-ep="4"><span class="tab-icon">🥕</span> 4일차</button>
+                <button class="tab-btn" data-ep="5"><span class="tab-icon">🔍</span> 5일차</button>
+                <button class="tab-btn" data-ep="6"><span class="tab-icon">⚪</span> 6일차</button>
+                <button class="tab-btn" data-ep="7"><span class="tab-icon">🏁</span> 7일차</button>
+                <button class="tab-btn" data-ep="8"><span class="tab-icon">🐜</span> 8일차</button>
+                <button class="tab-btn" data-ep="9"><span class="tab-icon">⛲</span> 9일차</button>
+                <!-- 10th tab is highlighted in purple -->
+                <button class="tab-btn special-tab" data-ep="10"><span class="tab-icon">💜</span> 10일차</button>
+            </nav>
+
+            <!-- Lined Diary Book Layout -->
+            <article class="diary-book" id="diary-card">
+                
+                <!-- Confetti canvas for episode 10 celebration -->
+                <canvas id="petal-canvas" class="petal-canvas"></canvas>
+
+                <div class="diary-layout">
+                    
+                    <!-- Left Page: Polaroid Frame & Media player -->
+                    <section class="diary-media">
+                        <!-- Polaroid Frame -->
+                        <div class="polaroid-frame" id="polaroid-trigger" title="사진 더 크게 보기">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/images/snail_dali.png" alt="달이 사진" class="polaroid-img" id="diary-img">
+                            </div>
+                            <div class="polaroid-caption" id="diary-caption">
+                                폭풍 먹방을 자랑하는 귀여운 16마리 달팽이 대가족
+                            </div>
+                        </div>
+
+                        <!-- Video / Activity Box -->
+                        <div class="media-container">
+                            <div class="media-title">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"/>
+                                </svg>
+                                팽이들의 오늘 행동 관찰하기
+                            </div>
+                            <!-- Custom interactive video button -->
+                            <div class="custom-player" id="video-trigger" title="달이 행동 영상 보기">
+                                <div class="player-overlay"></div>
+                                <div class="play-btn-circle">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                                <div class="player-duration" id="player-label">관찰 영상 보기 (0:15)</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right Page: Diary Text -->
+                    <section class="diary-text-content">
+                        <div class="diary-header">
+                            <h2 class="diary-title" id="diary-title">1일: 15남매 가족 소풍</h2>
+                            <div class="diary-meta">
+                                <span id="diary-date">2026년 6월 1일 월요일</span>
+                                <div class="diary-weather">
+                                    <span>날씨:</span>
+                                    <span id="diary-weather-val">개구리 우는 날 🐸🌧️</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lined background text area -->
+                        <div class="diary-body" id="diary-text">
+                            오늘 우리 집에 아주 특별한 식구들이 이사를 왔어요! 바로 귀여운 달팽이 16마리 대가족이랍니다. 그중에서 가장 껍질이 크고 멋진 맏이 대장에게는 '달이'라는 이름을 붙여주었고, 나머지 15마리 동생들은 다 같이 '팽이들'이라고 부르기로 했어요. 아빠랑 함께 통기성이 좋은 통에 촉촉한 코코피트 흙을 부드럽게 깔고 이끼도 촉촉하게 적셔서 팽이들의 새 보금자리를 꾸며주었어요. 16마리나 되다 보니 잘 먹는 만큼 똥도 아주 어마어마하게 많이 싸네요! 벌써 흙 위를 꼬물꼬물 기어 다니는 모습이 한가득하네요. 앞으로 루시의 팽이 관찰 일기가 시작됩니다!
+                        </div>
+
+                        <div class="diary-footer">
+                            <div class="diary-signature" id="diary-sig">- 루시가 촉촉한 이끼 숲 앞에서 ✍️</div>
+                        </div>
+                    </section>
+
+                </div>
+            </article>
+
+            <!-- Bookmarks navigation -->
+            <nav class="bookmark-nav">
+                <a href="index.html" class="bookmark-link back-home" title="메인 화면으로 돌아가기">
+                    <span>🍂</span> 목록으로 가기
+                </a>
+                
+                <div style="display:flex; gap:1rem;">
+                    <button class="bookmark-link prev-tab" id="prev-btn" title="이전 회차 일기">
+                        <span>👈</span> 이전 일기
+                    </button>
+                    <button class="bookmark-link next-tab" id="next-btn" title="다음 회차 일기">
+                        다음 일기 <span>👉</span>
+                    </button>
+                </div>
+            </nav>
+
+        </main>
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="footer-desc">🍀 매일 조금씩 성장하는 우리의 초록 친구들 🍀</div>
+            <p>&copy; 2026 루시의 초록 일기장. All Rights Reserved. Made with 💚 by Dad.</p>
+        </footer>
+    </div>
+
+    <!-- Polaroid Zoom Modal -->
+    <div class="modal-overlay" id="zoom-modal">
+        <div class="modal-card" style="max-width: 480px; padding: 1.5rem; text-align: center;">
+            <button class="modal-close" id="zoom-close-btn">&times;</button>
+            <div class="polaroid-frame" style="transform:none; margin: 1rem 0; width:100%; box-shadow:none; border:none; padding: 0.5rem 0.5rem 2rem;">
+                <div class="polaroid-img-wrapper" style="border-radius:8px;">
+                    <img src="" alt="달이 확대 사진" class="polaroid-img" id="zoom-img">
+                </div>
+                <div class="polaroid-caption" id="zoom-caption" style="font-size: 1.5rem; margin-top: 1.2rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulated Video Modal (Interactive Snail Drawing Canvas!) -->
+    <div class="modal-overlay" id="video-modal">
+        <div class="modal-card" style="max-width: 640px; padding: 2rem;">
+            <button class="modal-close" id="video-close-btn">&times;</button>
+            <div class="memorial-modal-header" style="margin-bottom:1rem;">
+                <h3 class="memorial-modal-title" id="video-modal-title">달이와 팽이들의 생생 행동 관찰 🎬</h3>
+            </div>
+            
+            <div class="video-frame-container" id="video-container" style="background:#2d3a2e; border: 2px solid var(--border-color); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                <!-- Animated canvas for simulated cute snail movement -->
+                <canvas id="video-canvas" style="width:100%; height:100%; background: radial-gradient(circle, #fcf8f2 0%, #e3dac9 100%);"></canvas>
+                <!-- Play overlay text -->
+                <div id="video-sound-alert" style="position:absolute; bottom:15px; left:15px; background:rgba(0,0,0,0.6); color:#fff; padding:6px 12px; border-radius:20px; font-family:var(--font-handwriting); font-size:1.1rem; display:flex; align-items:center; gap:5px; pointer-events:none;">
+                    🔊 꼬물거리며 기어가는 소리가 합성되어 들려요!
+                </div>
+            </div>
+            <p class="memorial-desc" style="margin-top: 1rem; text-align:center;" id="video-modal-desc">
+                달이가 배발을 꼬물꼬물 움직이며 나뭇잎 위를 천천히 기어 다니고 있어요.
+            </p>
+        </div>
+    </div>
+
+    <script src="js/snail-detail.js"></script>
+</body>
+</html>
