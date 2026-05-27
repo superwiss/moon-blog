@@ -501,7 +501,8 @@ header {
     align-items: center;
     cursor: pointer;
     overflow: hidden;
-    height: 400px;
+    min-height: 400px;
+    height: auto;
     justify-content: space-between;
     animation: gentleFloat 5s infinite ease-in-out;
 }
@@ -586,6 +587,7 @@ header {
     margin: 0.8rem 0;
     padding: 8px;
     transition: transform 0.5s ease;
+    flex-shrink: 0;
 }
 
 [data-theme="night"] .card-img-frame {
@@ -1440,13 +1442,15 @@ footer {
     }
     
     .card {
-        height: 350px;
+        min-height: 350px;
+        height: auto;
         padding: 1.5rem 1rem;
     }
     
     .card-img-frame {
         width: 140px;
         height: 140px;
+        flex-shrink: 0;
     }
     
     .card-name {
