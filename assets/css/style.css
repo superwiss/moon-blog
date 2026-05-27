@@ -1356,3 +1356,267 @@ footer {
     margin-bottom: 0.4rem;
     color: var(--accent-color);
 }
+
+/* ==========================================
+   11. MOBILE & TABLET RESPONSIVE STYLES
+   ========================================== */
+@media (max-width: 768px) {
+    /* Container & Layout Sizing */
+    .container {
+        padding: 1rem 1rem;
+    }
+    
+    /* Header Sizing */
+    header {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 20px 20px 100px 20px/20px 100px 20px 100px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header-title {
+        font-size: 1.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .header-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .header-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .header-interactive {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    
+    .supermoon-btn {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .supermoon-btn::before {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .supermoon-btn .moon-face {
+        font-size: 1.3rem;
+    }
+    
+    /* Dashboard (Grid Layout to Column Flow) */
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .memorial-sidebar {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        order: 2; /* Horangi's Grave goes below active cards on mobile for quicker diary access */
+    }
+    
+    .observation-grid-section {
+        order: 1; /* Lucy's diaries on top */
+    }
+    
+    .grid-title {
+        font-size: 1.7rem;
+    }
+    
+    .observation-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .card {
+        height: 350px;
+        padding: 1.5rem 1rem;
+    }
+    
+    .card-img-frame {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .card-name {
+        font-size: 1.25rem;
+    }
+    
+    /* DETAIL PAGE: Widescreen Book to Scrollable Single Page */
+    .detail-main {
+        padding: 0 0.2rem;
+    }
+    
+    /* Horizontal Swipeable Ribbon of Episode Tabs */
+    .episode-tabs {
+        display: flex;
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 0.6rem;
+        padding: 0.5rem 0.2rem 1rem 0.2rem;
+        margin-bottom: 1.2rem;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+    }
+    
+    .episode-tabs::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Chrome/Safari */
+    }
+    
+    .tab-btn {
+        flex: 0 0 auto;
+        padding: 0.4rem 1rem;
+        font-size: 1.15rem;
+        scroll-snap-align: start;
+    }
+    
+    /* Book Container stacked vertically */
+    .diary-book {
+        padding: 2rem 1.2rem;
+        border-radius: 18px;
+        min-height: auto;
+    }
+    
+    .diary-book::after {
+        display: none; /* Hide the vertical spine binding line */
+    }
+    
+    .diary-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .diary-media {
+        gap: 1.5rem;
+    }
+    
+    .polaroid-frame {
+        padding: 1rem 1rem 2rem;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    
+    .custom-player {
+        height: 130px;
+    }
+    
+    .diary-text-content {
+        padding-left: 0;
+    }
+    
+    .diary-title {
+        font-size: 1.5rem;
+    }
+    
+    .diary-meta {
+        font-size: 1.15rem;
+    }
+    
+    /* Custom mobile handwriting line-height alignment */
+    .diary-body {
+        font-size: 1.15rem;
+        line-height: 2.3rem; /* Perfectly aligned */
+        background-size: 100% 2.3rem; /* Perfect lined notebook matching */
+        min-height: 240px;
+        padding-top: 0.2rem;
+    }
+    
+    .diary-signature {
+        font-size: 1.3rem;
+    }
+    
+    /* Navigation Bookmarks */
+    .bookmark-nav {
+        margin-top: 2rem;
+        gap: 0.5rem;
+    }
+    
+    .bookmark-link {
+        font-size: 1.15rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Modals & Popups Sizing */
+    .modal-card {
+        padding: 1.5rem 1.2rem;
+        max-width: 92%;
+        border-radius: 18px;
+    }
+    
+    .memorial-modal-title {
+        font-size: 1.6rem;
+    }
+    
+    .memorial-letter {
+        padding: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .flower-options {
+        gap: 0.5rem;
+    }
+    
+    .flower-option {
+        padding: 0.5rem;
+    }
+    
+    .flower-emoji {
+        font-size: 1.8rem;
+    }
+    
+    .flower-name {
+        font-size: 0.85rem;
+    }
+    
+    .flower-desc {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .observation-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .card {
+        height: 340px;
+    }
+    
+    .bookmark-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .bookmark-nav > div {
+        width: 100%;
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .bookmark-nav > div > button {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .bookmark-link.back-home {
+        justify-content: center;
+    }
+}
