@@ -1,20 +1,24 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.0.6'; // Increment this version on each deploy to trigger notifications!
-const UPDATE_MESSAGE = "호랑이 수호 요정의 3D 입체 유영 비행 업그레이드 및 동영상 자막 가림 버그가 말끔히 수정되었습니다! 💚";
+const CACHE_NAME = 'moon-blog-cache-v1.0.7'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "신비로운 푸른 젤성 대장 개미 일기(10화) 추가 및 뚜기x달이x개미의 포복절도 연합 운동회 대개막! 🐜🐌🟢🏆";
 const ASSETS = [
     './',
     './index.html',
     './detail.html',
     './snail-detail.html',
+    './ant-detail.html',
     './horangi-forest.html',
     './assets/css/style.css',
     './js/main.js',
     './js/detail.js',
     './js/snail-detail.js',
+    './js/ant-detail.js',
     './js/horangi-forest.js',
     './assets/images/logo_supermoon.png',
     './assets/images/grasshopper_ttougi.png',
     './assets/images/snail_dali.png',
+    './assets/images/ant_farm_1.png',
+    './assets/images/ant_farm_2.png',
     './assets/images/tomb_horangi.png'
 ];
 

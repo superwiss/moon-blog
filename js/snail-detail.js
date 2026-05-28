@@ -293,6 +293,17 @@ const EPISODE_DATA = {
         videoLabel: "10일간의 행복 축하 (0:15)",
         videoDesc: "루시의 사랑을 가득 받고 윤기가 흐르는 패각을 뽐내는 16마리의 해피 엔딩!",
         videoAction: "celebrate"
+    },
+    11: {
+        title: "11일차: 은빛 달팽이의 느림보 대역전 운동회! 🐌🏆",
+        date: "2026년 6월 25일 목요일",
+        weather: "기분 좋은 선선한 가을바람 🍂",
+        text: "오늘 대단한 소식이 있어요! 바로 루시의 장미 마당에서 '초록 들판 곤충 연합 운동회'가 대대적으로 펼쳐졌답니다! 참가 선수는 이 구역 제일 날렵한 뒷다리의 방아깨비 뚜기 형아, 저 푸른 젤 개미성에서 기어 나온 한국홍가슴개미들의 대장인 '대장 개미', 그리고 우직한 은빛 달팽이 대표인 우리 첫째 대장 '달이'였어요! 첫 경기인 '기어가기 레이스'가 시작되자마자 뚜기는 로켓처럼 휘익 하늘로 튀어 올라 10미터를 폴짝 날아갔고, 대장 개미는 수십 마리의 정예 개미 부대와 함께 군대 구령에 맞춰 '영차영차!' 소름 돋는 칼군무 대열로 전진해 왔어요. 하지만 우리 느림보 달이도 지지 않았습니다! 배발 깊은 곳에서 특수 점액 오일을 대폭 뿜어내며 은빛 윤기가 흐르는 점액 로드를 바닥에 까는 데 성공했거든요! 덕분에 흙바닥에 마찰력이 제로가 되면서, 달이는 꼬물꼬물 걷는 대신 껍질을 스케이트 삼아 쌩쌩 얼음판 위를 미끄러지는 피겨스케이팅 슬라이딩 기술로 무한 쾌속 전진을 감행했답니다! ‘스스스슥-!’ 그 모습은 흡사 은빛 슬라이더 같아 구경하던 루시가 배를 잡고 떼굴떼굴 굴렀지요! 이어진 '루꼴라 뷔페 식성 대격돌'에서는 개미 군단이 돋보였습니다. 수십 마리가 도화지 오리듯 루꼴라를 완벽한 사각형으로 가위질해 가져갔고, 뚜기는 날갯소리를 슥슥 울리며 엄청난 속도로 구멍을 뻥뻥 뚫어 갉아먹었어요. 하지만 우리 달이도 지지 않고 거대한 주황색 당근 조각을 입속으로 한 번에 진공 흡입하듯 꼬물꼬물 먹어 치웠답니다. 마지막 '줄다리기' 종목은 장미 가지 덩굴을 잡고 팽팽한 당기기를 시도했어요. 뚜기가 강력한 로켓 뒷다리로 땅을 파며 당기고, 대장 개미 군단이 수십 마리의 어깨를 겯고 총출동하여 버텼으며, 달이가 자기 몸무게의 100배가 넘는 우직한 패각 중심을 뒤로 슬쩍 눕히는 닻 내리기 전술을 썼죠. 결국 줄이 '툭-' 끊어지면서 세 마리 모두 풀밭에 나뒹굴고 말았답니다! 정말 눈물이 쏙 빠질 정도로 박장대소한 행복한 하루였어요. 달이와 팽이들, 그리고 뚜기와 대장 개미 부대까지! 우리 마당의 소중한 단짝 삼총사들이 앞으로도 아프지 않고 사이좋게 지내며, 멋진 정원 판타지를 만들어 갔으면 좋겠습니다. 동물 연합 영원하라! 💚🏆✨",
+        caption: "달이의 기막힌 은빛 미끄럼틀 슬라이딩 대역전!",
+        imgFilter: "brightness(1.02) saturate(1.15) contrast(1.05)",
+        videoLabel: "달이의 슬라이딩 레이스 (0:25)",
+        videoDesc: "은빛 점액 길을 뿜으며 얼음 스케이트 타듯 쌩쌩 슬라이딩하는 달이의 스릴 만점 질주 장면!",
+        videoAction: "crossover"
     }
 };
 
@@ -351,7 +362,8 @@ function switchEpisode(epNumber) {
             7: "- 올림픽 우승 팀장 루시가 🏆✍️",
             8: "- 개미와 달팽이 통을 잇는 사랑의 가교 루시가 ✍️",
             9: "- 옥수수 온천과 노란 보석 똥을 줍는 루시가 ⛲✍️",
-            10: "- 16마리 달팽이 대가족의 수호신 루시가 💚✍️"
+            10: "- 16마리 달팽이 대가족의 수호신 루시가 💚✍️",
+            11: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
@@ -367,15 +379,15 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 10 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 10 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 11 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 11 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
         diaryCard.style.transform = 'translateY(0)';
         
-        // Special fireworks celebration on Episode 10!
-        if (currentEp === 10) {
+        // Special fireworks celebration on Episode 10 and 11!
+        if (currentEp === 10 || currentEp === 11) {
             startCelebration();
         } else {
             stopCelebration();
@@ -395,7 +407,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 10) switchEpisode(currentEp + 1);
+    if (currentEp < 11) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -758,19 +770,19 @@ function animateVideo() {
     antWiggle = Math.sin(vTime * 1.5) * 5;
     
     // Crawl forward slowly
-    if (action !== 'race' && snailX < 450) {
+    if (action !== 'race' && action !== 'crossover' && snailX < 450) {
         snailX += 0.45 * (1.2 - Math.abs(Math.sin(vTime * 3)) * 0.4); // moves faster when stretched!
         // Slow periodic crawling squish sound!
         if (Math.floor(vTime * 3) % 10 === 0 && Math.random() > 0.96) {
             synth.playSquish();
         }
-    } else if (action === 'race') {
-        // High speed race! (Hops forward)
+    } else if (action === 'race' || action === 'crossover') {
+        // High speed race! (Hops/slides forward fast)
         snailX += 1.8 * (1.1 + Math.sin(vTime * 5) * 0.3);
         bodyStretch = 1 + Math.sin(vTime * 6) * 0.18;
     }
 
-    // DRAW THE SHINY TRAIL (点液 trail)
+    // DRAW THE SHINY TRAIL (점액 trail)
     vCtx.save();
     vCtx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
     vCtx.lineWidth = 6;
@@ -836,6 +848,9 @@ function animateVideo() {
         drawFoodCorn(420, 195);
     } else if (action === 'meet_ant') {
         drawAnt(440, 210, vTime);
+    } else if (action === 'crossover') {
+        drawTtougiMini(130, 200, vTime);
+        drawAnt(430, 200, vTime);
     } else if (action === 'explore') {
         drawHouseSprout(420, 185);
     } else if (action === 'eat_white') {
@@ -1070,6 +1085,37 @@ function drawAnt(x, y, time) {
     vCtx.moveTo(11, 0);
     vCtx.quadraticCurveTo(18, 5, 22, 3);
     vCtx.stroke();
+    vCtx.restore();
+}
+
+function drawTtougiMini(x, y, time) {
+    vCtx.save();
+    vCtx.translate(x, y + Math.sin(time * 6) * 12); // hopping effect!
+    vCtx.fillStyle = '#81c784'; // green
+    vCtx.strokeStyle = '#4caf50';
+    vCtx.lineWidth = 1.5;
+    
+    // Body (long ellipse)
+    vCtx.beginPath();
+    vCtx.ellipse(0, 0, 16, 6, Math.PI/12, 0, Math.PI*2);
+    vCtx.fill();
+    vCtx.stroke();
+    
+    // Head (cone shape/circle)
+    vCtx.beginPath();
+    vCtx.arc(12, -4, 5, 0, Math.PI*2);
+    vCtx.fill();
+    vCtx.stroke();
+    
+    // Legs
+    vCtx.strokeStyle = '#4caf50';
+    vCtx.lineWidth = 2;
+    vCtx.beginPath();
+    vCtx.moveTo(-8, 2);
+    vCtx.lineTo(-14, -10);
+    vCtx.lineTo(-6, 8);
+    vCtx.stroke();
+    
     vCtx.restore();
 }
 

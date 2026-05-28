@@ -270,6 +270,17 @@ const EPISODE_DATA = {
         videoLabel: "우정 축하 영상 (0:15)",
         videoDesc: "탐험가 루시의 손 위에서 신나게 춤을 추며 소통하는 단짝 뚜기예요.",
         videoAction: "friendship"
+    },
+    7: {
+        title: "7회: 초록 들판 동물 연합 운동회! 🏆",
+        date: "2026년 5월 28일 목요일",
+        weather: "화창하고 맑은 가을바람 🍂",
+        text: "오늘 루시의 정원에서 사상 최초로 '초록 들판 동물 연합 운동회'가 열렸습니다! 참가 선수는 날렵한 다리의 방아깨비 대표 저 뚜기, 우직한 껍질의 느림보 달팽이 대표 달이, 그리고 파란 물약 젤리 성곽의 군대 지휘관 대장 개미 대표였습니다! 첫 번째 경기인 '초속 기어가기 레이스'가 시작되자마자 저는 강력한 뒷다리 근육에 우주의 힘을 모아 숲길을 한 번에 날아올랐습니다! ‘폴짝!’ 단 한 번의 점프로 10미터를 날아가며 우승을 따놓은 당상이라 생각하고 신나게 다리를 슥슥 비벼 날갯소리로 오케스트라 연주를 울려댔죠. 하지만 뒤를 돌아보니 기적이 일어나고 있었습니다! 달팽이 달이는 물러서지 않고 자기만의 거대한 은빛 점액 길을 뿜어내며 마찰력을 제로로 만든 채 미끄러지듯 스케이트를 타고 슬라이딩을 하고 있었습니다! 게다가 대장 개미는 혼자 달리는 것이 아니라, 무려 수십 마리의 정예 개미 부대원들과 함께 완벽한 군사 대열을 맞추어 영차영차 구령에 맞추어 엄청난 일사불란함으로 돌진해오고 있었죠! 두 번째 종목인 '누가누가 루꼴라 빨리 먹나 뷔페전'에서는 대장 개미 군단이 돋보였습니다. 그들은 특유의 정밀한 이빨로 루꼴라 잎을 도화지 오리듯 완벽한 등분으로 쪼개서 기지국으로 쏜살같이 실어 날랐고, 저 뚜기는 턱이 빠지도록 루꼴라를 사각사각 구멍 내며 갉아 먹어 저만의 1등 신기록을 경신했습니다. 느림보 달이는 커다란 당근 조각을 입안에 통째로 물고 진공청소기처럼 천천히 빨아들이며 온천욕을 즐기고 있었어요. 마지막 '줄다리기 단체전'에서는 저와 달이와 개미 군단이 장미 줄기를 물고 힘을 겨뤘는데, 달이의 우직한 패각 무게 중심과 개미 부대의 일사불란한 단합력, 그리고 저의 로켓 엔진 뒷다리가 격돌하여 결국 장미 줄기가 뚝 끊어지는 바람에 모두가 잔디밭에 벌러덩 자빠지고 말았답니다! 경기 결과는 모두가 1등인 완벽한 공동 우승! 서로 다른 발걸음과 재주를 가졌지만, 함께 달리며 잔디밭에서 뒤엉켜 노는 시간이 너무나 눈부시게 행복했습니다. 뚜기 요정, 은빛 달팽이, 파란 젤 개미 부대까지 우리 모두 루시의 소중한 단짝들로서 평화롭고 신나는 초록 연합 영원히 포에버! 💚🌟",
+        caption: "정원에서 펼쳐진 신나는 동물 운동회 대격돌!",
+        imgFilter: "brightness(1.02) saturate(1.15) contrast(1.05)",
+        videoLabel: "연합 운동회 단체전 (0:25)",
+        videoDesc: "뚜기가 도약하고 달팽이가 슬라이딩하며 개미들이 장미 줄기를 당기는 손에 땀을 쥐는 경기 장면이에요!",
+        videoAction: "crossover"
     }
 };
 
@@ -318,7 +329,8 @@ function switchEpisode(epNumber) {
             3: "- 멋진 쉐프 루시가 🍽️✍️",
             4: "- 기특함에 눈물짓는 루시가 ✍️",
             5: "- 다리는 아직 못 비비는 루시가 🎻✍️",
-            6: "- 뚜기 단짝 친구 루시가 💚✍️"
+            6: "- 뚜기 단짝 친구 루시가 💚✍️",
+            7: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
@@ -334,15 +346,15 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 6 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 6 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 7 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 7 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
         diaryCard.style.transform = 'translateY(0)';
         
-        // Special fireworks celebration on Episode 6!
-        if (currentEp === 6) {
+        // Special fireworks celebration on Episode 7!
+        if (currentEp === 7) {
             startCelebration();
         } else {
             stopCelebration();
@@ -362,7 +374,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 6) switchEpisode(currentEp + 1);
+    if (currentEp < 7) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -779,6 +791,46 @@ function animateVideo() {
         // Hearts drift out
         antennaWiggle = Math.sin(vTime * 3) * 8;
         drawHearts(280, 120, vTime);
+    }
+    else if (action === 'crossover') {
+        // Epic Sports Day Crossover Animation!
+        antennaWiggle = Math.sin(vTime * 5) * 8;
+        grasshopperScale = 0.95 + Math.sin(vTime * 3) * 0.05;
+        drawHearts(280, 110, vTime);
+        drawSparkles(280, 150, vTime);
+        
+        // Draw Snail to the left (x: 130, y: 200)
+        vCtx.save();
+        vCtx.translate(130, 200);
+        vCtx.fillStyle = '#fdf5e6';
+        vCtx.strokeStyle = '#d7ccc8';
+        vCtx.lineWidth = 2.5;
+        vCtx.beginPath();
+        vCtx.ellipse(0, 10, 20, 8, 0, 0, Math.PI*2);
+        vCtx.fill();
+        vCtx.stroke();
+        // draw shell
+        vCtx.fillStyle = '#d7ccc8';
+        vCtx.strokeStyle = '#5d4037';
+        vCtx.beginPath();
+        vCtx.arc(-5, 0, 15, 0, Math.PI*2);
+        vCtx.fill();
+        vCtx.stroke();
+        vCtx.restore();
+        
+        // Draw Ant to the right (x: 430, y: 200)
+        vCtx.save();
+        vCtx.translate(430, 200);
+        vCtx.fillStyle = '#1e120c';
+        // Abdomen
+        vCtx.beginPath();
+        vCtx.ellipse(-10, 0, 9, 6, 0, 0, Math.PI*2);
+        vCtx.fill();
+        // Head
+        vCtx.beginPath();
+        vCtx.arc(5, -2, 5, 0, Math.PI*2);
+        vCtx.fill();
+        vCtx.restore();
     }
 
     // DRAW THE LEAF for eating action

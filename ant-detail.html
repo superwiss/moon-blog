@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>달이와 팽이들 관찰일지 - 초록 들판의 탐험가 🌿</title>
-    <meta name="description" content="달이와 15마리 팽이 남매들의 우당탕탕 10일간의 소중한 식성 일지 (총 16마리 대가족)">
+    <title>대장 개미 관찰일지 - 신비로운 푸른 젤성 🐜</title>
+    <meta name="description" content="한국홍가슴개미 대장과 대원들이 펼치는 신비로운 푸른 젤 개미성 개척 일지">
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Custom theme override for rich watery blue ant farm vibes -->
+    <style>
+        :root {
+            --accent-color: #2196f3; /* Watery Blue */
+            --accent-hover: #1e88e5;
+            --accent-bg: rgba(33, 150, 243, 0.12);
+        }
+        [data-theme="night"] {
+            --accent-color: #64b5f6; /* Soft Sky Blue for dark mode */
+            --accent-hover: #90caf9;
+            --accent-bg: rgba(100, 181, 246, 0.15);
+        }
+    </style>
 </head>
 <body>
 
@@ -30,13 +43,13 @@
 
     <div class="container">
         
-        <!-- Small Header for Snail Detail Page -->
+        <!-- Small Header for Ant Detail Page -->
         <header style="padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 15px 15px 150px 15px/15px 150px 15px 150px;">
             <div class="header-night-overlay"></div>
             <div class="header-content">
                 <div class="header-title-area">
-                    <div class="header-subtitle">16마리 대가족의 폭풍 꼬물꼬물 먹방 일기</div>
-                    <h1 class="header-title" style="font-size: 2.2rem; margin-bottom: 0;">💚 달이와 팽이들 관찰일지 💚</h1>
+                    <div class="header-subtitle">신비로운 푸른 젤성 속의 한국홍가슴개미 특공대</div>
+                    <h1 class="header-title" style="font-size: 2.2rem; margin-bottom: 0;">💙 대장 개미 관찰일지 💙</h1>
                 </div>
                 
                 <div class="header-interactive">
@@ -60,27 +73,25 @@
 
         <main class="detail-main">
             
-            <!-- Episode Selector Tabs (Leaf/flower-shaped horizontally swipeable on mobile) -->
+            <!-- Episode Selector Tabs -->
             <nav class="episode-tabs" id="tabs-container">
-                <button class="tab-btn active" data-ep="1"><span class="tab-icon">🐌</span> 1일차</button>
-                <button class="tab-btn" data-ep="2"><span class="tab-icon">🥗</span> 2일차</button>
-                <button class="tab-btn" data-ep="3"><span class="tab-icon">💩</span> 3일차</button>
-                <button class="tab-btn" data-ep="4"><span class="tab-icon">🥕</span> 4일차</button>
-                <button class="tab-btn" data-ep="5"><span class="tab-icon">🔍</span> 5일차</button>
-                <button class="tab-btn" data-ep="6"><span class="tab-icon">⚪</span> 6일차</button>
-                <button class="tab-btn" data-ep="7"><span class="tab-icon">🏁</span> 7일차</button>
-                <button class="tab-btn" data-ep="8"><span class="tab-icon">🐜</span> 8일차</button>
-                <button class="tab-btn" data-ep="9"><span class="tab-icon">⛲</span> 9일차</button>
-                <!-- 10th tab is highlighted in purple -->
-                <button class="tab-btn special-tab" data-ep="10"><span class="tab-icon">💜</span> 10일차</button>
-                <!-- 11th tab for crossover event -->
-                <button class="tab-btn special-tab" data-ep="11" style="border-color:var(--accent-purple-hover); color:var(--accent-purple-hover);"><span class="tab-icon">🏆</span> 11일차</button>
+                <button class="tab-btn active" data-ep="1"><span class="tab-icon">🐜</span> 1일차</button>
+                <button class="tab-btn" data-ep="2"><span class="tab-icon">🧱</span> 2일차</button>
+                <button class="tab-btn" data-ep="3"><span class="tab-icon">🔵</span> 3일차</button>
+                <button class="tab-btn" data-ep="4"><span class="tab-icon">🗺️</span> 4일차</button>
+                <button class="tab-btn" data-ep="5"><span class="tab-icon">💧</span> 5일차</button>
+                <button class="tab-btn" data-ep="6"><span class="tab-icon">🧪</span> 6일차</button>
+                <button class="tab-btn" data-ep="7"><span class="tab-icon">🔬</span> 7일차</button>
+                <button class="tab-btn" data-ep="8"><span class="tab-icon">🏗️</span> 8일차</button>
+                <button class="tab-btn" data-ep="9"><span class="tab-icon">👑</span> 9일차</button>
+                <!-- 10th tab is the crossover event, highlighted in purple -->
+                <button class="tab-btn special-tab" data-ep="10" style="border-color:var(--accent-purple-hover); color:var(--accent-purple-hover);"><span class="tab-icon">🏆</span> 10일차</button>
             </nav>
 
             <!-- Lined Diary Book Layout -->
             <article class="diary-book" id="diary-card">
                 
-                <!-- Confetti canvas for episode 10 celebration -->
+                <!-- Confetti canvas for celebration -->
                 <canvas id="petal-canvas" class="petal-canvas"></canvas>
 
                 <div class="diary-layout">
@@ -90,10 +101,10 @@
                         <!-- Polaroid Frame -->
                         <div class="polaroid-frame" id="polaroid-trigger" title="사진 더 크게 보기">
                             <div class="polaroid-img-wrapper">
-                                <img src="assets/images/snail_dali.png" alt="달이 사진" class="polaroid-img" id="diary-img">
+                                <img src="assets/images/ant_farm_1.png" alt="대장 개미 사진" class="polaroid-img" id="diary-img">
                             </div>
                             <div class="polaroid-caption" id="diary-caption">
-                                폭풍 먹방을 자랑하는 귀여운 16마리 달팽이 대가족
+                                신비로운 푸른 젤 성곽의 늠름한 한국홍가슴개미 대장
                             </div>
                         </div>
 
@@ -103,10 +114,10 @@
                                 <svg viewBox="0 0 24 24">
                                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"/>
                                 </svg>
-                                팽이들의 오늘 행동 관찰하기
+                                개미들의 오늘 행동 관찰하기
                             </div>
                             <!-- Custom interactive video button -->
-                            <div class="custom-player" id="video-trigger" title="달이 행동 영상 보기">
+                            <div class="custom-player" id="video-trigger" title="개미 행동 영상 보기">
                                 <div class="player-overlay"></div>
                                 <div class="play-btn-circle">
                                     <svg viewBox="0 0 24 24">
@@ -121,23 +132,23 @@
                     <!-- Right Page: Diary Text -->
                     <section class="diary-text-content">
                         <div class="diary-header">
-                            <h2 class="diary-title" id="diary-title">1일: 15남매 가족 소풍</h2>
+                            <h2 class="diary-title" id="diary-title">1일: 신비로운 푸른 젤 개미집</h2>
                             <div class="diary-meta">
-                                <span id="diary-date">2026년 6월 1일 월요일</span>
+                                <span id="diary-date">2026년 6월 15일 월요일</span>
                                 <div class="diary-weather">
                                     <span>날씨:</span>
-                                    <span id="diary-weather-val">개구리 우는 날 🐸🌧️</span>
+                                    <span id="diary-weather-val">구름 없는 하늘 ☀️</span>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Lined background text area -->
                         <div class="diary-body" id="diary-text">
-                            오늘 우리 집에 아주 특별한 식구들이 이사를 왔어요! 바로 귀여운 달팽이 16마리 대가족이랍니다. 그중에서 가장 껍질이 크고 멋진 맏이 대장에게는 '달이'라는 이름을 붙여주었고, 나머지 15마리 동생들은 다 같이 '팽이들'이라고 부르기로 했어요. 아빠랑 함께 통기성이 좋은 통에 촉촉한 코코피트 흙을 부드럽게 깔고 이끼도 촉촉하게 적셔서 팽이들의 새 보금자리를 꾸며주었어요. 16마리나 되다 보니 잘 먹는 만큼 똥도 아주 어마어마하게 많이 싸네요! 벌써 흙 위를 꼬물꼬물 기어 다니는 모습이 한가득하네요. 앞으로 루시의 팽이 관찰 일기가 시작됩니다!
+                            오늘 우리 집에 진짜진짜 신기하고 멋진 친구들이 도착했어요! 바로 투명하고 파란 젤리가 꽉 차 있는 특수 개미집과 한국홍가슴개미 식구들이랍니다. 개미들이 다치지 않게 조심히 파란 젤성 입구에 넣어주었어요. 그중에서 가장 덩치가 크고 멋진 카리스마를 가진 대장에게는 '대장 개미'라는 이름을 붙여주었지요. 대장 개미와 대원들은 새로운 푸른 성에 오자마자 더듬이를 파르르 흔들며 젤바닥을 이리저리 문지르고 탐색을 시작했답니다. 신비한 젤 속에서 어떤 미래의 궁전 터널들이 뚫릴지 벌써부터 정말 기대돼요!
                         </div>
 
                         <div class="diary-footer">
-                            <div class="diary-signature" id="diary-sig">- 루시가 촉촉한 이끼 숲 앞에서 ✍️</div>
+                            <div class="diary-signature" id="diary-sig">- 루시가 파란 젤성 앞에서 ✍️</div>
                         </div>
                     </section>
 
@@ -175,37 +186,37 @@
             <button class="modal-close" id="zoom-close-btn">&times;</button>
             <div class="polaroid-frame" style="transform:none; margin: 1rem 0; width:100%; box-shadow:none; border:none; padding: 0.5rem 0.5rem 2rem;">
                 <div class="polaroid-img-wrapper" style="border-radius:8px;">
-                    <img src="" alt="달이 확대 사진" class="polaroid-img" id="zoom-img">
+                    <img src="" alt="개미 확대 사진" class="polaroid-img" id="zoom-img">
                 </div>
                 <div class="polaroid-caption" id="zoom-caption" style="font-size: 1.5rem; margin-top: 1.2rem;"></div>
             </div>
         </div>
     </div>
 
-    <!-- Simulated Video Modal (Interactive Snail Drawing Canvas!) -->
+    <!-- Simulated Video Modal -->
     <div class="modal-overlay" id="video-modal">
         <div class="modal-card" style="max-width: 640px; padding: 2rem;">
             <button class="modal-close" id="video-close-btn">&times;</button>
             <div class="memorial-modal-header" style="margin-bottom:1rem;">
-                <h3 class="memorial-modal-title" id="video-modal-title">달이와 팽이들의 생생 행동 관찰 🎬</h3>
+                <h3 class="memorial-modal-title" id="video-modal-title">개미들의 영차영차 굴 파기 🎬</h3>
             </div>
             
-            <div class="video-frame-container" id="video-container" style="background:#2d3a2e; border: 2px solid var(--border-color); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
-                <!-- Animated canvas for simulated cute snail movement -->
-                <canvas id="video-canvas" style="width:100%; height:100%; background: radial-gradient(circle, #fcf8f2 0%, #e3dac9 100%);"></canvas>
+            <div class="video-frame-container" id="video-container" style="background:#1a237e; border: 2px solid var(--border-color); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                <!-- Animated canvas for simulated cute ant movement in blue gel -->
+                <canvas id="video-canvas" style="width:100%; height:100%; background: radial-gradient(circle, #e3f2fd 0%, #bbdefb 100%);"></canvas>
             </div>
             
             <!-- Video sound alert/caption moved underneath -->
             <div id="video-sound-alert" style="margin-top: 1rem; text-align: center; color: var(--text-secondary); font-family: var(--font-handwriting); font-size: 1.15rem; display: flex; align-items: center; justify-content: center; gap: 5px; pointer-events: none;">
-                🔊 꼬물거리며 기어가는 소리가 합성되어 들려요!
+                🔊 개미들이 바스락거리며 땅을 파는 소리가 합성되어 들려요!
             </div>
             
             <p class="memorial-desc" style="margin-top: 0.5rem; text-align:center;" id="video-modal-desc">
-                달이가 배발을 꼬물꼬물 움직이며 나뭇잎 위를 천천히 기어 다니고 있어요.
+                대장 개미가 턱으로 젤을 냠냠 뜯어내며 수직 갱도를 파고 있어요.
             </p>
         </div>
     </div>
 
-    <script src="js/snail-detail.js"></script>
+    <script src="js/ant-detail.js"></script>
 </body>
 </html>
