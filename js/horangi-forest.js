@@ -1,5 +1,82 @@
 /* js/horangi-forest.js */
 
+const reincarnatedImg = new Image();
+reincarnatedImg.src = "./assets/images/horangi_reincarnation.png";
+
+// Dynamic background transparency processor (color keying)
+let transparentReincarnatedCanvas = null;
+
+function processImageTransparency(img) {
+    if (transparentReincarnatedCanvas) return transparentReincarnatedCanvas;
+    if (!img.complete || img.naturalWidth === 0) return null;
+
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = img.naturalWidth;
+    tempCanvas.height = img.naturalHeight;
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCtx.drawImage(img, 0, 0);
+
+    const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+    const data = imgData.data;
+
+    const width = tempCanvas.width;
+    const height = tempCanvas.height;
+    const visited = new Uint8Array(width * height);
+    const queue = [];
+
+    // Add corners to queue
+    const corners = [
+        [0, 0],
+        [width - 1, 0],
+        [0, height - 1],
+        [width - 1, height - 1]
+    ];
+    for (const [cx, cy] of corners) {
+        const idx = cy * width + cx;
+        visited[idx] = 1;
+        queue.push([cx, cy]);
+    }
+
+    const isWhite = (r, g, b, a) => {
+        if (a === 0) return true;
+        return r > 230 && g > 230 && b > 230; // Close to white threshold
+    };
+
+    let head = 0;
+    while (head < queue.length) {
+        const [cx, cy] = queue[head++];
+        const idx = (cy * width + cx) * 4;
+        const r = data[idx];
+        const g = data[idx + 1];
+        const b = data[idx + 2];
+        const a = data[idx + 3];
+
+        if (isWhite(r, g, b, a)) {
+            data[idx + 3] = 0; // Make transparent
+
+            const neighbors = [
+                [cx - 1, cy],
+                [cx + 1, cy],
+                [cx, cy - 1],
+                [cx, cy + 1]
+            ];
+            for (const [nx, ny] of neighbors) {
+                if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                    const nIdx = ny * width + nx;
+                    if (visited[nIdx] === 0) {
+                        visited[nIdx] = 1;
+                        queue.push([nx, ny]);
+                    }
+                }
+            }
+        }
+    }
+
+    tempCtx.putImageData(imgData, 0, 0);
+    transparentReincarnatedCanvas = tempCanvas;
+    return tempCanvas;
+}
+
 // ==========================================
 // 1. Web Audio API Sound Synthesizer (Magical & Local)
 // ==========================================
@@ -225,7 +302,7 @@ const DEFAULT_STATE = {
     hunger: 60,
     happy: 60,
     clean: 100,
-    stage: 1, // 1: Seed 🥚, 2: Worm 🐛, 3: Fairy 🧚, 4: Butterfly 🦋
+    stage: 1, // 1: Seed 🥚, 2: Worm 🐛, 3: Fairy 🧚, 4: Butterfly 🦋, 5: Reincarnated Spirit 👧✨
     unlockedSprouts: false
 };
 
@@ -250,11 +327,14 @@ function saveState() {
 }
 
 function updateGaugesUI() {
-    // Round to integers
-    const h = Math.round(state.hunger);
-    const ha = Math.round(state.happy);
-    const c = Math.round(state.clean);
-    
+    // If in final stage 5, lock all stats to 100% (peaceful eternity)
+    if (state.stage === 5) {
+        state.hunger = 100;
+        state.happy = 100;
+        state.clean = 100;
+        state.xp = 0;
+    }
+
     // Limits
     state.hunger = Math.max(0, Math.min(100, state.hunger));
     state.happy = Math.max(0, Math.min(100, state.happy));
@@ -276,9 +356,14 @@ function updateGaugesUI() {
     document.getElementById('gauge-clean').style.background = state.clean < 25 ? '#ef5350' : '#81c784';
     
     // Update XP
-    const maxXp = getXpLimit(state.stage);
-    document.getElementById('xp-val').textContent = `${state.xp}/${maxXp}`;
-    document.getElementById('gauge-xp').style.width = `${(state.xp / maxXp) * 100}%`;
+    if (state.stage === 5) {
+        document.getElementById('xp-val').textContent = `MAX`;
+        document.getElementById('gauge-xp').style.width = `100%`;
+    } else {
+        const maxXp = getXpLimit(state.stage);
+        document.getElementById('xp-val').textContent = `${state.xp}/${maxXp}`;
+        document.getElementById('gauge-xp').style.width = `${(state.xp / maxXp) * 100}%`;
+    }
     
     // Update Level badge
     document.getElementById('spirit-level-val').textContent = state.level;
@@ -293,6 +378,7 @@ function getXpLimit(stage) {
     if (stage === 1) return 100;
     if (stage === 2) return 200;
     if (stage === 3) return 300;
+    if (stage === 4) return 400; // 400 XP to evolve from Butterfly to Reincarnation யோஜியா!
     return 999; // Final stage cap
 }
 
@@ -302,6 +388,7 @@ function getStageDetails(stage) {
         case 2: return { name: "꼬물 애벌레", emoji: "🐛", scale: 1.1 };
         case 3: return { name: "영혼 요정", emoji: "🧚", scale: 1.25 };
         case 4: return { name: "은하 나비", emoji: "🦋", scale: 1.4 };
+        case 5: return { name: "수호 요정 환생", emoji: "👧✨", scale: 0.55 }; // child drawing!
         default: return { name: "아기 영혼", emoji: "🥚", scale: 1.0 };
     }
 }
@@ -339,7 +426,8 @@ const ANGRY_QUOTES = [
 const LEVEL_UP_QUOTES = [
     "우와앗! 내 몸속에서 엄청 따뜻하고 찬란한 별빛 마법이 부글부글 끓어올라!! ✨",
     "보여, 루시야? 내 날개가 파르르 펄럭이며 더 넓은 하늘을 부르고 있어! 🦋🧚",
-    "사랑을 듬뿍 받아 드디어 성장에 성공했어! 루시 요정 최고! 💖✨"
+    "사랑을 듬뿍 받아 드디어 성장에 성공했어! 루시 요정 최고! 💖✨",
+    "루시야! 네가 날 위해 그려준 바로 그 모습이야! 너무 마음에 들어, 항상 함께할게! 👧✨💚"
 ];
 
 function setDialogue(text) {
@@ -382,6 +470,18 @@ let particles = [];
 let darkDusts = [];
 
 let isSweepingActive = false;
+
+let mouseX = null;
+let mouseY = null;
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+});
+canvas.addEventListener('mouseleave', () => {
+    mouseX = null;
+    mouseY = null;
+});
 
 function resizeCanvas() {
     const rect = canvas.parentNode.getBoundingClientRect();
@@ -449,7 +549,7 @@ class VisualParticle {
 
 // Generate Dark Sadness Dust in Canvas
 function spawnDarkDust() {
-    if (state.stage === 4) return; // Celestial butterfly has zero sadness!
+    if (state.stage >= 4) return; // Butterfly and Reincarnated Spirit have zero sadness!
     
     if (darkDusts.length < 5 && Math.random() > 0.4) {
         // Spawn coordinates away from edges
@@ -492,6 +592,15 @@ function updateAndRender() {
         // Move towards food item (placed at 320, 150)
         spiritTargetX = 290;
         spiritTargetY = 160;
+    } else if (state.stage === 5) {
+        // Stage 5: Follow mouse gently if active, else drift softly in center
+        if (mouseX !== null && mouseY !== null) {
+            spiritTargetX = mouseX;
+            spiritTargetY = mouseY - 15;
+        } else {
+            spiritTargetX = canvasWidth / 2 + Math.sin(vTime * 0.7) * 30;
+            spiritTargetY = canvasHeight / 2 - 15 + Math.cos(vTime * 0.5) * 15;
+        }
     } else if (state.stage === 4) {
         // Butterfly fly in 8-shape trajectory naturally
         const t = vTime * 0.8;
@@ -509,8 +618,8 @@ function updateAndRender() {
     // 1. Draw floating ambient path seeds (Glowing specs)
     if (Math.random() > 0.88) {
         // Spawn sparkles from spirit body
-        const color = state.stage === 4 ? 'rgba(255, 235, 120, 0.8)' : 'rgba(200, 255, 200, 0.6)';
-        const type = state.stage === 3 ? 'leaf' : 'star';
+        const color = state.stage === 5 ? 'rgba(255, 182, 193, 0.8)' : (state.stage === 4 ? 'rgba(255, 235, 120, 0.8)' : 'rgba(200, 255, 200, 0.6)');
+        const type = state.stage === 5 ? 'heart' : (state.stage === 3 ? 'leaf' : 'star');
         particles.push(new VisualParticle(spiritX + (Math.random()*40 - 20), spiritY + (Math.random()*40 - 20), color, type));
     }
     
@@ -821,6 +930,28 @@ function updateAndRender() {
         ctx.fill();
         
         ctx.restore();
+    } else if (state.stage === 5) {
+        // STAGE 5: Reincarnated Guardian Fairy (Daughter's cute drawing!)
+        const pulse = 1 + Math.sin(vTime * 3) * 0.04;
+        
+        ctx.save();
+        ctx.shadowColor = 'rgba(255, 182, 193, 0.9)';
+        ctx.shadowBlur = 20;
+        
+        const processedCanvas = processImageTransparency(reincarnatedImg);
+        
+        if (processedCanvas) {
+            // Keep original aspect ratio
+            const aspect = processedCanvas.width / processedCanvas.height;
+            const h = 135 * pulse;
+            const w = h * aspect;
+            ctx.drawImage(processedCanvas, -w / 2, -h / 2, w, h);
+        } else {
+            // Fallback text
+            ctx.font = '56px sans-serif';
+            ctx.fillText('👧✨', -28, 20);
+        }
+        ctx.restore();
     }
     
     ctx.restore();
@@ -989,7 +1120,7 @@ canvas.addEventListener('click', (e) => {
 
 // Trigger XP Gain & Evolution Check
 function gainXP(amount) {
-    if (state.stage === 4) return; // Celestial butterfly is fully evolved!
+    if (state.stage === 5) return; // Reincarnated spirit is fully evolved!
     
     state.xp += amount;
     const maxXp = getXpLimit(state.stage);
@@ -1039,24 +1170,18 @@ function triggerEvolutionClimax() {
     const subtitles = {
         2: "꼬물꼬물 빛나는 아기 애벌레로 다시 태어났어요!",
         3: "파닥파닥 앙증맞은 요정의 날개가 돋아났어요!",
-        4: "은하수를 자유롭게 비행하는 전설의 환상 나비 우화 대성공!"
+        4: "은하수를 자유롭게 비행하는 전설의 환상 나비 우화 대성공!",
+        5: "루시가 그린 사랑스러운 수호 요정으로 환생했어요! 👧✨"
     };
     document.getElementById('evolve-modal-subtitle').textContent = subtitles[state.stage] || "빛의 성장에 성공했습니다!";
     
     const descs = {
         2: "루시가 정성 들여 먹이고 청소해 준 덕분에 호랑이 알이 부화했어요! 이제 초록빛 몸체에 작고 이쁜 안테나 눈을 쫑긋 세우며 꼬물꼬물 춤출 수 있어요. 🐛✨",
         3: "와! 호랑이의 몸에 반짝거리는 보랏빛 요정 날개가 돋아났어요! 이제 공중에 둥실 떠올라 별가루 궤적을 그리며 숲 속을 신나게 부유할 수 있습니다. 🧚🌿",
-        4: "축하합니다! 호랑이가 완전하고 눈부신 '은하 환상 나비'로 최종 우화에 성공했습니다! 호랑이의 영혼은 이제 슬픔과 아픔 없이 밤하늘 가장 높은 곳에서 은하수를 항해하며 영원히 아름다운 날개짓을 보낼 것입니다. 🦋✨"
+        4: "축하합니다! 호랑이가 완전하고 눈부신 '은하 환상 나비'로 최종 우화에 성공했습니다! 호랑이의 영혼은 이제 슬픔과 아픔 없이 밤하늘 가장 높은 곳에서 은하수를 항해하며 영원히 아름다운 날개짓을 보낼 것입니다. 🦋✨",
+        5: "기적 같은 일이 일어났어요! 호랑이의 영혼이 루시가 스케치북에 정성껏 그린 사랑 가득한 모습의 '수호 요정'으로 환생했습니다! 숲속의 고통이나 배고픔 없이, 이제 언제나 루시의 곁을 맴돌며 따뜻하게 지켜주는 은하수의 천사가 될 것입니다. 👧✨💚"
     };
     document.getElementById('evolve-modal-desc').textContent = descs[state.stage] || "성공적으로 진화했습니다!";
-    
-    // Special Butterfly reward unlock!
-    if (state.stage === 4) {
-        document.getElementById('butterfly-gift-alert').style.display = 'block';
-        localStorage.setItem('horangi_butterfly_unlocked', 'true'); // Flag to unlock card 5 on index page!
-    } else {
-        document.getElementById('butterfly-gift-alert').style.display = 'none';
-    }
     
     evolveModal.classList.add('active');
     setDialogue(LEVEL_UP_QUOTES[state.stage - 2] || "와! 내가 성장했어!");
@@ -1197,7 +1322,7 @@ popoverPlay.querySelectorAll('.popover-item').forEach(item => {
 // 6. Natural Decay Loop (Time tick)
 // ==========================================
 setInterval(() => {
-    if (state.stage === 4) return; // Butterfly has achieved nirvana, no hunger/decay!
+    if (state.stage >= 4) return; // Butterfly & Reincarnated Spirit achieved nirvana, no hunger/decay!
     
     // Decrement states naturally
     state.hunger = Math.max(0, state.hunger - 0.25);
