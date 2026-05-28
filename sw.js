@@ -1,5 +1,6 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.0.5'; // Increment this version on each deploy to trigger notifications!
+const CACHE_NAME = 'moon-blog-cache-v1.0.6'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "호랑이 수호 요정의 3D 입체 유영 비행 업그레이드 및 동영상 자막 가림 버그가 말끔히 수정되었습니다! 💚";
 const ASSETS = [
     './',
     './index.html',
@@ -47,7 +48,7 @@ self.addEventListener('activate', (e) => {
 function showUpdateNotification() {
     if (self.registration) {
         self.registration.showNotification("일기장 새 버전 업데이트! 🎈", {
-            body: "루시의 초록 일기장이 더 새롭고 멋진 모습으로 업데이트되었습니다. 지금 바로 확인해 보세요! 🌿",
+            body: UPDATE_MESSAGE,
             icon: "./assets/images/logo_supermoon.png",
             badge: "./assets/images/logo_supermoon.png",
             tag: "version-update",
