@@ -99,7 +99,7 @@ class SoundSynth {
         noise.stop(now + 0.05);
     }
 
-    // Play cheerful royalty-free MP3 BGM (Funny Adventures!)
+    // Play cheerful BGM
     startAmbient() {
         if (this.isPlayingAmbient) return;
         this.isPlayingAmbient = true;
@@ -152,117 +152,117 @@ class SoundSynth {
 const synth = new SoundSynth();
 
 // ==========================================
-// 2. Data Base: Ants' 10 Episodes Content
+// 2. Data Base: Solo Captain Ant's 10 Episodes Content
 // ==========================================
 const EPISODE_DATA = {
     1: {
-        title: "1일차: 신비로운 푸른 젤 개미집 🐜",
+        title: "1일차: 신비로운 푸른 젤 개미성 🐜",
         date: "2026년 6월 15일 월요일",
         weather: "구름 없는 맑음 ☀️",
-        text: "오늘 우리 집에 진짜진짜 신기하고 멋진 친구들이 도착했어요! 바로 투명하고 예쁜 파란색 젤리가 꽉 차 있는 특수 개미집과 한국홍가슴개미 식구들이랍니다. 개미들이 다치지 않게 조심히 파란 젤성 입구에 넣어주었어요. 그중에서 가장 덩치가 크고 멋진 카리스마를 가진 첫째 대장에게 '대장 개미'라는 이름을 지어주었지요. 대장 개미와 대원들은 새로운 파란 젤성에 오자마자 더듬이를 파르르 흔들며 젤바닥을 이리저리 문지르고 주위를 살피며 탐색을 시작했답니다. 신비한 젤 속에서 어떤 궁전 터널들이 뚫릴지 벌써부터 기대돼요!",
-        caption: "파란 젤성 입구에서 주위를 적극적으로 탐색하는 개미들",
+        text: "오늘 우리 집에 진짜진짜 신기하고 멋진 친구가 도착했어요! 바로 투명하고 예쁜 파란색 젤리가 꽉 차 있는 특수 개미집과, 늠름하고 멋진 검은색 카리스마를 자랑하는 한국홍가슴개미 한 마리랍니다. 아빠랑 함께 조심스레 파란 젤성 입구에 넣어주었어요. 돋보기로 보니 여러 마리가 꼬물거리는 것보다 훨씬 멋지게, 혼자서도 아주 씩씩한 장군 포스를 풍겼답니다! 그래서 이름을 '대장 개미'라고 부르기로 했어요. 대장 개미는 새로운 파란 젤성에 오자마자 더듬이를 파르르 흔들며 젤바닥을 이리저리 문지르고 탐색을 시작했답니다. 신비한 젤 속에서 나 홀로 파낼 요새 터널이 벌써부터 기대돼요!",
+        caption: "넓은 파란 젤성 입구에서 위엄있게 주위를 탐색하는 대장 개미",
         imgFilter: "brightness(1) contrast(1)",
         videoLabel: "요새 탐색 영상 (0:15)",
-        videoDesc: "대장 개미와 대원들이 파란 젤리 위에 옹기종기 모여 더듬이로 주변을 신나게 탐사하는 중이에요.",
+        videoDesc: "대장 개미가 파란 젤리 요새에 혼자 우뚝 서서 더듬이를 사방으로 쫑긋거리며 주변을 탐사하고 있어요.",
         videoAction: "explore"
     },
     2: {
         title: "2일차: 수직 갱도 굴착 개시! 🏗️",
         date: "2026년 6월 16일 화요일",
         weather: "살짝 바람 부는 날 🍃",
-        text: "와! 오늘 아침 개미통을 들여다보았더니 깜짝 놀랄 만한 변화가 있었어요! 대장 개미의 완벽한 지휘 아래, 일개미 대원들이 입을 모아 파란 젤을 아삭아삭 야금야금 파내려 가며 머리 하나가 쏙 들어갈 만한 깊은 수직 터널을 뚫어놓은 거예요! 대장 개미는 터널 입구에서 보초를 서며 대원들을 든든하게 지켜주었고, 대원들은 자른 젤 조각들을 머리 위로 번쩍 들어 올리며 밖으로 부지런히 날랐답니다. 아주 작은 몸집의 개미들이 단단한 젤을 이렇게나 열심히 뚫고 영차영차 협동하는 모습을 보니 진짜 기특하고 대단해요!",
-        caption: "야금야금 아래로 수직 갱도를 파내려 가는 일개미 대원들",
+        text: "와! 오늘 아침 개미통을 들여다보았더니 깜짝 놀랄 만한 변화가 있었어요! 대장 개미 혼자서 그 단단한 파란 젤을 아삭아삭 야금야금 쪼아내며 머리가 쏙 들어갈 만한 깊은 수직 터널을 뚫어놓았지 뭐예요! 비록 혼자지만 강력한 턱 근술로 젤을 한 조각씩 뜯어내고는, 자기 몸집만 한 부스러기를 머리 위로 번쩍 짊어진 채 지상 출구로 열심히 날랐답니다. 영차영차 지치지도 않고 성실하게 1인 터널 공사를 해나가는 대장 개미의 뒷모습을 보며 마음속으로 엄청난 격려와 박수를 보내주었습니다!",
+        caption: "혼자서 야금야금 아래로 수직 갱도를 파내려 가는 늠름한 대장 개미",
         imgFilter: "brightness(1.02) contrast(0.98) saturate(1.1)",
         videoLabel: "수직 갱도 굴착 영상 (0:12)",
-        videoDesc: "대장 개미의 진두지휘 하에 일개미들이 입으로 젤을 부지런히 뜯어내며 밑으로 전진해요.",
+        videoDesc: "대장 개미가 혼자서 강력한 입턱으로 젤을 부지런히 뜯어내며 밑으로 씩씩하게 전진해요.",
         videoAction: "dig_down"
     },
     3: {
-        title: "3일차: 첫 번째 안락한 지하 침실 🛏️",
+        title: "3일차: 안락한 지하 침실 🛏️",
         date: "2026년 6월 17일 수요일",
         weather: "햇볕 쨍쨍 더움 ☀️🔥",
-        text: "수직으로 쑥 파고 내려가던 개미 특공대가 오늘은 옆으로 방향을 휙 틀었어요! 가로로 둥글게 파내려 가더니 동그랗고 널찍한 비밀 지하 챔버(방)를 뚝딱 완성했답니다. 다 지어진 방에 옹기종기 모여서 서로의 더듬이를 슥슥 맞대고 다정하게 대화를 나누거나 젤 위에서 꿀맛 같은 낮잠을 자는 모습을 포착했어요! 대장 개미는 방 한가운데서 대원들을 포근히 감싸고 있었고, 밖에서는 경비 개미가 서성거렸답니다. 이 푸른 젤리 방은 개미들의 첫 번째 보금자리인 안락한 침실이 된 것 같아요. 정말 정교하고 신기한 설계예요!",
-        caption: "동그란 가로 챔버 속에 모여 단잠을 자는 개미 대원들",
+        text: "수직으로 쑥 파고 내려가던 고독한 건축가 대장 개미가, 오늘은 옆으로 방향을 휙 틀었어요! 가로로 둥글게 파내려 가더니 혼자만의 동그랗고 아늑한 비밀 지하 챔버(방)를 뚝딱 완성했답니다! 돋보기로 보니 다 지어진 방 한가운데에 누워서 더듬이를 살랑이며 꿀맛 같은 낮잠을 청하고 있었어요. 아무도 없는 거대하고 신비로운 파란 요새에서 오직 나만의 안락한 침실을 마련한 셈이죠! 꼼짝도 않고 새끈새끈 자는 모습이 정말 귀여웠어요. 혼자서 설계하고 만드는 정교한 기술이 진짜 신기해요!",
+        caption: "둥글고 아늑한 나 홀로 침실 속에서 곤히 단잠을 자는 대장 개미",
         imgFilter: "brightness(1.05) saturate(1.15)",
         videoLabel: "지하 침실 단잠 영상 (0:14)",
-        videoDesc: "완성된 동그란 침실 방에 옹기종기 모여 더듬이를 맞대고 편안하게 쉬고 있는 개미 가족.",
+        videoDesc: "자신이 뚫은 동그란 침실 방에 편안하게 몸을 뉘이고 다정하게 쉬고 있는 외톨이 대장 개미.",
         videoAction: "sleep"
     },
     4: {
         title: "4일차: 달콤한 설탕물 충전 시간 💧",
         date: "2026년 6월 18일 목요일",
         weather: "개구리 노래하는 흐림 ☁️",
-        text: "열심히 땅을 파는 개미 대원들을 위해 아빠랑 특급 간식을 준비했어요! 주사기에 달콤하고 맛있는 설탕물을 한 방울 쪽 담아서 개미집 상단 먹이 급여구에 살포시 얹어주었지요. 그러자 보초를 서던 대장 개미가 냄새를 킁킁 맡고는 재빨리 다가와 설탕물 방울을 맛있게 냠냠 먹기 시작했어요. 그리고 터널 속 대원들에게 쏜살같이 돌아가 입에서 입으로 달콤한 설탕물을 골고루 나누어주는 기발한 '사회적 위장'을 선보였답니다! 온 식구가 다 같이 달콤한 기운을 가득 충전하고 나더니 터널 공사에 속도가 어마어마하게 붙기 시작했어요!",
-        caption: "달콤한 설탕물 한 방울을 사이좋게 나눠 먹는 모습",
+        text: "열심히 나 홀로 집짓기를 수행하는 대장 개미를 위해 특별 영양 간식을 선물했어요! 주사기에 달콤한 설탕물을 한 방울 담아서 상단 급여구에 얹어주었지요. 그러자 보초를 서던 대장 개미가 냄새를 킁킁 맡더니 쏜살같이 기어가 설탕물 방울에 입을 대고 냠냠 먹기 시작했어요. 이번에는 나눠 먹을 다른 식구들이 없으니 온전히 대장 개미 혼자 다 마실 수 있는 독점 특권이 주어졌답니다! 배가 물방울처럼 투명한 파란색으로 빵빵하게 부풀어 오르도록 맛있게 완충하더니, 다시 기운을 내서 굴착 장비를 챙겨 아래쪽 공사 현장으로 씩씩하게 복귀했어요!",
+        caption: "달콤한 설탕물 한 방울을 혼자서 남김없이 맛있게 흡입하는 모습",
         imgFilter: "brightness(0.98) saturate(1.25)",
         videoLabel: "당 충전 스위트 영상 (0:15)",
-        videoDesc: "설탕물 방울 주위로 모여들어 배가 투명하게 부풀어 오르도록 맛있게 당을 보충하는 개미들.",
+        videoDesc: "설탕물 방울에 착 달라붙어 배가 빵빵하게 부풀어 오를 때까지 에너지를 혼자 채우는 대장 개미.",
         videoAction: "eat_sugar"
     },
     5: {
         title: "5일차: 지하 2층 수평 고속도로 개통! 🗺️",
         date: "2026년 6월 19일 금요일",
         weather: "선선하고 기분 좋은 맑음 ☀️",
-        text: "개미들의 개척 정신은 끝이 없나 봐요! 어제 다진 설탕물 에너지를 가지고 오늘 무려 지하 2층까지 도달하더니, 좌우로 아주 길고 넓은 수평 터널을 뚫어냈습니다. 그 길이와 직선도가 얼마나 자로 잰 듯 똑바른지, 꼭 우리 동네 지하철선이나 고속도로를 보는 것 같았지요! 일개미들이 서로 스쳐 지나갈 때마다 교통체증 없이 길을 척척 양보해가며 바쁘게 오가는 협동 시스템이 아주 잘 짜여 있었어요. 대장 개미는 고속도로 중심 교차로에 딱 버티고 서서 양방향 통행을 조율하는 카리스마 사령관처럼 멋지게 지시를 내리고 있었답니다!",
-        caption: "지하 2층에 일직선으로 개통된 시원한 수평 고속도로",
+        text: "오늘 대장 개미가 진짜 놀랍고 신기한 기적을 만들어냈어요! 어제 마신 설탕물 파워를 100% 가동했는지, 혼자의 힘으로 기어코 지하 2층 수직 갱도 깊은 곳까지 뚫고 내려가 좌우로 곧고 긴 수평 터널을 뚫어냈답니다! 마주치거나 비켜 가야 할 다른 개미 대원도 없으니, 그 터널은 온전히 대장 개미 전용 1인 프리패스 초고속 전용도로가 된 것이죠! 돋보기로 보니 혼자서 신나게 긴 도로 양끝을 꼬리를 살랑이며 쌩쌩 왕복 달리기 연습을 하고 있었어요. 1인 4역을 하며 성 전체를 종횡무진 개척해 나가는 대장의 에너지가 정말 엄청나요!",
+        caption: "지하 2층에 혼자의 힘으로 일직선 개통한 시원한 1인 전용 고속도로",
         imgFilter: "brightness(1.02) contrast(1.02)",
         videoLabel: "수평 도로 통행 영상 (0:13)",
-        videoDesc: "양방향으로 뚫린 긴 터널을 일개미들이 마주치며 서로 통행을 조율하며 바삐 오가요.",
+        videoDesc: "혼자 전용으로 개통된 긴 터널을 엄청난 질주 속도로 왕복하며 활력 넘치게 뛰어다녀요.",
         videoAction: "run_highway"
     },
     6: {
-        title: "6일차: 젤리 부스러기 대작전 🧱",
+        title: "6일차: 젤리 부스러기 요새 성벽 🧱",
         date: "2026년 6월 20일 토요일",
         weather: "주륵주륵 여름 장마 🌧️🌧️",
-        text: "오늘은 밖에서 비가 엄청나게 내렸어요. 습도가 높아진 개미집 안에서 개미들이 신기한 공동 작업을 하고 있었답니다. 터널을 파면서 나온 푸른 젤리 부스러기들을 한곳에 버리지 않고, 입구 주변에 조르르 쌓아 올려 꼭 성벽이나 둑 같은 단단한 방벽을 만들고 있는 거예요! 대장 개미가 선두에서 부스러기를 조심히 물어 입구 모서리에 꾹꾹 눌러 다지자, 뒤를 이은 대원들도 젤리 성벽을 튼튼하게 보강했지요. 외부 습기나 빛을 차단해 집안을 쾌적하고 안전하게 유지하려는 개미들의 똑똑한 생활 지혜에 감탄사가 절로 나왔어요!",
-        caption: "파낸 젤 가루들을 뭉쳐 튼튼한 요새 성벽을 쌓는 특공대",
+        text: "비가 아주 어마어마하게 쏟아지는 여름 주말이었어요. 대장 개미는 젤 요새 안에서 아주 흥미로운 1인 방어 작업을 진행했답니다. 아래에서 터널을 파면서 모은 투명한 푸른 젤리 부스러기 벽돌들을 한 알 한 알 정성껏 물어 올려 입구 테두리에 성곽이나 댐처럼 둥그렇게 벽을 쌓고 있는 거였어요! 혼자 사는 집이지만 외풍 단속과 습기 방벽 공사만큼은 철저히 하겠다는 지독한 인테리어 정신 같았죠! 턱으로 가루를 다져가며 동그랗고 튼튼한 푸른 방벽 요새를 뚝딱 완성해 내는 걸 보니, 대장 개미는 명불허전 최고의 프로 엔지니어예요!",
+        caption: "혼자 쌓아 올린 튼튼한 푸른 젤 방벽과 늠름한 대장의 모습",
         imgFilter: "brightness(1) saturate(1.1)",
         videoLabel: "방벽 건축 영상 (0:15)",
-        videoDesc: "개미들이 입으로 젤 부스러기 벽돌을 차곡차곡 모아 입구 주변에 멋진 요새 성벽을 지어요.",
+        videoDesc: "대장 개미가 입으로 푸른 젤 벽돌을 하나하나 모아 집 주변에 예쁜 보강 요새 성벽을 지어요.",
         videoAction: "build_wall"
     },
     7: {
         title: "7일차: 이웃집 달팽이와의 첫 유리창 면담 🔍",
         date: "2026년 6월 21일 일요일",
         weather: "개인 하늘과 예쁜 무지개 🌈",
-        text: "오늘은 개미집 옆에 우리 달팽이 대가족의 통을 나란히 놓아주었어요. 투명한 아크릴 유리창을 사이에 두고, 드디어 우리 대장 개미와 첫째 달이의 신비로운 첫 만남이 이루어졌답니다! 대장 개미가 유리창 쪽으로 조심히 기어가 더듬이를 바르르 떨며 인사하자, 유리창 너머에 있던 느림보 달이도 신기한 듯 커다란 눈 stalks(눈자루)를 쭉 내밀고 한참 동안 개미의 움직임을 관찰했어요. 크기와 움직이는 속도는 완전히 다르지만, 두 녀석이 눈을 맞추며 교감하는 모습이 너무 귀여워서 돋보기를 들고 한참을 배시시 웃으며 구경했답니다!",
-        caption: "유리벽 너머로 눈을 마주하며 소통하는 대장 개미와 달이",
+        text: "오늘은 개미통 옆에 달팽이 16마리 대가족이 사는 촉촉한 이끼통을 나란히 놓아주었습니다. 드디어 투명 아크릴 벽을 사이에 두고 대장 개미와 첫째 달팽이 달이의 짜릿한 미팅이 열렸죠! 대장 개미가 유리벽으로 다가오자, 달이가 신기한 듯 눈 stalks(눈자루)를 길게 쭉 뽑아 돋보기처럼 개미를 구경했어요. 대장 개미는 거대한 덩치의 달팽이 형아 앞에서도 꿀리지 않고, 혼자서 당당히 가슴을 편 채 더듬이를 바르르 움직이며 기세 좋게 탭댄스를 추며 경계 인사를 마쳤답니다. 두 고독한 영웅과 평화로운 팽이 패밀리의 우정이 시작되는 기분이에요!",
+        caption: "거대한 달팽이 달이의 눈앞에서도 혼자 당당히 기세를 뽐내는 대장 개미",
         imgFilter: "brightness(1.03) saturate(1.05)",
         videoLabel: "이웃사촌 대면 영상 (0:11)",
-        videoDesc: "더듬이를 바르르 움직이는 개미와 눈자루를 길게 뺀 달이의 평화로운 첫 유리벽 미팅.",
+        videoDesc: "유리벽 너머의 달이와 눈을 마주하고 당차게 더듬이 탭댄스로 기선 제압을 하는 대장 개미.",
         videoAction: "meet_snail"
     },
     8: {
-        title: "8일차: 푸른 젤성의 완벽한 순찰대 👮",
+        title: "8일차: 푸른 젤성의 완벽한 밤샘 순찰 👮",
         date: "2026년 6월 22일 월요일",
         weather: "바람 솔솔 부는 밤 🌟",
-        text: "밤에 잠이 안 와서 스탠드 불빛 아래 개미집을 가만히 관찰했어요. 모두가 잠든 고요한 시간에도 대장 개미와 정예 보초 대원들은 쉬지 않고 푸른 젤리 요새 전체를 꼼꼼하게 순찰하고 있었답니다! 수직 통로부터 침실, 2층 고속도로와 외벽 성벽까지 구석구석을 기어 다니며 혹시나 젤성에 균열이 있거나 위험 요소가 없는지 체크하는 철통 보안 모습이었어요. 밤하늘 푸른 별처럼 빛나는 젤성 안에서 든든하게 요새를 지키는 대장 개미 순찰대를 보니 안심하고 푹 잘 수 있을 것 같아요. 멋쟁이 순찰대 화이팅!",
-        caption: "한밤중 푸른 젤성을 질서 정연하게 순찰하는 개미 순찰대",
+        text: "밤늦게 스탠드 불빛만 켜놓고 조용히 개미집을 지켜보았어요. 루시가 잠든 고요한 시간에도 대장 개미는 쉴 틈 없이 자기 젤성 곳곳을 꼼꼼하게 순찰하고 있었답니다! 수직 갱도에서 수평 통로, 침실과 입구 방벽까지 혼자서 1인 4역을 해내며 혹시나 젤 요새에 무너지거나 금이 간 곳은 없는지 체크하는 한밤의 외로운 보안관 같았어요. 밤하늘 푸른 은하수처럼 빛나는 젤 성곽을 든든하게 지켜주는 대장 개미 장군이 있어서, 루시도 안심하고 침대에서 푹 단잠에 빠져들 수 있었답니다. 대장 보안관님 오늘도 고마워요!",
+        caption: "고요한 밤 푸른 젤성을 혼자서 지키며 든든히 지키고 있는 밤샘 보안관",
         imgFilter: "brightness(0.92) contrast(1.05) saturate(0.95)",
         videoLabel: "철통 요새 순찰 영상 (0:14)",
-        videoDesc: "스탠드 조명 속 푸른 젤리 미로를 질서정연하게 오가며 꼼꼼히 안전을 체크하는 순찰 대원들.",
+        videoDesc: "은은한 불빛 속 파란 요새 길을 혼자 꼼꼼하게 왕복하며 하자가 없는지 순찰하는 멋진 대장 개미.",
         videoAction: "patrol"
     },
     9: {
         title: "9일차: 파란 젤 대궁전 완성 기념식! 👑",
         date: "2026년 6월 24일 수요일",
         weather: "구름 한 점 없는 파란 하늘 ☀️",
-        text: "드디어 오늘, 우리 개미 군단의 파란 젤 대궁전이 완벽하게 완공되었습니다! 개미집 아래쪽부터 상단 출구까지 모든 수직 갱도와 수평 통로들이 거미줄처럼 그물망 시스템으로 멋지게 연결되어, 거대하고 화려한 3차원 개미 입체 요새가 만들어졌어요. 고생한 대장 개미와 대원들이 요새 가장 안쪽에 있는 크고 화려한 중앙 궁전에 모여 서로의 몸을 깨끗이 단장해주고, 먹이를 다정하게 나누며 완공 축하연을 즐기고 있네요! 9일 동안 매일매일 포기하지 않고 흙 대신 젤을 파가며 정교한 걸작을 만들어 낸 우리 개미들, 진짜 기특해서 아낌없는 박수를 보내주고 싶어요!",
-        caption: "화려한 3D 푸른 젤 궁전을 마침내 완공한 개미 특공대",
+        text: "드디어 오늘, 우리 위대한 1인 건축가 대장 개미의 거대한 3차원 입체 파란 대궁전이 완벽하게 준공되었습니다! 아래층 수직 통로부터 가로 고속도로, 안락한 침실방까지 거미줄 미로처럼 사방이 정교하게 관통되어 빛나는 걸작이 완성되었어요. 공사를 성황리에 마친 대장 개미가 가장 넓은 1층 중앙 궁전의 왕좌에 홀로 앉아, 앞다리를 번쩍 치켜들며 만세 삼창을 하듯 기쁨의 완공 댄스 퍼레이드를 펼치고 있는 걸 목격했답니다! 단 1마리의 작은 개미가 매일매일 쉬지 않고 파내어 만든 이 장엄한 푸른 요새를 보며 루시는 너무 기특해 진짜 눈물이 찔끔 날 뻔했어요!",
+        caption: "혼자의 손으로 대궁전을 최종 완성하고 만세 삼창 댄스를 즐기는 대장 개미",
         imgFilter: "brightness(1.04) saturate(1.25)",
         videoLabel: "대궁전 완공 축하 영상 (0:15)",
-        videoDesc: "정교하게 개통된 3차원 푸른 젤 대궁전 속에서 평화롭고 웅장한 기념 축하연을 벌이는 모습.",
+        videoDesc: "화려하게 개통된 나 홀로 푸른 젤 미로 성곽의 중심부에서 기쁨의 자축 댄스를 벌이는 모습.",
         videoAction: "celebrate"
     },
     10: {
         title: "10일차: 파란 젤 특공대의 완벽한 작전: 연합 운동회! 🏆",
         date: "2026년 6월 25일 목요일",
         weather: "화창하고 맑은 가을바람 🍂",
-        text: "보고드립니다! 오늘 11시경, 마당의 장미 영토에서 사상 초유의 '초록 들판 곤충 연합 운동회' 전투가 벌어졌습니다! 우리 푸른 젤성 한국홍가슴개미 연대 대표인 나 대장 개미와, 비행 돌격 능력을 갖춘 날렵한 뒷다리의 방아깨비 뚜기 형아, 그리고 엄청난 무게중심 패각 닻을 소유한 느림보 달이 녀석까지 삼국 동맹군이 잔디 연병장에 집결했지요. 첫 경기인 '지상 돌파 기어가기 작전'이 발발하자마자, 뚜기 녀석은 엄청난 충격 도약력을 일으키며 미사일처럼 10미터를 폴짝 날아 가볍게 공중 우위를 선점했습니다. 하지만 우리 개미 사단도 결코 호락호락하지 않았지요! 즉각 '영차영차!' 훈련된 제식 구령에 맞추어 수십 마리의 정예 일개미 대원들을 3열 종대로 칼같이 배치, 고도의 전술적 대열을 맞춰 일사불란한 행진 속도로 잔디밭을 압도적으로 돌파해 갔습니다! 그 와중에 달이 녀석은 몸체 후미에서 투명 윤활유 특수 오일을 바닥에 사정없이 코팅하더니, 마찰 계수를 0으로 만들어 패각 밑바닥을 미끄럼틀처럼 쭉쭉 썰매 태워 초속 슬라이딩 질주를 시도하는 기상천외한 전략을 펼쳤습니다! ‘스스스슥-!’ 하는 가히 사기적인 속도에 관람석의 루시 대장이 웃음을 터트리며 격렬한 박수를 보냈죠. 두 번째 종목인 '식량 보급 루꼴라 쟁탈전'이 개시되자, 우리 공병 부대의 정밀 커터 능력이 빛을 발했습니다. 대원들이 줄 맞춰 루꼴라 잎을 한 치의 오차도 없는 사각 격자 도면으로 완벽하게 전단하여 기지 터널로 신속하게 수송 작전을 완료했거든요! 뚜기 녀석은 턱 관절 속사포 공격으로 이파리들에 무수한 포탄 구멍을 냈고, 달이는 입안의 진공 흡입 모터를 가동해 대형 당근 슬라이스를 꼬물꼬물 통째로 소화시키는 괴력을 선보였습니다. 마지막 '줄다리기 참호전'에서는 세 전사의 힘이 우주급으로 격돌했습니다. 뚜기가 잔디밭에 발톱을 깊숙이 고정하고 당겼고, 달이가 자기 질량의 100배에 달하는 패각의 우직한 중력 무게로 버티는 사이, 우리 개미 백만 대군이 어깨를 겯고 총출동해 온 힘을 모아 밧줄인 장미 넝쿨을 잡아당겼죠! 팽팽한 장력에 걸린 장미 줄기가 결국 '툭-' 소리를 내며 끊어져, 세 동맹군 모두 잔디밭 위로 벌러덩 슬랩스틱 자빠짐을 시도하며 대작전은 성황리에 종료되었습니다! 전투 결과는 전원 만장일치 공동 우승! 서로 다른 전술과 규격을 가졌지만, 함께 협동하여 잔디 연병장을 뒹구는 시간은 가히 감동적인 초록빛 판타지였습니다. 뚜기 요정, 은빛 달팽이, 그리고 우리 파란 젤성 개미 부대까지! 우리 모두 루시 대장의 영원한 우방국 단짝 패밀리로서 영원한 평화와 협동을 선서합니다! 동물 연합 특공대 영원하라! 💚🏆🎖️",
-        caption: "일사불란한 행진과 철통 전술로 빛난 동물 연합 대작전!",
+        text: "보고드립니다! 나 홀로 부대의 최정예 단일 전사, 대장 개미 장군입니다! 오늘 정오경 마당의 잔디 연병장에서 방아깨비 뚜기 요정, 달팽이 달이 전우와 사상 최초의 '곤충 연합 운동회' 전투가 발발했습니다. 첫 번째 경기인 '기어가기 레이스'가 시작되자마자, 날렵한 뚜기는 로켓 비행 뒷다리로 10미터를 폴짝 점프해 공중 우위를 선점했고, 달이는 배발의 특수 점액 로드를 매끄럽게 포장해 껍질을 스케이트 삼아 마찰력 제로의 피겨스케이팅 슬라이딩으로 질주해 왔지요. 하지만 나 대장 개미 장군도 만만치 않았습니다! 비록 부대원 없이 나 홀로 참전했지만, 마음속으로 '영차영차!' 훈련된 제식 구령을 혼자 힘차게 외치며 1인 3역의 3열 종대 전술 대열을 흉내 내는 압도적 질주 속도로 잔디 연병장을 돌파해 갔습니다! 1인 군단이 보여주는 엄청난 기백과 기동성에 관객석의 루시 대장이 배를 잡고 폭소하며 박수를 쳤지요! 두 번째 '식량 수송 쟁탈전'에서도 나의 독보적인 1인 공병 재단 능력이 빛을 발했습니다. 정밀한 입턱으로 루꼴라 잎사귀를 컴퓨터 도면 오리듯 정밀한 사각형으로 한 치의 오차도 없이 재단하여 나 홀로 기지로 빠르게 실어 날랐죠. 마지막 '줄다리기 덩굴 대격돌'에서는 뚜기의 로켓 엔진과 달이의 닻 무게 중심, 그리고 나 대장 개미가 영혼을 모아 1마리의 어깨에 백만 군대의 단합력을 투영하여 버티다 결국 장미 줄기가 툭- 끊어지는 장렬한 슬랩스틱 엔딩을 맺었습니다! 경기 결과는 전원 공동 우승! 규격과 전술은 서로 달랐지만, 함께 잔디밭을 뒤엉켜 구르며 나눈 시간은 눈부시게 행복했습니다. 뚜기, 달이, 그리고 나 홀로 대장 개미 장군까지 우리는 루시 대장의 영원한 3국 동맹 수호 단짝 패밀리입니다. 1인 부대 만세! 💚🏆🎖️",
+        caption: "혼자서도 백만 대군의 기백을 선보인 당찬 대장 개미의 운동회 1인 군단!",
         imgFilter: "brightness(1.02) saturate(1.15) contrast(1.05)",
         videoLabel: "연합 운동회 단체전 (0:25)",
-        videoDesc: "대장 개미가 이끄는 개미 군단이 일사불란하게 나란히 행진하며 뚜기와 달이와 격돌하는 명승부!",
+        videoDesc: "대장 개미가 나 홀로 씩씩하게 뛰어가며 뚜기와 달팽이 달이 사이에서 1인 군단 기백을 뽐내는 질주 장면!",
         videoAction: "crossover"
     }
 };
@@ -305,7 +305,7 @@ function switchEpisode(epNumber) {
         
         // Alternating images for ant farm
         if (currentEp === 10) {
-            img.src = "assets/images/ant_farm_1.png"; // or custom crossover illustration
+            img.src = "assets/images/ant_farm_1.png";
         } else {
             img.src = currentEp % 2 === 1 ? "assets/images/ant_farm_1.png" : "assets/images/ant_farm_2.png";
         }
@@ -319,17 +319,17 @@ function switchEpisode(epNumber) {
         // Update player
         document.getElementById('player-label').textContent = data.videoLabel;
         
-        // Signature updates based on story
+        // Signature updates based on story (Single Ant perspective)
         const sigs = {
             1: "- 루시가 파란 젤성 앞에서 ✍️",
-            2: "- 루시가 수직 갱도 현장에서 ✍️🏗️",
-            3: "- 지하 요새 설계사 루시가 ✍️🗺️",
-            4: "- 영차영차 구령에 맞춘 루시가 ✍️",
-            5: "- 투명 방 속 개미를 돋보기로 보는 루시가 🔍✍️",
-            6: "- 젤리 푸딩을 선물한 루시가 🍮✍️",
-            7: "- 지하 터널 통풍을 도운 루시가 🍃✍️",
-            8: "- 고속도로 개통식을 직관한 루시가 🏁✍️",
-            9: "- 영리한 개미 군단의 보좌관 루시가 👑✍️",
+            2: "- 루시가 1인 수직 갱도 현장에서 ✍️🏗️",
+            3: "- 나 홀로 요새 설계사 루시가 ✍️🗺️",
+            4: "- 혼자 다 먹는 개미가 부러운 루시가 ✍️💧",
+            5: "- 1인 프리패스 도로 개통식을 본 루시가 🔍✍️",
+            6: "- 방풍 방습 푸른 성곽을 만져본 루시가 🧱✍️",
+            7: "- 유리벽 대치전의 목격자 루시가 🔍✍️",
+            8: "- 야간 수호천사 개미를 사랑하는 루시가 👮✍️",
+            9: "- 1인 대역사 준공식 대표 비서 루시가 👑✍️",
             10: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
@@ -502,7 +502,7 @@ themeToggle.addEventListener('click', () => {
 
 
 // ==========================================
-// 7. Simulated Video Player (Canvas Drawing Loop)
+// 7. Simulated Video Player (Canvas Drawing Loop - 1 Ant Only!)
 // ==========================================
 const videoTrigger = document.getElementById('video-trigger');
 const videoModal = document.getElementById('video-modal');
@@ -513,8 +513,6 @@ const vCtx = videoCanvas.getContext('2d');
 let isVideoPlaying = false;
 let videoFrameId = null;
 let vTime = 0;
-let antLegWiggle = 0;
-let progressPercent = 0;
 
 videoTrigger.addEventListener('click', () => {
     synth.playChime();
@@ -555,33 +553,30 @@ function resizeVideoCanvas() {
     videoCanvas.height = 315;
 }
 
-// Draw the beautiful blue gel ant-farm tunnels procedurally!
+// Tunnels drawing helper
 function drawGelTunnels() {
     vCtx.save();
     
-    // Base translucent blue gel gradient
+    // Base blue gel
     const gelGrad = vCtx.createRadialGradient(280, 150, 50, 280, 150, 300);
-    gelGrad.addColorStop(0, '#e3f2fd'); // Soft ice blue
-    gelGrad.addColorStop(1, '#90caf9'); // Translucent royal blue
+    gelGrad.addColorStop(0, '#e3f2fd');
+    gelGrad.addColorStop(1, '#90caf9');
     vCtx.fillStyle = gelGrad;
     vCtx.fillRect(0, 0, videoCanvas.width, videoCanvas.height);
     
-    // Drawing watercolor gel lines
+    // Tunnel pathways
     vCtx.strokeStyle = 'rgba(33, 150, 243, 0.4)';
-    vCtx.lineWidth = 14;
+    vCtx.lineWidth = 16;
     vCtx.lineCap = 'round';
     vCtx.lineJoin = 'round';
     
-    // Tunnel 1: Central vertical shaft
     vCtx.beginPath();
     vCtx.moveTo(280, 0);
     vCtx.lineTo(280, 220);
     
-    // Tunnel 2: Left 1st floor chamber
     vCtx.moveTo(280, 100);
     vCtx.quadraticCurveTo(180, 90, 140, 110);
     
-    // Tunnel 3: Right highway (straight horizontal)
     vCtx.moveTo(280, 180);
     vCtx.lineTo(440, 180);
     vCtx.stroke();
@@ -591,15 +586,13 @@ function drawGelTunnels() {
     vCtx.strokeStyle = 'rgba(33, 150, 243, 0.5)';
     vCtx.lineWidth = 3;
     
-    // Left Chamber
     vCtx.beginPath();
-    vCtx.arc(140, 110, 22, 0, Math.PI*2);
+    vCtx.arc(140, 110, 24, 0, Math.PI*2);
     vCtx.fill();
     vCtx.stroke();
     
-    // Central Chamber
     vCtx.beginPath();
-    vCtx.arc(280, 220, 28, 0, Math.PI*2);
+    vCtx.arc(280, 220, 30, 0, Math.PI*2);
     vCtx.fill();
     vCtx.stroke();
     
@@ -624,20 +617,19 @@ function animateVideo() {
         }
     }
     
-    // 2. Render characters based on action
+    // 2. Render EXACTLY ONE Captain Ant based on action
     if (action === 'explore') {
-        // Ants walking around top area
-        drawAnt(280 + Math.sin(vTime*2)*30, 40, 1, Math.sin(vTime*2)*0.2, vTime);
-        drawAnt(220 + Math.cos(vTime)*20, 30, 0.8, -0.2, vTime + 1);
+        // Only one Captain Ant exploring the surface
+        drawAnt(280 + Math.sin(vTime*2)*40, 40, 1.1, Math.sin(vTime*2)*0.3, vTime);
     } 
     else if (action === 'dig_down') {
-        // Ant at the bottom of shaft wiggling and chipping gel
-        drawAnt(280, 80 + vTime * 6, 1, Math.PI/2, vTime);
+        // One Captain Ant digging deep
+        drawAnt(280, 80 + vTime * 6, 1.15, Math.PI/2, vTime);
         
-        // falling gel crumbs
+        // falling crumbs
         vCtx.fillStyle = 'rgba(33, 150, 243, 0.6)';
-        for(let i=0; i<5; i++) {
-            const cy = (80 + vTime * 6 + i*10 + vTime*40) % 220;
+        for(let i=0; i<4; i++) {
+            const cy = (80 + vTime * 6 + i*12 + vTime*35) % 220;
             if (cy > 80 + vTime * 6) {
                 vCtx.beginPath();
                 vCtx.arc(280 + Math.sin(i + vTime)*3, cy, 2, 0, Math.PI*2);
@@ -646,80 +638,62 @@ function animateVideo() {
         }
     } 
     else if (action === 'sleep') {
-        // Ants resting inside left chamber
-        drawAnt(135, 110, 0.9, Math.PI/6, vTime * 0.2); // sleeping - slow breathing wiggle
-        drawAnt(145, 115, 0.8, -Math.PI/4, vTime * 0.15);
-        drawAnt(280, 220, 1.1, 0, vTime * 0.1); // big captain resting in central chamber
+        // Solo Captain resting peacefully in the main chamber
+        drawAnt(280, 220, 1.15, 0, vTime * 0.1);
     } 
     else if (action === 'eat_sugar') {
-        // Feeding scene at the top
-        vCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-        vCtx.strokeStyle = 'rgba(33,150,243,0.3)';
+        // Solo Captain enjoying sugar water all by himself!
+        vCtx.fillStyle = 'rgba(255, 255, 255, 0.82)';
+        vCtx.strokeStyle = 'rgba(33,150,243,0.35)';
         vCtx.beginPath();
-        vCtx.arc(280, 10, 12, 0, Math.PI*2); // drop of water
+        vCtx.arc(280, 10, 12, 0, Math.PI*2);
         vCtx.fill();
         vCtx.stroke();
         
-        // Ants drinking
-        drawAnt(268, 16, 0.9, -Math.PI/4, vTime);
-        drawAnt(292, 16, 0.95, -Math.PI*0.75, vTime + 0.5);
+        drawAnt(280, 24, 1.1, -Math.PI/2, vTime);
     } 
     else if (action === 'run_highway') {
-        // Fast running ants along right highway
-        const highwayX1 = (100 + vTime * 120) % 360;
-        const highwayX2 = (440 - vTime * 90);
-        drawAnt(280 + (highwayX1 % 160), 180, 0.9, 0, vTime);
-        if (highwayX2 > 280) {
-            drawAnt(highwayX2, 180, 0.85, Math.PI, vTime + 2);
-        }
+        // Solo Captain running back and forth on horizontal highway
+        const highwayX = 140 + (vTime * 110) % 260;
+        drawAnt(highwayX, 180, 1.1, 0, vTime);
     } 
     else if (action === 'build_wall') {
-        // Ants piling crumbs at the entry
-        drawAnt(260, 25, 0.95, -Math.PI/6, vTime);
+        // Solo Captain building a cozy protective wall at the entry
+        drawAnt(260, 25, 1.05, -Math.PI/6, vTime);
         
         vCtx.fillStyle = 'rgba(33, 150, 243, 0.8)';
         vCtx.strokeStyle = 'rgba(33, 150, 243, 0.4)';
         vCtx.lineWidth = 1;
         // pile of gel crumbs
-        for(let i=0; i<12; i++) {
+        for(let i=0; i<9; i++) {
             vCtx.beginPath();
-            vCtx.arc(275 + (i%4)*4, 32 - Math.floor(i/4)*3, 2.5, 0, Math.PI*2);
+            vCtx.arc(275 + (i%3)*4, 32 - Math.floor(i/3)*3, 2.5, 0, Math.PI*2);
             vCtx.fill();
             vCtx.stroke();
         }
     } 
     else if (action === 'meet_snail') {
-        // Dali Snail outside the glass container on the left!
+        // Solo Captain meeting Dali Snail through the window
         drawSnailMini(80, 110, vTime);
-        // Ant wiggling on the inside of the wall
         drawAnt(130, 110, 1.05, Math.PI, vTime);
     } 
     else if (action === 'patrol') {
-        // Patrol ants marching
-        drawAnt(280, 60 + Math.sin(vTime)*30, 1, Math.PI/2, vTime);
-        drawAnt(320, 180, 0.9, 0, vTime + 1);
+        // Solo Captain doing a dedicated night-watch patrol
+        drawAnt(280, 60 + Math.sin(vTime)*40, 1.1, Math.PI/2, vTime);
     } 
     else if (action === 'celebrate') {
-        // All ants party! Wiggling around central chamber
-        drawAnt(280, 220, 1.2, vTime * 0.5, vTime * 2); // Captain spinning
-        drawAnt(262, 212, 0.85, Math.PI/3, vTime * 3);
-        drawAnt(298, 228, 0.8, -Math.PI/3, vTime * 2.5);
-        drawAnt(282, 195, 0.9, Math.PI, vTime * 2);
-        
-        // Sparkling stars in central chamber
+        // Solo Captain holding an epic one-ant victory dance party!
+        drawAnt(280, 220, 1.25, vTime * 0.6, vTime * 2.5);
         drawSparkles(280, 220, vTime);
     } 
     else if (action === 'crossover') {
-        // Epic Crossover Sports day!
-        // Draws grasshopper on the right, snail on the left, and ant platoon marching in the center
+        // Crossover Sports Day: Dali Snail on left, Ttougi on right,
+        // and Solo Captain Ant marching proudly in the center as a one-ant army!
         drawSnailMini(100, 180, vTime);
         drawTtougiMini(460, 170, vTime);
         
-        // Platoon of 3 ants marching together!
-        const platoonX = 220 + (vTime * 40) % 180;
-        drawAnt(platoonX, 195, 0.9, 0, vTime * 1.5);
-        drawAnt(platoonX - 25, 205, 0.8, 0, vTime * 1.5);
-        drawAnt(platoonX - 12, 185, 0.85, 0, vTime * 1.5);
+        const soloX = 180 + (vTime * 50) % 200;
+        drawAnt(soloX, 195, 1.1, 0, vTime * 2);
         
         drawSparkles(280, 150, vTime);
     }
