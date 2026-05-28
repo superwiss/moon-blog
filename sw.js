@@ -1,5 +1,5 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.0.7'; // Increment this version on each deploy to trigger notifications!
+const CACHE_NAME = 'moon-blog-cache-v1.0.8'; // Increment this version on each deploy to trigger notifications!
 const UPDATE_MESSAGE = "신비로운 푸른 젤성 대장 개미 일기(10화) 추가 및 뚜기x달이x개미의 포복절도 연합 운동회 대개막! 🐜🐌🟢🏆";
 const ASSETS = [
     './',
@@ -32,7 +32,7 @@ self.addEventListener('install', (e) => {
     );
 });
 
-// Activate event: detect update and trigger native system push notification
+// Activate event: detect update, delete ALL old caches, and claim clients instantly!
 self.addEventListener('activate', (e) => {
     e.waitUntil(
         caches.keys().then((keys) => {
@@ -45,7 +45,7 @@ self.addEventListener('activate', (e) => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim()) // Instantly take control of all active tabs!
     );
 });
 
@@ -62,48 +62,21 @@ function showUpdateNotification() {
     }
 }
 
-// Fetch event: hybrid strategy (Network-First for code, Cache-First for static media assets)
+// Fetch event: cache-first with network fallback (retains permanent cache for identical versions)
 self.addEventListener('fetch', (e) => {
-    const url = new URL(e.request.url);
-    
-    // Cache-First strategy for heavy static media files (audio tracks and images)
-    if (url.pathname.includes('/assets/audio/') || url.pathname.includes('/assets/images/')) {
-        e.respondWith(
-            caches.match(e.request).then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
+    e.respondWith(
+        caches.match(e.request).then((cachedResponse) => {
+            return cachedResponse || fetch(e.request).then((networkResponse) => {
+                if (networkResponse.status === 200) {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, responseClone);
+                    });
                 }
-                return fetch(e.request).then((networkResponse) => {
-                    if (networkResponse.status === 200) {
-                        const responseClone = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(e.request, responseClone);
-                        });
-                    }
-                    return networkResponse;
-                });
-            })
-        );
-    } else {
-        // Network-First strategy for critical code (HTML, JS, CSS, Manifest) to guarantee instant updates on reload
-        e.respondWith(
-            fetch(e.request)
-                .then((networkResponse) => {
-                    // Update cache with the fresh resource on success
-                    if (networkResponse.status === 200) {
-                        const responseClone = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(e.request, responseClone);
-                        });
-                    }
-                    return networkResponse;
-                })
-                .catch(() => {
-                    // Fallback to cache ONLY when completely offline
-                    return caches.match(e.request);
-                })
-        );
-    }
+                return networkResponse;
+            });
+        })
+    );
 });
 
 // Click notification event: focus or open the diary

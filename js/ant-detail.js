@@ -996,6 +996,15 @@ zoomModal.addEventListener('click', (e) => {
 
 // PWA Service Worker register
 if ('serviceWorker' in navigator) {
+    // Force instant reload when the new Service Worker takes over and deletes the old cache
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+        }
+    });
+
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
     });
