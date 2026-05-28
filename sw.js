@@ -62,13 +62,48 @@ function showUpdateNotification() {
     }
 }
 
-// Fetch event: network fallback to cache
+// Fetch event: hybrid strategy (Network-First for code, Cache-First for static media assets)
 self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        caches.match(e.request).then((cachedResponse) => {
-            return cachedResponse || fetch(e.request);
-        })
-    );
+    const url = new URL(e.request.url);
+    
+    // Cache-First strategy for heavy static media files (audio tracks and images)
+    if (url.pathname.includes('/assets/audio/') || url.pathname.includes('/assets/images/')) {
+        e.respondWith(
+            caches.match(e.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+                return fetch(e.request).then((networkResponse) => {
+                    if (networkResponse.status === 200) {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(e.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                });
+            })
+        );
+    } else {
+        // Network-First strategy for critical code (HTML, JS, CSS, Manifest) to guarantee instant updates on reload
+        e.respondWith(
+            fetch(e.request)
+                .then((networkResponse) => {
+                    // Update cache with the fresh resource on success
+                    if (networkResponse.status === 200) {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(e.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                })
+                .catch(() => {
+                    // Fallback to cache ONLY when completely offline
+                    return caches.match(e.request);
+                })
+        );
+    }
 });
 
 // Click notification event: focus or open the diary
