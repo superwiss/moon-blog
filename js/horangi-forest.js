@@ -593,14 +593,9 @@ function updateAndRender() {
         spiritTargetX = 290;
         spiritTargetY = 160;
     } else if (state.stage === 5) {
-        // Stage 5: Follow mouse gently if active, else drift softly in center
-        if (mouseX !== null && mouseY !== null) {
-            spiritTargetX = mouseX;
-            spiritTargetY = mouseY - 15;
-        } else {
-            spiritTargetX = canvasWidth / 2 + Math.sin(vTime * 0.7) * 30;
-            spiritTargetY = canvasHeight / 2 - 15 + Math.cos(vTime * 0.5) * 15;
-        }
+        // Stage 5: Stay perfectly centered in the screen frame, only 3D depth pulsing is applied
+        spiritTargetX = canvasWidth / 2;
+        spiritTargetY = canvasHeight / 2 + 10;
     } else if (state.stage === 4) {
         // Butterfly fly in 8-shape trajectory naturally
         const t = vTime * 0.8;
@@ -932,7 +927,8 @@ function updateAndRender() {
         ctx.restore();
     } else if (state.stage === 5) {
         // STAGE 5: Reincarnated Guardian Fairy (Daughter's cute drawing!)
-        const pulse = 1 + Math.sin(vTime * 3) * 0.04;
+        // 3D back-and-forth perspective scaling (zooming in and out)
+        const pulse = 0.98 + Math.sin(vTime * 2.2) * 0.15;
         
         ctx.save();
         ctx.shadowColor = 'rgba(255, 182, 193, 0.9)';
@@ -943,7 +939,7 @@ function updateAndRender() {
         if (processedCanvas) {
             // Keep original aspect ratio
             const aspect = processedCanvas.width / processedCanvas.height;
-            const h = 135 * pulse;
+            const h = 230 * pulse; // Large size filling the screen beautifully!
             const w = h * aspect;
             ctx.drawImage(processedCanvas, -w / 2, -h / 2, w, h);
         } else {
