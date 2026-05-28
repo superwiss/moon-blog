@@ -994,6 +994,27 @@ zoomModal.addEventListener('click', (e) => {
 });
 
 
+// Reset body opacity to 1 immediately when the page is shown,
+// especially when loaded from back-forward cache (bfcache)
+window.addEventListener('pageshow', (event) => {
+    document.body.style.opacity = '1';
+    document.body.style.transition = '';
+});
+
+// Smooth fade-out page transition when returning to list
+const backHomeBtn = document.querySelector('.back-home');
+if (backHomeBtn) {
+    backHomeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        synth.playChime();
+        document.body.style.opacity = 0;
+        document.body.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            window.location.href = backHomeBtn.href;
+        }, 450);
+    });
+}
+
 // PWA Service Worker register
 if ('serviceWorker' in navigator) {
     // Force instant reload when the new Service Worker takes over and deletes the old cache

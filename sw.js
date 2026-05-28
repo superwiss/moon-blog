@@ -1,6 +1,6 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.0.8'; // Increment this version on each deploy to trigger notifications!
-const UPDATE_MESSAGE = "신비로운 푸른 젤성 대장 개미 일기(10화) 추가 및 뚜기x달이x개미의 포복절도 연합 운동회 대개막! 🐜🐌🟢🏆";
+const CACHE_NAME = 'moon-blog-cache-v1.0.9'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "뒤로가기 및 페이지 이동 시 화면이 하얗게 나오던 문제를 수정하여 한층 부드러워진 동화책 전환 업데이트! 🍂✨";
 const ASSETS = [
     './',
     './index.html',
