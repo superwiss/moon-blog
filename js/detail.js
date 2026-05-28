@@ -947,3 +947,10 @@ function drawHearts(cx, cy, time) {
     }
     vCtx.restore();
 }
+
+// PWA Service Worker register
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+    });
+}

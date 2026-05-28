@@ -8,6 +8,7 @@
     <meta name="description" content="동물과 곤충을 사랑하는 딸아이를 위한 따뜻한 수채화 동화풍의 관찰일지 블로그">
     <meta name="keywords" content="방아깨비 뚜기, 자벌레 호랑이, 관찰일지, 초등학생 관찰기록, 동화풍 블로그, 곤충 관찰">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -102,6 +103,14 @@
 
             <!-- Right Column: Observation Grid -->
             <section class="observation-grid-section">
+                
+                <!-- PWA Update Notification Prompt -->
+                <div id="notification-prompt" style="display:none; background:rgba(253, 251, 247, 0.95); border: 2.5px dashed var(--border-color); border-radius: 20px; padding: 1.2rem; margin-bottom: 2rem; text-align: center; font-family: var(--font-handwriting); box-shadow: var(--card-shadow);">
+                    <span style="font-size:1.2rem; color:var(--text-primary); display:block; margin-bottom: 0.6rem;">🔔 일기장에 새 글이 올라오거나 요정이 진화하면 핸드폰으로 알려드릴까요?</span>
+                    <p style="font-size:0.95rem; color:var(--text-secondary); margin-bottom: 0.8rem; line-height: 1.4;">(아이폰은 알림 수락 후 하단 공유 버튼 누르고 '홈 화면에 추가'해 주세요 📲)</p>
+                    <button class="btn-handdrawn" id="btn-enable-notifications" style="padding: 6px 20px; font-size:1.15rem; cursor:pointer;">알림 받기 💚</button>
+                </div>
+
                 <h2 class="grid-title">
                     <svg viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>

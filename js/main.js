@@ -536,6 +536,86 @@ function renderHistoricalFlowers() {
     }
 }
 
+window.addEventListener('load', () => {
+    const initialFlowerEmojis = ['🌼', '🌸', '💮'];
+    for(let i=0; i<Math.min(flowerCount, 15); i++) {
+        const randomEmoji = initialFlowerEmojis[Math.floor(Math.random() * initialFlowerEmojis.length)];
+        createVisualFlower(randomEmoji, true);
+    }
+    flowerCounter.textContent = flowerCount;
+});
+
+// ==========================================
+// PWA Service Worker Registration & Version Notification Prompt
+// ==========================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => {
+                console.log('PWA Service Worker successfully registered!', reg);
+                
+                // Monitor updates to show instantaneous prompts
+                reg.onupdatefound = () => {
+                    const installingWorker = reg.installing;
+                    if (installingWorker) {
+                        installingWorker.onstatechange = () => {
+                            if (installingWorker.state === 'installed') {
+                                if (navigator.serviceWorker.controller) {
+                                    console.log('New version content available; please refresh!');
+                                }
+                            }
+                        };
+                    }
+                };
+            })
+            .catch(err => console.error('Service Worker registration failed', err));
+    });
+}
+
+// Notification Prompt Handler
+document.addEventListener('DOMContentLoaded', () => {
+    const prompt = document.getElementById('notification-prompt');
+    const enableBtn = document.getElementById('btn-enable-notifications');
+
+    if (prompt && enableBtn) {
+        // Only show prompt if permission is 'default' (not yet allowed or blocked)
+        if ('Notification' in window && Notification.permission === 'default') {
+            prompt.style.display = 'block';
+        }
+
+        enableBtn.addEventListener('click', () => {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        if (typeof synth !== 'undefined' && synth.playChime) {
+                            synth.playChime();
+                        }
+                        
+                        prompt.innerHTML = `<span style="font-size:1.25rem; color:var(--accent-color); font-weight:bold;">🎉 알림 설정 완료! 이제 일기장이 더 멋져지면 핸드폰으로 알려드릴게요. 고마워요 루시! 💚</span>`;
+                        setTimeout(() => {
+                            prompt.style.display = 'none';
+                        }, 4000);
+                        
+                        // Register a test notification to welcome the user
+                        navigator.serviceWorker.ready.then(reg => {
+                            reg.showNotification("루시의 초록 일기장 🔔", {
+                                body: "알림 권한이 성공적으로 설정되었습니다. 반가워요! 🌿",
+                                icon: "./assets/images/logo_supermoon.png",
+                                badge: "./assets/images/logo_supermoon.png"
+                            });
+                        });
+                    } else {
+                        prompt.style.display = 'none';
+                    }
+                });
+            } else {
+                alert("이 브라우저는 알림을 지원하지 않습니다.");
+                prompt.style.display = 'none';
+            }
+        });
+    }
+});
+
 // Generate falling flower visual effect
 function createVisualFlower(emoji, immediate = false) {
     const flower = document.createElement('span');
