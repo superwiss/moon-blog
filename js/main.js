@@ -1,5 +1,12 @@
 /* js/main.js */
 
+// Reset body opacity to 1 immediately when the page is shown,
+// especially when loaded from back-forward cache (bfcache)
+window.addEventListener('pageshow', (event) => {
+    document.body.style.opacity = '1';
+    document.body.style.transition = '';
+});
+
 // ==========================================
 // 1. Web Audio API Sound Synthesizer (Magical & Local)
 // ==========================================
