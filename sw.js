@@ -1,6 +1,6 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.0.9'; // Increment this version on each deploy to trigger notifications!
-const UPDATE_MESSAGE = "뒤로가기 및 페이지 이동 시 화면이 하얗게 나오던 문제를 수정하여 한층 부드러워진 동화책 전환 업데이트! 🍂✨";
+const CACHE_NAME = 'moon-blog-cache-v1.1.2'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "팽이들의 42일간의 '달팽이의 날' 손그림 계획표 추가 및 수박 특식/허물 점프 리얼 영상 일기 업데이트! 🐌🟢✨";
 const ASSETS = [
     './',
     './index.html',
@@ -19,7 +19,12 @@ const ASSETS = [
     './assets/images/snail_dali.png',
     './assets/images/ant_farm_1.png',
     './assets/images/ant_farm_2.png',
-    './assets/images/tomb_horangi.png'
+    './assets/images/tomb_horangi.png',
+    './assets/20260529/days.jpg',
+    './assets/20260529/팽이.png',
+    './assets/20260529/팽이_전속력.mp4',
+    './assets/20260529/뚜기였던것.png',
+    './assets/20260529/뚜기_점프.mp4'
 ];
 
 // Install event: cache initial assets

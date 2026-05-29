@@ -71,10 +71,12 @@
                 <button class="tab-btn" data-ep="7"><span class="tab-icon">🏁</span> 7일차</button>
                 <button class="tab-btn" data-ep="8"><span class="tab-icon">🐜</span> 8일차</button>
                 <button class="tab-btn" data-ep="9"><span class="tab-icon">⛲</span> 9일차</button>
-                <!-- 10th tab is highlighted in purple -->
+                <!-- 6th tab is highlighted in purple -->
                 <button class="tab-btn special-tab" data-ep="10"><span class="tab-icon">💜</span> 10일차</button>
                 <!-- 11th tab for crossover event -->
                 <button class="tab-btn special-tab" data-ep="11" style="border-color:var(--accent-purple-hover); color:var(--accent-purple-hover);"><span class="tab-icon">🏆</span> 11일차</button>
+                <!-- 12th tab for real video/molt/egg event -->
+                <button class="tab-btn special-tab" data-ep="12" style="border-color:#ff9800; color:#ff9800;"><span class="tab-icon">✨</span> 12일차</button>
             </nav>
 
             <!-- Lined Diary Book Layout -->
@@ -133,7 +135,7 @@
                         
                         <!-- Lined background text area -->
                         <div class="diary-body" id="diary-text">
-                            오늘 우리 집에 아주 특별한 식구들이 이사를 왔어요! 바로 귀여운 달팽이 16마리 대가족이랍니다. 그중에서 가장 껍질이 크고 멋진 맏이 대장에게는 '달이'라는 이름을 붙여주었고, 나머지 15마리 동생들은 다 같이 '팽이들'이라고 부르기로 했어요. 아빠랑 함께 통기성이 좋은 통에 촉촉한 코코피트 흙을 부드럽게 깔고 이끼도 촉촉하게 적셔서 팽이들의 새 보금자리를 꾸며주었어요. 16마리나 되다 보니 잘 먹는 만큼 똥도 아주 어마어마하게 많이 싸네요! 벌써 흙 위를 꼬물꼬물 기어 다니는 모습이 한가득하네요. 앞으로 루시의 팽이 관찰 일기가 시작됩니다!
+                            오늘 우리 집에 아주 특별한 식구들이 이사를 왔어요! 바로 귀여운 달팽이 16마리 대가족이랍니다. 그중에서 가장 껍질이 크고 멋진 맏이 대장에게는 '달이'라는 이름을 붙여주었고, 나머지 15마리 동생들은 다 같이 '팽이들'이라고 부르기로 했어요. 아빠랑 함께 통기성이 좋은 통에 촉촉한 코코피트 흙을 부드럽게 깔고 이끼도 촉촉하게 적셔서 팽이들의 새 보금자리를 꾸며주어로요. 16마리나 되다 보니 잘 먹는 만큼 똥도 아주 어마어마하게 많이 싸네요! 벌써 흙 위를 꼬물꼬물 기어 다니는 모습이 한가득하네요. 앞으로 루시의 팽이 관찰 일기가 시작됩니다!
                         </div>
 
                         <div class="diary-footer">
@@ -193,6 +195,8 @@
             <div class="video-frame-container" id="video-container" style="background:#2d3a2e; border: 2px solid var(--border-color); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;">
                 <!-- Animated canvas for simulated cute snail movement -->
                 <canvas id="video-canvas" style="width:100%; height:100%; background: radial-gradient(circle, #fcf8f2 0%, #e3dac9 100%);"></canvas>
+                <!-- Real video player for new mp4 clips -->
+                <video id="real-video" style="display:none; width:100%; height:100%; object-fit:contain;" controls></video>
             </div>
             
             <!-- Video sound alert/caption moved underneath -->

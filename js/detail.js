@@ -275,12 +275,25 @@ const EPISODE_DATA = {
         title: "7회: 초록 들판 동물 연합 운동회! 🏆",
         date: "2026년 5월 28일 목요일",
         weather: "화창하고 맑은 가을바람 🍂",
-        text: "오늘 루시의 정원에서 사상 최초로 '초록 들판 동물 연합 운동회'가 열렸습니다! 참가 선수는 날렵한 다리의 방아깨비 대표 저 뚜기, 우직한 껍질의 느림보 달팽이 대표 달이, 그리고 파란 물약 젤리 성곽의 고독한 전사 대장 개미 대표였습니다! 놀랍게도 대장 개미네 성에는 대장 개미 딱 한 마리만 기거하고 있었죠! 첫 번째 경기인 '초속 기어가기 레이스'가 시작되자마자 저는 강력한 뒷다리 근육에 우주의 힘을 모아 숲길을 한 번에 날아올랐습니다! ‘폴짝!’ 단 한 번의 점프로 10미터를 날아가며 우승을 따놓은 당상이라 생각하고 신나게 다리를 슥슥 비벼 날갯소리로 오케스트라 연주를 울려댔죠. 하지만 뒤를 돌아보니 기적이 일어나고 있었습니다! 달팽이 달이는 물러서지 않고 자기만의 거대한 은빛 점액 길을 뿜어내며 마찰력을 제로로 만든 채 미끄러지듯 스케이트를 타고 슬라이딩을 하고 있었습니다! 게다가 대장 개미는 여러 마리가 아니라 단 한 마리뿐인데도, 혼자서 '영차영차!' 씩씩한 군대 구령 소리를 내며 1인 3역으로 3열 종대 대열을 시뮬레이션하듯 엄청난 기백과 질주 속도로 돌진해오고 있었죠! (처음엔 너무 날쌔서 개미 군단인 줄 착각했답니다!) 두 번째 종목인 '누가누가 루꼴라 빨리 먹나 뷔페전'에서도 대장 개미의 활약이 돋보였습니다. 혼자서 특유의 정밀한 이빨 커터 능력을 가동해 루꼴라 잎을 도화지 오리듯 자로 잰 격자 사각형으로 오려 기지 성으로 쏜살같이 혼자 날랐고, 저 뚜기는 턱이 빠지도록 루꼴라를 사각사각 구멍 내며 갉아 먹어 저만의 1등 신기록을 경신했습니다. 느림보 달이는 커다란 당근 조각을 입안에 통째로 물고 진공청소기처럼 천천히 빨아들이며 온천욕을 즐기고 있었어요. 마지막 '줄다리기 단체전'에서는 저와 달이와 대장 개미가 장미 줄기를 물고 힘을 겨뤘는데, 달이의 닻 내리기 전술과 대장 개미가 혼자서 백만 대군의 단합력을 온몸으로 시각화하여 버티는 초인적인 힘, 그리고 저의 로켓 엔진 뒷다리가 격돌하여 결국 장미 줄기가 뚝 끊어지는 바람에 모두가 잔디밭에 벌러덩 자빠지고 말았답니다! 경기 결과는 모두가 1등인 완벽한 공동 우승! 서로 다른 발걸음과 재주를 가졌지만, 함께 달리며 잔디밭에서 뒤엉켜 노는 시간이 너무나 눈부시게 행복했습니다. 뚜기 요정, 은빛 달팽이, 대장 개미까지 우리 모두 루시의 소중한 단짝들로서 평화롭고 신나는 초록 연합 영원히 포에버! 💚🌟",
+        text: "오늘 루시의 정원에서 사상 최초로 '초록 들판 동물 연합 운동회'가 열렸습니다! 참가 선수는 날렵한 다리의 방아깨비 대표 저 뚜기, 우직한 껍질의 느림보 달팽이 대표 달이, 그리고 파란 물약 젤리 성곽의 고독한 전사 대장 개미 대표였습니다! 놀랍게도 대장 개미네 성에는 대장 개미 딱 한 마리만 기거하고 있었죠! 첫 번째 경기인 '초속 기어가기 레이스'가 시작되자마자 저는 강력한 뒷다리 근육에 우주의 힘을 모아 숲길을 한 번에 날아올랐습니다! ‘폴짝!’ 단 한 번의 점프로 10미터를 날아가며 우승을 따놓은 당상이라 생각하고 신나게 다리를 슥슥 비벼 날갯소리로 오케스트라 연주를 울려댔죠. 하지만 뒤를 돌아보니 기적이 일어나고 있었습니다! 달팽이 달이는 물러서지 않고 자기만의 거대한 은빛 점액 길을 뿜어내며 마찰력을 제로로 만든 채 미끄러지듯 스케이트를 타고 슬라이딩을 하고 있었습니다! 게다가 대장 개미는 여러 마리가 아니라 단 한 마리뿐인데도, 혼자서 '영차영차!' 씩씩한 군대 구령 소리를 내며 1인 3역으로 3열 종대 대열을 시뮬레이션하듯 엄청난 기백과 질주 속도로 돌진해오고 있었죠! (처음엔 너무 날쌔서 개미 군단인 줄 착각했답니다!) 두 번째 종목인 '누가누가 루꼴라 빨리 먹나 뷔페전'에서도 대장 개미의 활약이 돋보였습니다. 혼자서 특유 of 정밀한 이빨 커터 능력을 가동해 루꼴라 잎을 도화지 오리듯 자로 잰 격자 사각형으로 오려 기지 성으로 쏜살같이 혼자 날랐고, 저 뚜기는 턱이 빠지도록 루꼴라를 사각사각 구멍 내며 갉아 먹어 저만의 1등 신기록을 경신했습니다. 느림보 달이는 커다란 당근 조각을 입안에 통째로 물고 진공청소기처럼 천천히 빨아들이며 온천욕을 즐기고 있었어요. 마지막 '줄다리기 단체전'에서는 저와 달이와 대장 개미가 장미 줄기를 물고 힘을 겨뤘는데, 달이의 닻 내리기 전술과 대장 개미가 혼자서 백만 대군의 단합력을 온몸으로 시각화하여 버티는 초인적인 힘, 그리고 저의 로켓 엔진 뒷다리가 격돌하여 결국 장미 줄기가 뚝 끊어지는 바람에 모두가 잔디밭에 벌러덩 자빠지고 말았답니다! 경기 결과는 모두가 1등인 완벽한 공동 우승! 서로 다른 발걸음과 재주를 가졌지만, 함께 달리며 잔디밭에서 뒤엉켜 노는 시간이 너무나 눈부시게 행복했습니다. 뚜기 요정, 은빛 달팽이, 대장 개미까지 우리 모두 루시의 소중한 단짝들로서 평화롭고 신나는 초록 연합 영원히 포에버! 💚🌟",
         caption: "정원에서 펼쳐진 신나는 동물 운동회 대격돌!",
         imgFilter: "brightness(1.02) saturate(1.15) contrast(1.05)",
         videoLabel: "연합 운동회 단체전 (0:25)",
         videoDesc: "뚜기가 도약하고 달팽이가 슬라이딩하며 대장 개미가 홀로 장미 줄기를 당기는 손에 땀을 쥐는 경기 장면이에요!",
         videoAction: "crossover"
+    },
+    8: {
+        title: "8회: 두 번째 허물과 방 안의 무법자 🦖✨",
+        date: "2026년 5월 29일 금요일",
+        weather: "맑고 화창한 날 ☀️",
+        text: "오늘 아침에 일어났더니 뚜기의 집 한쪽에 또 하나의 뽀얗고 투명한 껍질이 놓여 있었어요! 세상에, 뚜기가 우리 집에 온 지 벌써 두 번째로 허물을 벗은 거예요! 이번 허물은 꼭 뚜기가 한 마리 더 있는 것처럼 완벽한 모양을 하고 있어서 너무나 신비로웠답니다. 허물을 벗느라 에너지를 많이 썼을 뚜기를 보는데, 좁고 답답한 관찰 상자 안에만 갇혀 있는 게 조금 안쓰러워 보였어요. 그래서 오늘은 과감히 방문을 꼭 닫고, 제 방에서 뚜기를 자유롭게 풀어주었답니다! 와, 그런데 방에 풀어주자마자 뚜기는 마치 물 만난 고기처럼 넓은 방안을 온통 제 세상인 양 폴짝폴짝 날아다녔어요! 뒷다리 근육을 힘차게 튕기며 가구 같은 건 하나도 없는 넓은 방바닥 위에서 실컷 폴짝폴짝 뛰어다녔어요! 방바닥을 딛고 힘차게 도약해 벽 쪽이나 공중으로 슈웅 날아오르는 모습이 꼭 한 마리의 미니 공룡이나 로켓 같았죠. 이 놀라운 점프 능력을 카메라로 담아 0.1배속 초슬로우모션 비디오로 정밀하게 분석해 보았는데, 세상에! 엄청나게 느린 화면인데도 뚜기가 공중을 가르는 도약 순간은 눈 깜짝할 사이에 휙 지나갈 정도로 눈이 번쩍 뜨이게 빨랐어요! 느리게 돌려보니 긴 뒷다리를 스프링처럼 접었다가 탕! 하고 튕기는 순간의 탄력과 높이가 정말 대단하다는 걸 똑똑히 관찰할 수 있었답니다. 매일 한 뼘씩 더 크고 단단해지는 뚜기를 보며 생명의 신비와 힘을 가득 느낀 하루였어요. 넓은 공간을 맘껏 누볐으니 오늘은 좋은 꿈 꾸고 푹 자길 바랄게, 우리 멋쟁이 로켓 요정 뚜기 파이팅! 🟢🚀",
+        caption: "방안을 자유롭게 탐험하며 두 번째 탈피를 마친 뚜기 (허물과 뚜기)",
+        imgSrc: "assets/20260529/뚜기였던것.png",
+        imgFilter: "brightness(1.05) saturate(1.1)",
+        videoLabel: "방 안의 로켓 점프 영상 (0:15)",
+        videoDesc: "넓은 방 안에서 로켓처럼 솟구쳐 도약하는 뚜기의 엄청난 0.1배속 초슬로우모션 점프 관찰 영상이에요!",
+        videoFile: "assets/20260529/뚜기_점프.mp4",
+        videoAction: "real_video"
     }
 };
 
@@ -309,10 +322,11 @@ function switchEpisode(epNumber) {
         document.getElementById('diary-title').textContent = data.title;
         document.getElementById('diary-date').textContent = data.date;
         document.getElementById('diary-weather-val').textContent = data.weather;
-        document.getElementById('diary-text').textContent = data.text;
+        document.getElementById('diary-text').innerHTML = data.text;
         document.getElementById('diary-caption').textContent = data.caption;
         
         const img = document.getElementById('diary-img');
+        img.src = data.imgSrc || 'assets/images/grasshopper_ttougi.png';
         img.style.filter = data.imgFilter;
         
         // Randomize polaroid rotation slightly for a hand-laid scrapbooked look!
@@ -330,7 +344,8 @@ function switchEpisode(epNumber) {
             4: "- 기특함에 눈물짓는 루시가 ✍️",
             5: "- 다리는 아직 못 비비는 루시가 🎻✍️",
             6: "- 뚜기 단짝 친구 루시가 💚✍️",
-            7: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅"
+            7: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅",
+            8: "- 방방곡곡 방을 비행기 태워준 루시가 ✍️🚀"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
@@ -346,15 +361,15 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 7 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 7 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 8 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 8 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
         diaryCard.style.transform = 'translateY(0)';
         
-        // Special fireworks celebration on Episode 7!
-        if (currentEp === 7) {
+        // Special fireworks celebration on final Episode 8!
+        if (currentEp === 8) {
             startCelebration();
         } else {
             stopCelebration();
@@ -374,7 +389,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 7) switchEpisode(currentEp + 1);
+    if (currentEp < 8) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -645,6 +660,7 @@ const videoTrigger = document.getElementById('video-trigger');
 const videoModal = document.getElementById('video-modal');
 const videoCloseBtn = document.getElementById('video-close-btn');
 const videoCanvas = document.getElementById('video-canvas');
+const realVideo = document.getElementById('real-video');
 const vCtx = videoCanvas.getContext('2d');
 
 let isVideoPlaying = false;
@@ -664,18 +680,40 @@ videoTrigger.addEventListener('click', () => {
     document.getElementById('video-modal-title').textContent = `${data.title} - 생생 관찰 영상 🎬`;
     document.getElementById('video-modal-desc').textContent = data.videoDesc;
     
-    // Initialize video parameters
-    isVideoPlaying = true;
-    vTime = 0;
-    leafEatenPercent = 0;
-    resizeVideoCanvas();
-    
-    // Trigger grasshopper chirping if episode 5 (music episode)
-    if (data.videoAction === 'sing') {
-        synth.startChirp();
+    if (data.videoFile) {
+        // Show real video player, hide canvas
+        videoCanvas.style.display = 'none';
+        realVideo.style.display = 'block';
+        realVideo.src = data.videoFile;
+        
+        // Hide procedural sound caption
+        document.getElementById('video-sound-alert').style.visibility = 'hidden';
+        
+        // Autoplay
+        realVideo.play().catch(err => console.log("Autoplay prevented:", err));
+        isVideoPlaying = false;
+    } else {
+        // Show canvas, hide real video
+        videoCanvas.style.display = 'block';
+        realVideo.style.display = 'none';
+        realVideo.pause();
+        realVideo.src = '';
+        
+        document.getElementById('video-sound-alert').style.visibility = 'visible';
+        
+        // Initialize video parameters
+        isVideoPlaying = true;
+        vTime = 0;
+        leafEatenPercent = 0;
+        resizeVideoCanvas();
+        
+        // Trigger grasshopper chirping if episode 5 (music episode)
+        if (data.videoAction === 'sing') {
+            synth.startChirp();
+        }
+        
+        animateVideo();
     }
-    
-    animateVideo();
 });
 
 videoCloseBtn.addEventListener('click', () => {
@@ -690,6 +728,12 @@ function closeVideo() {
     isVideoPlaying = false;
     synth.stopChirp();
     cancelAnimationFrame(videoFrameId);
+    
+    if (realVideo) {
+        realVideo.pause();
+        realVideo.src = '';
+    }
+    
     videoModal.classList.remove('active');
 }
 

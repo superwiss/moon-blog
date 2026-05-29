@@ -304,6 +304,19 @@ const EPISODE_DATA = {
         videoLabel: "달이의 슬라이딩 레이스 (0:25)",
         videoDesc: "은빛 점액 길을 뿜으며 얼음 스케이트 타듯 쌩쌩 슬라이딩하는 달이의 스릴 만점 질주 장면!",
         videoAction: "crossover"
+    },
+    12: {
+        title: "12일차: 수박 파티와 특별한 1인실 요양원 🍉🐌",
+        date: "2026년 5월 29일 금요일",
+        weather: "따스한 햇살 가득 ☀️",
+        text: "요즘 우리 달팽이 대가족의 달리기 속도가 너무 궁금해졌어요! 그중에서도 가장 호기심 많은 '팽이'의 레이스를 카메라로 열심히 담아 무려 16배속으로 엄청나게 빠르게 돌려보았답니다. 16배속이면 로켓처럼 쌩 지나갈 줄 알았는데, 어머나! 뚜기의 0.1배속 초슬로우모션 도약 순간보다 훨씬 더 느리게 꼬물꼬물 움직이는 게 아니겠어요? 달팽이는 아무리 마음이 급해 전속력으로 달려도 역시 느림보의 평화로운 본능을 숨길 수는 없나 봐요. 어이없기도 하고 또 너무 귀여워서 혼자서 한참을 웃었답니다.<br><br>그런데 오늘은 마음이 좀 짠한 관찰도 있었어요. 16마리를 찬찬히 돋보기로 들여다보니 몇 마리 동생 팽이들의 동글동글한 껍질이 살짝 깨지거나 얇아져서 아파 보였거든요. 달팽이에게 껍질은 든든한 방패이자 요새인데 깨져가다니 큰일이에요! 그래서 내일은 칼슘 영양이 듬뿍 들어있는 계란 특식을 곱게 갈아서 영양 파티를 열어주기로 굳게 다짐했답니다.<br><br>오후에는 16마리 대가족 전체 몸무게 검사도 해보았어요. 미니 저울 위에 꼬물꼬물 올려놓았는데, 역시 예상했던 대로 우리 대장 첫째 '달이'가 가장 묵직하고 웅장한 무게를 뽐내며 당당하게 몸무게 1등을 차지했지요! 맏이로서 너무나 든든하고 기특해서, 달이에게는 오늘 아주 특별한 대접을 해주었어요. 비좁은 단체 생활을 벗어나 특별히 제작한 아늑한 '1인실 VIP 집'에 폭신하고 보드라운 흙을 도톰하게 깔아준 뒤, 달이가 좋아하는 아주 달콤하고 싱싱한 빨간 수박 한 조각을 선물했답니다! 과연 달이가 이 달콤하고 시원한 수박을 맛있게 먹어줄지 무척 궁금하네요! 달이가 수박을 좋아하는지 안 좋아하는지는 내일 꼭 확인해 보고 관찰기록에 남겨둘게요. 🐌🍉✨<br><br>아참! 그리고 오늘 달팽이 대가족을 위해 정성껏 그렸던 42일간의 '달팽이의 날 계획표' 달력도 12일차 일기장에 예쁘게 기록해 둡니다! 우리가 함께 약속한 놀이 시간과 특식 약속들이 아기자기하게 적혀있어 보기만 해도 마음이 따뜻해져요. 우리 42일째 되는 날의 성대한 '달팽이의 날' 축제까지 다들 아프지 말고 건강하게 지내자!<br><br><img src='assets/20260529/days.jpg' alt='달팽이의 날 계획표' style='display:block; margin:1.5rem auto; max-width:90%; border:3px dashed var(--border-color); border-radius:15px; padding:8px; background:#fffefb; box-shadow:var(--card-shadow); transform:rotate(-1deg);'>",
+        caption: "16배속 카메라 앞에서도 느릿느릿 여유 넘치는 에이스 팽이의 귀여운 모습 🐌",
+        imgSrc: "assets/20260529/팽이.png",
+        imgFilter: "brightness(1.05) saturate(1.1)",
+        videoLabel: "팽이의 전속력 레이스 영상 (0:15)",
+        videoDesc: "16배속으로 빠르게 감아도 뚜기 0.1배 슬로우모션보다 느린 꼬물이 팽이의 귀여운 전속력 질주 관찰 영상이에요!",
+        videoFile: "assets/20260529/팽이_전속력.mp4",
+        videoAction: "real_video"
     }
 };
 
@@ -338,10 +351,11 @@ function switchEpisode(epNumber) {
         document.getElementById('diary-title').textContent = data.title;
         document.getElementById('diary-date').textContent = data.date;
         document.getElementById('diary-weather-val').textContent = data.weather;
-        document.getElementById('diary-text').textContent = data.text;
+        document.getElementById('diary-text').innerHTML = data.text;
         document.getElementById('diary-caption').textContent = data.caption;
         
         const img = document.getElementById('diary-img');
+        img.src = data.imgSrc || 'assets/images/snail_dali.png';
         img.style.filter = data.imgFilter;
         
         // Randomize polaroid rotation slightly
@@ -363,7 +377,8 @@ function switchEpisode(epNumber) {
             8: "- 개미와 달팽이 통을 잇는 사랑의 가교 루시가 ✍️",
             9: "- 옥수수 온천과 노란 보석 똥을 줍는 루시가 ⛲✍️",
             10: "- 16마리 달팽이 대가족의 수호신 루시가 💚✍️",
-            11: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅"
+            11: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅",
+            12: "- 달이의 1인실 VIP 집사 루시가 🍉✍️"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
@@ -379,15 +394,15 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 11 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 11 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 12 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 12 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
         diaryCard.style.transform = 'translateY(0)';
         
-        // Special fireworks celebration on Episode 10 and 11!
-        if (currentEp === 10 || currentEp === 11) {
+        // Special fireworks celebration on Episode 10, 11, and 12!
+        if (currentEp === 10 || currentEp === 11 || currentEp === 12) {
             startCelebration();
         } else {
             stopCelebration();
@@ -407,7 +422,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 11) switchEpisode(currentEp + 1);
+    if (currentEp < 12) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -672,6 +687,7 @@ const videoTrigger = document.getElementById('video-trigger');
 const videoModal = document.getElementById('video-modal');
 const videoCloseBtn = document.getElementById('video-close-btn');
 const videoCanvas = document.getElementById('video-canvas');
+const realVideo = document.getElementById('real-video');
 const vCtx = videoCanvas.getContext('2d');
 
 let isVideoPlaying = false;
@@ -693,20 +709,42 @@ videoTrigger.addEventListener('click', () => {
     document.getElementById('video-modal-title').textContent = `${data.title} - 생생 관찰 영상 🎬`;
     document.getElementById('video-modal-desc').textContent = data.videoDesc;
     
-    isVideoPlaying = true;
-    vTime = 0;
-    snailX = 80;
-    placedPoops = [];
-    resizeVideoCanvas();
-    
-    // Play squishy sound or pop sound!
-    if ([3, 4, 9].includes(currentEp)) {
-        poopColor = currentEp === 3 ? '#9ccc65' : (currentEp === 4 ? '#ff9800' : '#fdd835'); // green, orange, yellow poop
+    if (data.videoFile) {
+        // Show real video player, hide canvas
+        videoCanvas.style.display = 'none';
+        realVideo.style.display = 'block';
+        realVideo.src = data.videoFile;
+        
+        // Hide procedural sound caption
+        document.getElementById('video-sound-alert').style.visibility = 'hidden';
+        
+        // Autoplay
+        realVideo.play().catch(err => console.log("Autoplay prevented:", err));
+        isVideoPlaying = false;
     } else {
-        poopColor = null;
+        // Show canvas, hide real video
+        videoCanvas.style.display = 'block';
+        realVideo.style.display = 'none';
+        realVideo.pause();
+        realVideo.src = '';
+        
+        document.getElementById('video-sound-alert').style.visibility = 'visible';
+        
+        isVideoPlaying = true;
+        vTime = 0;
+        snailX = 80;
+        placedPoops = [];
+        resizeVideoCanvas();
+        
+        // Play squishy sound or pop sound!
+        if ([3, 4, 9].includes(currentEp)) {
+            poopColor = currentEp === 3 ? '#9ccc65' : (currentEp === 4 ? '#ff9800' : '#fdd835'); // green, orange, yellow poop
+        } else {
+            poopColor = null;
+        }
+        
+        animateVideo();
     }
-    
-    animateVideo();
 });
 
 videoCloseBtn.addEventListener('click', () => {
@@ -720,6 +758,10 @@ videoModal.addEventListener('click', (e) => {
 function closeVideo() {
     isVideoPlaying = false;
     cancelAnimationFrame(videoFrameId);
+    if (realVideo) {
+        realVideo.pause();
+        realVideo.src = '';
+    }
     videoModal.classList.remove('active');
 }
 
