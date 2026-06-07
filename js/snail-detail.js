@@ -370,6 +370,50 @@ function switchEpisode(epNumber) {
         img.src = data.imgSrc || 'assets/images/snail_dali.png';
         img.style.filter = data.imgFilter;
         
+        const overlay = document.getElementById('polaroid-overlay');
+        if (currentEp === 13) {
+            overlay.innerHTML = `
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <!-- Distressed Stamp "달이를 찾습니다 🔍" -->
+                    <div style="
+                        transform: rotate(-15deg);
+                        border: 4px double #e91e63;
+                        color: #e91e63;
+                        font-family: var(--font-handwriting);
+                        font-size: 2.2rem;
+                        font-weight: bold;
+                        padding: 0.6rem 1.2rem;
+                        background: rgba(255, 255, 255, 0.85);
+                        border-radius: 8px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                        z-index: 2;
+                        letter-spacing: 2px;
+                        text-align: center;
+                    ">
+                        달이를 찾습니다 🔍🐌
+                    </div>
+                    
+                    <!-- Dotted snail silhouette with question mark -->
+                    <svg viewBox="0 0 100 100" style="position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; opacity: 0.55; z-index: 1;">
+                        <!-- Dotted snail path -->
+                        <path d="M 15 75 C 5 75, 2 65, 12 60 C 22 55, 42 55, 47 60 C 52 65, 47 75, 15 75 Z" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
+                        <circle cx="47" cy="50" r="18" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
+                        <!-- Spiral in shell -->
+                        <path d="M 47 50 A 13 13 0 1 0 60 50 A 8 8 0 1 0 52 42" fill="none" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                        <!-- Antennas -->
+                        <line x1="12" y1="60" x2="6" y2="46" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                        <line x1="15" y1="57" x2="13" y2="43" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                        <!-- Question mark inside the shell -->
+                        <text x="47" y="56" font-family="var(--font-handwriting)" font-size="20" font-weight="bold" fill="#e91e63" text-anchor="middle">?</text>
+                    </svg>
+                </div>
+            `;
+            overlay.style.display = 'block';
+        } else {
+            overlay.innerHTML = '';
+            overlay.style.display = 'none';
+        }
+        
         // Randomize polaroid rotation slightly
         const rot = -4 + Math.random() * 8;
         document.getElementById('polaroid-trigger').style.setProperty('--rot', `${rot}deg`);
@@ -394,6 +438,13 @@ function switchEpisode(epNumber) {
             13: "- 달이를 그리워하며 눈물 글썽인 루시가 😭✍️"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
+
+        const mediaContainer = document.querySelector('.media-container');
+        if (currentEp === 13) {
+            mediaContainer.style.display = 'none';
+        } else {
+            mediaContainer.style.display = 'block';
+        }
 
         // Highlight tab
         tabs.forEach(tab => {
