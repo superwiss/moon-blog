@@ -1,6 +1,6 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.1.2'; // Increment this version on each deploy to trigger notifications!
-const UPDATE_MESSAGE = "팽이들의 42일간의 '달팽이의 날' 손그림 계획표 추가 및 수박 특식/허물 점프 리얼 영상 일기 업데이트! 🐌🟢✨";
+const CACHE_NAME = 'moon-blog-cache-v1.1.3'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "달팽이 관찰 일지 13일차: 달이의 대탐험과 이색 놀이터, 그리고 아쉬운 이별 이야기 업데이트 💔🐌";
 const ASSETS = [
     './',
     './index.html',

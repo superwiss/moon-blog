@@ -317,6 +317,18 @@ const EPISODE_DATA = {
         videoDesc: "16배속으로 빠르게 감아도 뚜기 0.1배 슬로우모션보다 느린 꼬물이 팽이의 귀여운 전속력 질주 관찰 영상이에요!",
         videoFile: "assets/20260529/팽이_전속력.mp4",
         videoAction: "real_video"
+    },
+    13: {
+        title: "13일차: 안녕 달이.. 자유로운 대탐험과 이별 💔🐌",
+        date: "2026년 5월 30일 토요일",
+        weather: "내 마음처럼 슬프고 흐린 날 ☁️💧",
+        text: "우리 첫째 대장 달이에게 더 넓고 멋진 놀이터를 선물해주고 싶어서 봉선화 화분에 달이를 넣어주었어요. 달이가 혹시나 멀리 달아나지 못하도록 화분 자체를 아빠에게 특별히 부탁해서 아주 커다란 플라스틱 통 안에 쏙 넣어 안전장치도 해두었죠. 비좁은 사육장을 벗어나 봉선화 잎사귀 사이를 훨씬 더 넓고 자유롭게 꼬물꼬물 돌아다니는 달이의 행복한 모습을 보니 내 마음도 너무 기쁘고 뿌듯했답니다.<br><br>그런데 오늘 아침 자고 일어나 보니 청천벽력 같은 일이 일어났어요! 달이가 감쪽같이 사라져 버린 거예요. 봉선화 화분이 키가 너무 커서 통 뚜껑을 살짝 열어 두었는데, 그 틈을 타서 달이가 밖으로 탈출해버렸나 봐요. 달팽이의 이동 속도가 워낙 느리니까 방바닥 근처나 책상 밑 어딘가 멀지 않은 곳에 있을 거라 생각하고 온 집안 구석구석을 몇 시간 동안 뒤지고 또 뒤져보았지만, 결국 우리 첫째 달이를 끝내 찾지 못했어요. 달이가 너무 보고 싶고 미안해서 하루 종일 눈물이 멈추지 않는 아주 슬픈 날입니다.",
+        caption: "넓은 봉선화 화분 속에서 마지막으로 관찰한 달이의 늠름한 모습",
+        imgSrc: "assets/images/snail_dali.png",
+        imgFilter: "grayscale(0.6) sepia(0.3) brightness(0.9)",
+        videoLabel: "달이의 마지막 흔적 (0:12)",
+        videoDesc: "화분을 타고 기어가 결국 탈출해 버린 달이의 슬픈 발자국 애니메이션이에요.",
+        videoAction: "escape"
     }
 };
 
@@ -378,7 +390,8 @@ function switchEpisode(epNumber) {
             9: "- 옥수수 온천과 노란 보석 똥을 줍는 루시가 ⛲✍️",
             10: "- 16마리 달팽이 대가족의 수호신 루시가 💚✍️",
             11: "- 세 곤충 친구들을 응원하는 심판 루시가 ✍️🏅",
-            12: "- 달이의 1인실 VIP 집사 루시가 🍉✍️"
+            12: "- 달이의 1인실 VIP 집사 루시가 🍉✍️",
+            13: "- 달이를 그리워하며 눈물 글썽인 루시가 😭✍️"
         };
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
@@ -394,14 +407,14 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 12 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 12 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 13 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 13 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
         diaryCard.style.transform = 'translateY(0)';
         
-        // Special fireworks celebration on Episode 10, 11, and 12!
+        // Special fireworks celebration on Episode 10, 11, and 12! (No fireworks on sad day 13!)
         if (currentEp === 10 || currentEp === 11 || currentEp === 12) {
             startCelebration();
         } else {
@@ -422,7 +435,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 12) switchEpisode(currentEp + 1);
+    if (currentEp < 13) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -812,7 +825,7 @@ function animateVideo() {
     antWiggle = Math.sin(vTime * 1.5) * 5;
     
     // Crawl forward slowly
-    if (action !== 'race' && action !== 'crossover' && snailX < 450) {
+    if (action !== 'race' && action !== 'crossover' && action !== 'escape' && snailX < 450) {
         snailX += 0.45 * (1.2 - Math.abs(Math.sin(vTime * 3)) * 0.4); // moves faster when stretched!
         // Slow periodic crawling squish sound!
         if (Math.floor(vTime * 3) % 10 === 0 && Math.random() > 0.96) {
@@ -822,6 +835,9 @@ function animateVideo() {
         // High speed race! (Hops/slides forward fast)
         snailX += 1.8 * (1.1 + Math.sin(vTime * 5) * 0.3);
         bodyStretch = 1 + Math.sin(vTime * 6) * 0.18;
+    } else if (action === 'escape') {
+        // Crawls out and exits the screen
+        snailX += 1.45 * (1.2 - Math.abs(Math.sin(vTime * 3)) * 0.4);
     }
 
     // DRAW THE SHINY TRAIL (점액 trail)
@@ -897,126 +913,140 @@ function animateVideo() {
         drawHouseSprout(420, 185);
     } else if (action === 'eat_white') {
         drawWhiteCalciumPowder();
+    } else if (action === 'escape') {
+        drawBalsamFlowerPot(180, 200);
+        if (snailX > 380) {
+            vCtx.save();
+            vCtx.font = '22px "Nanum Pen Script", cursive, sans-serif';
+            vCtx.fillStyle = '#e91e63';
+            vCtx.textAlign = 'center';
+            const alpha = Math.min((snailX - 380) / 100, 1.0);
+            vCtx.globalAlpha = alpha;
+            vCtx.fillText("달아야 어디 갔니? 😭💔", 180, 60);
+            vCtx.restore();
+        }
     }
 
     // DRAW DALI (THE CUTE WATERCOLOR SNAIL)
-    vCtx.save();
-    const currentY = 210 + Math.sin(snailX/50) * 5;
-    vCtx.translate(snailX, currentY);
-    
-    // 1. Snail Wet Foot/Body (Stretches & contracts procedurally!)
-    vCtx.fillStyle = '#fdf5e6'; // warm cream watercolor body
-    vCtx.strokeStyle = '#d7ccc8';
-    vCtx.lineWidth = 4;
-    vCtx.lineJoin = 'round';
-    
-    vCtx.beginPath();
-    // Tail
-    vCtx.moveTo(-60 * bodyStretch, 12);
-    vCtx.quadraticCurveTo(-70 * bodyStretch, 12, -75 * bodyStretch, 8);
-    vCtx.quadraticCurveTo(-65 * bodyStretch, 2, -45 * bodyStretch, 0);
-    // Body base
-    vCtx.lineTo(25 * bodyStretch, 0);
-    // Head front curves
-    vCtx.quadraticCurveTo(45 * bodyStretch, 0, 50 * bodyStretch, -20);
-    vCtx.quadraticCurveTo(45 * bodyStretch, -30, 35 * bodyStretch, -25);
-    // Neck curves back into shell
-    vCtx.quadraticCurveTo(20 * bodyStretch, -10, 5 * bodyStretch, -8);
-    // Under shell connection
-    vCtx.lineTo(-40 * bodyStretch, -5);
-    vCtx.closePath();
-    vCtx.fill();
-    vCtx.stroke();
+    if (snailX < 600) {
+        vCtx.save();
+        const currentY = 210 + Math.sin(snailX/50) * 5;
+        vCtx.translate(snailX, currentY);
+        
+        // 1. Snail Wet Foot/Body (Stretches & contracts procedurally!)
+        vCtx.fillStyle = '#fdf5e6'; // warm cream watercolor body
+        vCtx.strokeStyle = '#d7ccc8';
+        vCtx.lineWidth = 4;
+        vCtx.lineJoin = 'round';
+        
+        vCtx.beginPath();
+        // Tail
+        vCtx.moveTo(-60 * bodyStretch, 12);
+        vCtx.quadraticCurveTo(-70 * bodyStretch, 12, -75 * bodyStretch, 8);
+        vCtx.quadraticCurveTo(-65 * bodyStretch, 2, -45 * bodyStretch, 0);
+        // Body base
+        vCtx.lineTo(25 * bodyStretch, 0);
+        // Head front curves
+        vCtx.quadraticCurveTo(45 * bodyStretch, 0, 50 * bodyStretch, -20);
+        vCtx.quadraticCurveTo(45 * bodyStretch, -30, 35 * bodyStretch, -25);
+        // Neck curves back into shell
+        vCtx.quadraticCurveTo(20 * bodyStretch, -10, 5 * bodyStretch, -8);
+        // Under shell connection
+        vCtx.lineTo(-40 * bodyStretch, -5);
+        vCtx.closePath();
+        vCtx.fill();
+        vCtx.stroke();
 
-    // 2. Eyes and Long Antennae 눈과 더듬이 (Wiggles gently!)
-    vCtx.save();
-    vCtx.translate(45 * bodyStretch, -23);
-    
-    // Left eye stalk
-    vCtx.strokeStyle = '#d7ccc8';
-    vCtx.lineWidth = 3.5;
-    vCtx.lineCap = 'round';
-    vCtx.beginPath();
-    vCtx.moveTo(-5, 0);
-    vCtx.quadraticCurveTo(5 + antWiggle, -20, 15 + antWiggle, -28);
-    vCtx.stroke();
-    
-    // Left Eye bulb
-    vCtx.fillStyle = '#ffffff';
-    vCtx.strokeStyle = '#8c7a6b';
-    vCtx.lineWidth = 1.5;
-    vCtx.beginPath();
-    vCtx.arc(15 + antWiggle, -28, 5, 0, Math.PI * 2);
-    vCtx.fill();
-    vCtx.stroke();
-    
-    vCtx.fillStyle = '#333333';
-    vCtx.beginPath();
-    vCtx.arc(16 + antWiggle, -28, 2.5, 0, Math.PI * 2); // Pupil
-    vCtx.fill();
+        // 2. Eyes and Long Antennae 눈과 더듬이 (Wiggles gently!)
+        vCtx.save();
+        vCtx.translate(45 * bodyStretch, -23);
+        
+        // Left eye stalk
+        vCtx.strokeStyle = '#d7ccc8';
+        vCtx.lineWidth = 3.5;
+        vCtx.lineCap = 'round';
+        vCtx.beginPath();
+        vCtx.moveTo(-5, 0);
+        vCtx.quadraticCurveTo(5 + antWiggle, -20, 15 + antWiggle, -28);
+        vCtx.stroke();
+        
+        // Left Eye bulb
+        vCtx.fillStyle = '#ffffff';
+        vCtx.strokeStyle = '#8c7a6b';
+        vCtx.lineWidth = 1.5;
+        vCtx.beginPath();
+        vCtx.arc(15 + antWiggle, -28, 5, 0, Math.PI * 2);
+        vCtx.fill();
+        vCtx.stroke();
+        
+        vCtx.fillStyle = '#333333';
+        vCtx.beginPath();
+        vCtx.arc(16 + antWiggle, -28, 2.5, 0, Math.PI * 2); // Pupil
+        vCtx.fill();
 
-    // Right eye stalk
-    vCtx.strokeStyle = '#d7ccc8';
-    vCtx.beginPath();
-    vCtx.moveTo(2, 2);
-    vCtx.quadraticCurveTo(15 - antWiggle, -15, 25 - antWiggle, -22);
-    vCtx.stroke();
-    
-    // Right Eye bulb
-    vCtx.fillStyle = '#ffffff';
-    vCtx.beginPath();
-    vCtx.arc(25 - antWiggle, -22, 5, 0, Math.PI * 2);
-    vCtx.fill();
-    vCtx.stroke();
-    
-    vCtx.fillStyle = '#333333';
-    vCtx.beginPath();
-    vCtx.arc(26 - antWiggle, -22, 2.5, 0, Math.PI * 2); // Pupil
-    vCtx.fill();
-    vCtx.restore();
+        // Right eye stalk
+        vCtx.strokeStyle = '#d7ccc8';
+        vCtx.beginPath();
+        vCtx.moveTo(2, 2);
+        vCtx.quadraticCurveTo(15 - antWiggle, -15, 25 - antWiggle, -22);
+        vCtx.stroke();
+        
+        // Right Eye bulb
+        vCtx.fillStyle = '#ffffff';
+        vCtx.beginPath();
+        vCtx.arc(25 - antWiggle, -22, 5, 0, Math.PI * 2);
+        vCtx.fill();
+        vCtx.stroke();
+        
+        vCtx.fillStyle = '#333333';
+        vCtx.beginPath();
+        vCtx.arc(26 - antWiggle, -22, 2.5, 0, Math.PI * 2); // Pupil
+        vCtx.fill();
+        vCtx.restore();
 
-    // 3. Smiling cute mouth!
-    vCtx.save();
-    vCtx.strokeStyle = '#5d4037';
-    vCtx.lineWidth = 2.5;
-    vCtx.beginPath();
-    vCtx.arc(43 * bodyStretch, -12, 4, 0.2, Math.PI * 0.8);
-    vCtx.stroke();
-    vCtx.restore();
+        // 3. Smiling cute mouth!
+        vCtx.save();
+        vCtx.strokeStyle = '#5d4037';
+        vCtx.lineWidth = 2.5;
+        vCtx.beginPath();
+        vCtx.arc(43 * bodyStretch, -12, 4, 0.2, Math.PI * 0.8);
+        vCtx.stroke();
+        vCtx.restore();
 
-    // 4. Watercolor Spiral Shell (패각 - The artistic core!)
-    vCtx.save();
-    vCtx.translate(-15 * bodyStretch, -22);
-    
-    // Solid soft brown watercolor circle
-    vCtx.fillStyle = '#d7ccc8'; // brown clay
-    vCtx.strokeStyle = '#8c7a6b';
-    vCtx.lineWidth = 4;
-    vCtx.beginPath();
-    vCtx.arc(0, 0, 36, 0, Math.PI * 2);
-    vCtx.fill();
-    vCtx.stroke();
-    
-    // Spiral lines (mathematical spiral r = a * theta)
-    vCtx.strokeStyle = '#5d4037';
-    vCtx.lineWidth = 2.5;
-    vCtx.beginPath();
-    
-    const spiralRot = action === 'race' ? vTime * 2 : 0;
-    vCtx.rotate(spiralRot);
-    
-    let a = 1.3; // spacing constant
-    vCtx.moveTo(0, 0);
-    for (let theta = 0; theta < Math.PI * 8; theta += 0.1) {
-        const r = a * theta;
-        const sx = r * Math.cos(theta);
-        const sy = r * Math.sin(theta);
-        vCtx.lineTo(sx, sy);
+        // 4. Watercolor Spiral Shell (패각 - The artistic core!)
+        vCtx.save();
+        vCtx.translate(-15 * bodyStretch, -22);
+        
+        // Solid soft brown watercolor circle
+        vCtx.fillStyle = '#d7ccc8'; // brown clay
+        vCtx.strokeStyle = '#8c7a6b';
+        vCtx.lineWidth = 4;
+        vCtx.beginPath();
+        vCtx.arc(0, 0, 36, 0, Math.PI * 2);
+        vCtx.fill();
+        vCtx.stroke();
+        
+        // Spiral lines (mathematical spiral r = a * theta)
+        vCtx.strokeStyle = '#5d4037';
+        vCtx.lineWidth = 2.5;
+        vCtx.beginPath();
+        
+        const spiralRot = action === 'race' ? vTime * 2 : 0;
+        vCtx.rotate(spiralRot);
+        
+        let a = 1.3; // spacing constant
+        vCtx.moveTo(0, 0);
+        for (let theta = 0; theta < Math.PI * 8; theta += 0.1) {
+            const r = a * theta;
+            const sx = r * Math.cos(theta);
+            const sy = r * Math.sin(theta);
+            vCtx.lineTo(sx, sy);
+        }
+        vCtx.stroke();
+        vCtx.restore();
+
+        vCtx.restore();
     }
-    vCtx.stroke();
-    vCtx.restore();
-
-    vCtx.restore();
 
     // Draw video HUD overlay (timer bar)
     vCtx.save();
@@ -1195,6 +1225,95 @@ function drawWhiteCalciumPowder() {
         vCtx.arc(rx, ry, 2.5, 0, Math.PI*2);
     }
     vCtx.fill();
+    vCtx.restore();
+}
+
+function drawBalsamFlowerPot(x, y) {
+    vCtx.save();
+    // 1. Draw large plastic tub container (transparent blue)
+    vCtx.fillStyle = 'rgba(129, 212, 250, 0.35)';
+    vCtx.strokeStyle = 'rgba(79, 195, 247, 0.7)';
+    vCtx.lineWidth = 3;
+    vCtx.beginPath();
+    vCtx.moveTo(x - 90, y + 25);
+    vCtx.lineTo(x + 90, y + 25);
+    vCtx.lineTo(x + 110, y - 50);
+    vCtx.lineTo(x - 110, y - 50);
+    vCtx.closePath();
+    vCtx.fill();
+    vCtx.stroke();
+
+    // 2. Draw balsam flowerpot (terracotta brown)
+    vCtx.fillStyle = '#a1887f';
+    vCtx.strokeStyle = '#8d6e63';
+    vCtx.lineWidth = 4;
+    vCtx.beginPath();
+    vCtx.moveTo(x - 50, y + 20);
+    vCtx.lineTo(x + 50, y + 20);
+    vCtx.lineTo(x + 60, y - 35);
+    vCtx.lineTo(x - 60, y - 35);
+    vCtx.closePath();
+    vCtx.fill();
+    vCtx.stroke();
+    
+    // Pot rim
+    vCtx.fillStyle = '#8d6e63';
+    vCtx.fillRect(x - 65, y - 45, 130, 10);
+    
+    // Soil
+    vCtx.fillStyle = '#5d4037';
+    vCtx.beginPath();
+    vCtx.ellipse(x, y - 40, 60, 10, 0, 0, Math.PI * 2);
+    vCtx.fill();
+
+    // 3. Draw Balsam plant growing out of pot
+    // Stems
+    vCtx.strokeStyle = '#81c784';
+    vCtx.lineWidth = 5;
+    vCtx.beginPath();
+    vCtx.moveTo(x, y - 40);
+    vCtx.quadraticCurveTo(x - 20, y - 80, x - 15, y - 110);
+    vCtx.moveTo(x, y - 40);
+    vCtx.quadraticCurveTo(x + 20, y - 75, x + 25, y - 100);
+    vCtx.stroke();
+
+    // Leaves
+    vCtx.fillStyle = '#4caf50';
+    vCtx.strokeStyle = '#388e3c';
+    vCtx.lineWidth = 1.5;
+    
+    // Leaf 1
+    vCtx.beginPath();
+    vCtx.ellipse(x - 20, y - 90, 18, 8, -Math.PI/6, 0, Math.PI * 2);
+    vCtx.fill();
+    vCtx.stroke();
+    
+    // Leaf 2
+    vCtx.beginPath();
+    vCtx.ellipse(x + 22, y - 85, 16, 7, Math.PI/6, 0, Math.PI * 2);
+    vCtx.fill();
+    vCtx.stroke();
+    
+    // Leaf 3
+    vCtx.beginPath();
+    vCtx.ellipse(x - 15, y - 115, 14, 6, -Math.PI/4, 0, Math.PI * 2);
+    vCtx.fill();
+    vCtx.stroke();
+
+    // Balsam Flowers (Pink)
+    vCtx.fillStyle = '#ff4081';
+    vCtx.beginPath();
+    for (let i = 0; i < 5; i++) {
+        const angle = (i * 2 * Math.PI) / 5;
+        vCtx.arc(x - 10 + Math.cos(angle) * 7, y - 105 + Math.sin(angle) * 7, 6, 0, Math.PI * 2);
+    }
+    vCtx.fill();
+    
+    vCtx.fillStyle = '#ffeb3b';
+    vCtx.beginPath();
+    vCtx.arc(x - 10, y - 105, 3.5, 0, Math.PI * 2);
+    vCtx.fill();
+
     vCtx.restore();
 }
 
