@@ -24,7 +24,8 @@ const ASSETS = [
     './assets/20260529/팽이.png',
     './assets/20260529/팽이_전속력.mp4',
     './assets/20260529/뚜기였던것.png',
-    './assets/20260529/뚜기_점프.mp4'
+    './assets/20260529/뚜기_점프.mp4',
+    './assets/20260607/놀이터.jpg'
 ];
 
 // Install event: cache initial assets
