@@ -329,6 +329,35 @@ const EPISODE_DATA = {
         videoLabel: "달이의 마지막 흔적 (0:12)",
         videoDesc: "화분을 타고 기어가 결국 탈출해 버린 달이의 슬픈 발자국 애니메이션이에요.",
         videoAction: "escape"
+    },
+    14: {
+        title: "14일차: 기적의 재회와 새로운 3층 러브하우스! 🏥🥬",
+        date: "2026년 6월 3일 수요일",
+        weather: "개인 뒤 맑음 ☀️🍀",
+        text: "잃어버렸던 우리 대장 달이를 드디어 4일 만에 극적으로 찾았어요! 아빠가 베란다 화분 청소를 하다가 발견했는데, 눈이 나쁜 아빠가 어떻게 그 작은 달이를 발견했는지 지금 생각해도 정말 신기할 따름이에요. 발견했을 때 달이는 다른 화분 벽에 꼭 붙어서 '버티기 모드' 상태로 꼼짝도 하지 않고 있었어요. 처음에는 달이가 죽은 줄 알고 덜컥 겁이 났답니다. 하지만 지푸라기라도 잡는 심정으로 물을 조심스레 적셔준 뒤 현미경으로 가만히 관찰해보니, 껍질 속에서 미세하게 꼬물꼬물 움직이는 게 보였어요! 그러더니 1시간쯤 지나자 기적처럼 완전히 깨어나서 안테나 눈을 쏙 내밀었답니다. 살아있어 줘서 정말 고마워, 달아야!<br><br>그런데 기쁨도 잠시, 내 눈에는 발견했을 때부터 달이 몸에 아주 작은 응애 벌레들이 기어 다니는 게 보였어요. 아빠는 안 보인다고 우기더니, 현미경으로 관찰하고 나서야 그제야 '응애 맞네'라며 마지못해 인정했지요. 최근 들어 달팽이 동생들이 많이 죽어서 이제 달이를 포함해 딱 10마리만 남게 되었는데, 아무래도 이 무서운 응애들이 범인이었던 것 같아요. 더 이상 친구들을 잃을 순 없기에, 유튜버 '제발돼라' 채널에서 본 대로 10마리 달팽이 모두에게 따뜻한 물로 온욕을 정성껏 시켜주어 응애를 깨끗이 씻어냈답니다.<br><br>그리고 남은 10마리 천사들을 위해 아주 특별한 '3층 러브하우스' 컵 아파트를 지어주었어요! 🏠 사랑이 꼬물꼬물 피어나는 곳!<br><strong>• 1층 놀이방:</strong> 넓은 통에 싱싱하고 푸른 청경채를 가득 넣어준 건강한 팽이들의 활기찬 놀이 공간이에요.<br><strong>• 2층 보호소:</strong> 응애 벌레가 있었던 친구들이 밤에 조용히 잠을 잘 수 있는 아주 깨끗하고 안전한 쉼터예요.<br><strong>• 3층 회복실:</strong> 껍질이 깨지거나 기운이 약한 친구들이 집중 치료를 받을 수 있는 넓고 안락한 공간이에요.<br><br>우리 대장 달이와 다른 아픈 친구 한 마리까지 총 2마리는 3층 회복실에서 특별 간호를 받으며 지내고 있고, 나머지 8마리 건강한 동생들은 낮에는 1층 놀이방에서 청경채를 맛있게 냠냠 먹으며 놀고, 밤이 되면 2층 보호소로 이사해 안전하게 꿀잠을 자게 될 거랍니다. 10마리 팽이 천사들아, 이제 아프지 말고 새로운 3층 집에서 행복하게 지내자! 🏥🥬✨",
+        caption: "베란다 화분 벽에 붙어 4일간 버티기 모드로 견뎌낸 달이 발견 순간! 🔍",
+        images: [
+            {
+                src: "assets/20260607/발견.jpg",
+                overlayType: "find",
+                caption: "베란다 화분 벽에 붙어 4일간 버티기 모드로 견뎌낸 달이 발견 순간! 🔍"
+            },
+            {
+                src: "assets/20260607/삼층집.jpg",
+                overlayType: "3floor",
+                caption: "남은 10마리 달팽이들을 위해 컵으로 지어준 3층 러브하우스 아파트 🏠",
+                aspectRatio: "473 / 900"
+            },
+            {
+                src: "assets/20260607/놀이방.jpg",
+                overlayType: "playroom",
+                caption: "1층 놀이방에서 싱싱한 청경채를 냠냠 맛있게 먹는 건강한 팽이들 🥬"
+            }
+        ],
+        imgFilter: "brightness(1.0) contrast(1.0)",
+        videoLabel: "영상 없음 (0:00)",
+        videoDesc: "14일차 일기는 동영상이 없습니다.",
+        videoAction: "none"
     }
 };
 
@@ -364,54 +393,119 @@ function switchEpisode(epNumber) {
         document.getElementById('diary-date').textContent = data.date;
         document.getElementById('diary-weather-val').textContent = data.weather;
         document.getElementById('diary-text').innerHTML = data.text;
-        document.getElementById('diary-caption').textContent = data.caption;
-        
         const img = document.getElementById('diary-img');
-        img.src = data.imgSrc || 'assets/images/snail_dali.png';
-        img.style.filter = data.imgFilter;
-        
         const overlay = document.getElementById('polaroid-overlay');
-        if (currentEp === 13) {
-            overlay.innerHTML = `
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                    <!-- Distressed Stamp "달이를 찾습니다 🔍" -->
-                    <div style="
-                        transform: rotate(-15deg);
-                        border: 4px double #e91e63;
-                        color: #e91e63;
-                        font-family: var(--font-handwriting);
-                        font-size: 2.2rem;
-                        font-weight: bold;
-                        padding: 0.6rem 1.2rem;
-                        background: rgba(255, 255, 255, 0.85);
-                        border-radius: 8px;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                        z-index: 2;
-                        letter-spacing: 2px;
-                        text-align: center;
-                    ">
-                        달이를 찾습니다 🔍🐌
+        
+        // Handle images (Multiple dynamic polaroid frames or single default polaroid frame)
+        // First, clean up any previous temporary polaroids
+        document.querySelectorAll('.temp-polaroid').forEach(el => el.remove());
+        
+        const polaroidTrigger = document.getElementById('polaroid-trigger');
+        
+        if (data.images) {
+            polaroidTrigger.style.display = 'none';
+            
+            data.images.forEach((imgData, idx) => {
+                const rots = ['-2deg', '3deg', '-1deg'];
+                const rot = rots[idx % rots.length];
+                
+                const tempFrame = document.createElement('div');
+                tempFrame.className = 'polaroid-frame temp-polaroid';
+                tempFrame.style.setProperty('--rot', rot);
+                tempFrame.style.marginBottom = '1.5rem';
+                
+                let overlayHtml = '';
+                if (imgData.overlayType === 'find') {
+                    overlayHtml = `
+                        <div class="find-overlay" style="position: absolute; left: 33.5%; top: 98.5%; transform: translate(-50%, -50%); pointer-events: none; display: flex; flex-direction: column; align-items: center; z-index: 10;">
+                            <div class="pulse-circle"></div>
+                            <div class="find-label">여기 매달려 있었어! 🔍🐌</div>
+                        </div>
+                    `;
+                } else if (imgData.overlayType === '3floor') {
+                    overlayHtml = `
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;">
+                            <div class="floor-label floor-3" style="top: 16%; left: 8%;">3층: 회복실 🏥</div>
+                            <div class="floor-label floor-2" style="top: 38%; left: 8%;">2층: 보호소 🏥</div>
+                            <div class="floor-label floor-1" style="top: 68%; left: 8%;">1층: 놀이방 🥬</div>
+                        </div>
+                    `;
+                } else if (imgData.overlayType === 'playroom') {
+                    overlayHtml = `
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;">
+                            <div class="sticker-bokchoy" style="top: 15%; right: 10%; transform: rotate(12deg);">
+                                청경채🥬 맛있어!
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                const wrapperStyle = imgData.aspectRatio ? `style="aspect-ratio: ${imgData.aspectRatio};"` : '';
+                tempFrame.innerHTML = `
+                    <div class="polaroid-img-container" style="position: relative; width: 100%;">
+                        <div class="polaroid-img-wrapper" ${wrapperStyle}>
+                            <img src="${imgData.src}" alt="${imgData.caption}" class="polaroid-img" style="filter: ${data.imgFilter || 'none'};">
+                        </div>
+                        ${overlayHtml}
                     </div>
-                    
-                    <!-- Dotted snail silhouette with question mark -->
-                    <svg viewBox="0 0 100 100" style="position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; opacity: 0.55; z-index: 1;">
-                        <!-- Dotted snail path -->
-                        <path d="M 15 75 C 5 75, 2 65, 12 60 C 22 55, 42 55, 47 60 C 52 65, 47 75, 15 75 Z" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
-                        <circle cx="47" cy="50" r="18" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
-                        <!-- Spiral in shell -->
-                        <path d="M 47 50 A 13 13 0 1 0 60 50 A 8 8 0 1 0 52 42" fill="none" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
-                        <!-- Antennas -->
-                        <line x1="12" y1="60" x2="6" y2="46" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
-                        <line x1="15" y1="57" x2="13" y2="43" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
-                        <!-- Question mark inside the shell -->
-                        <text x="47" y="56" font-family="var(--font-handwriting)" font-size="20" font-weight="bold" fill="#e91e63" text-anchor="middle">?</text>
-                    </svg>
-                </div>
-            `;
-            overlay.style.display = 'block';
+                    <div class="polaroid-caption">${imgData.caption}</div>
+                `;
+                
+                // Append as child to diaryMedia
+                const diaryMedia = document.querySelector('.diary-media');
+                diaryMedia.appendChild(tempFrame);
+            });
         } else {
-            overlay.innerHTML = '';
-            overlay.style.display = 'none';
+            polaroidTrigger.style.display = 'flex';
+            
+            document.getElementById('diary-caption').textContent = data.caption;
+            img.src = data.imgSrc || 'assets/images/snail_dali.png';
+            img.style.filter = data.imgFilter;
+            
+            if (currentEp === 13) {
+                overlay.innerHTML = `
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <!-- Distressed Stamp "달이를 찾습니다 🔍" -->
+                        <div style="
+                            transform: rotate(-15deg);
+                            border: 4px double #e91e63;
+                            color: #e91e63;
+                            font-family: var(--font-handwriting);
+                            font-size: 2.2rem;
+                            font-weight: bold;
+                            padding: 0.6rem 1.2rem;
+                            background: rgba(255, 255, 255, 0.85);
+                            border-radius: 8px;
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                            z-index: 2;
+                            letter-spacing: 2px;
+                            text-align: center;
+                        ">
+                            달이를 찾습니다 🔍🐌
+                        </div>
+                        
+                        <!-- Dotted snail silhouette with question mark -->
+                        <svg viewBox="0 0 100 100" style="position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; opacity: 0.55; z-index: 1;">
+                            <!-- Dotted snail path -->
+                            <path d="M 15 75 C 5 75, 2 65, 12 60 C 22 55, 42 55, 47 60 C 52 65, 47 75, 15 75 Z" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
+                            <circle cx="47" cy="50" r="18" fill="none" stroke="#e91e63" stroke-width="2" stroke-dasharray="3,3" />
+                            <!-- Spiral in shell -->
+                            <path d="M 47 50 A 13 13 0 1 0 60 50 A 8 8 0 1 0 52 42" fill="none" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                            <!-- Antennas -->
+                            <line x1="12" y1="60" x2="6" y2="46" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                            <line x1="15" y1="57" x2="13" y2="43" stroke="#e91e63" stroke-width="1.8" stroke-dasharray="3,3" />
+                            <!-- Question mark inside the shell -->
+                            <text x="47" y="56" font-family="var(--font-handwriting)" font-size="20" font-weight="bold" fill="#e91e63" text-anchor="middle">?</text>
+                        </svg>
+                    </div>
+                `;
+                overlay.style.display = 'block';
+                overlay.style.pointerEvents = 'none';
+            } else {
+                overlay.innerHTML = '';
+                overlay.style.display = 'none';
+                overlay.style.pointerEvents = 'none';
+            }
         }
         
         // Randomize polaroid rotation slightly
@@ -440,7 +534,7 @@ function switchEpisode(epNumber) {
         document.getElementById('diary-sig').textContent = sigs[currentEp];
 
         const mediaContainer = document.querySelector('.media-container');
-        if (currentEp === 13) {
+        if (currentEp === 13 || currentEp === 14) {
             mediaContainer.style.display = 'none';
         } else {
             mediaContainer.style.display = 'block';
@@ -458,8 +552,8 @@ function switchEpisode(epNumber) {
         // Toggle prev/next button states
         prevBtn.style.opacity = currentEp === 1 ? '0.5' : '1';
         prevBtn.style.cursor = currentEp === 1 ? 'not-allowed' : 'pointer';
-        nextBtn.style.opacity = currentEp === 13 ? '0.5' : '1';
-        nextBtn.style.cursor = currentEp === 13 ? 'not-allowed' : 'pointer';
+        nextBtn.style.opacity = currentEp === 14 ? '0.5' : '1';
+        nextBtn.style.cursor = currentEp === 14 ? 'not-allowed' : 'pointer';
         
         // Smooth transition fade-in
         diaryCard.style.opacity = 1;
@@ -486,7 +580,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentEp < 13) switchEpisode(currentEp + 1);
+    if (currentEp < 14) switchEpisode(currentEp + 1);
 });
 
 // Initialize first episode
@@ -620,19 +714,27 @@ animateParticles();
 // ==========================================
 // 7. Polaroid Zoom Modal Interaction
 // ==========================================
-const polaroidTrigger = document.getElementById('polaroid-trigger');
 const zoomModal = document.getElementById('zoom-modal');
 const zoomCloseBtn = document.getElementById('zoom-close-btn');
 const zoomImg = document.getElementById('zoom-img');
 const zoomCaption = document.getElementById('zoom-caption');
 
-polaroidTrigger.addEventListener('click', () => {
+// Event delegation on .diary-media for clicking polaroids (works for single or multiple stacked polaroids)
+document.querySelector('.diary-media').addEventListener('click', (e) => {
+    const frame = e.target.closest('.polaroid-frame');
+    if (!frame) return;
+    
     synth.playChime();
+    const img = frame.querySelector('.polaroid-img');
+    const caption = frame.querySelector('.polaroid-caption');
     const data = EPISODE_DATA[currentEp];
-    zoomImg.src = document.getElementById('diary-img').src;
-    zoomImg.style.filter = data.imgFilter;
-    zoomCaption.textContent = data.caption;
-    zoomModal.classList.add('active');
+    
+    if (img && caption) {
+        zoomImg.src = img.src;
+        zoomImg.style.filter = data.imgFilter || 'brightness(1) contrast(1)';
+        zoomCaption.textContent = caption.textContent;
+        zoomModal.classList.add('active');
+    }
 });
 
 zoomCloseBtn.addEventListener('click', () => {

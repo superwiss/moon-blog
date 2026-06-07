@@ -1,6 +1,6 @@
 /* sw.js */
-const CACHE_NAME = 'moon-blog-cache-v1.1.3'; // Increment this version on each deploy to trigger notifications!
-const UPDATE_MESSAGE = "달팽이 관찰 일지 13일차: 달이의 대탐험과 이색 놀이터, 그리고 아쉬운 이별 이야기 업데이트 💔🐌";
+const CACHE_NAME = 'moon-blog-cache-v1.1.4'; // Increment this version on each deploy to trigger notifications!
+const UPDATE_MESSAGE = "달팽이 관찰 일지 14일차: 기적의 재회와 새로운 3층 러브하우스! 🏥🥬";
 const ASSETS = [
     './',
     './index.html',
@@ -25,7 +25,10 @@ const ASSETS = [
     './assets/20260529/팽이_전속력.mp4',
     './assets/20260529/뚜기였던것.png',
     './assets/20260529/뚜기_점프.mp4',
-    './assets/20260607/놀이터.jpg'
+    './assets/20260607/놀이터.jpg',
+    './assets/20260607/발견.jpg',
+    './assets/20260607/삼층집.jpg',
+    './assets/20260607/놀이방.jpg'
 ];
 
 // Install event: cache initial assets
